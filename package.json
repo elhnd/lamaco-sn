@@ -1,0 +1,24 @@
+{
+  "name": "lamaco-sn",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "check": "astro check",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "@tailwindcss/vite": "latest",
+    "astro": "latest",
+    "gsap": "latest",
+    "tailwindcss": "latest",
+    "three": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "@types/three": "latest",
+    "typescript": "latest"
+  }
+}
