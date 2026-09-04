@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string;
+  variant?: 'primary' | 'outline' | 'light';
+  class?: string;
+}
+
+const { href, variant = 'primary', class: className = '' } = Astro.props;
+---
+
+<a class:list={['button', `button--${variant}`, className]} href={href}>
+  <span><slot /></span>
+  <svg aria-hidden="true" viewBox="0 0 20 20" width="18" height="18">
+    <path d="M4 10h11M11 6l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square" />
+  </svg>
+</a>

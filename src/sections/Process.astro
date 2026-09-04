@@ -1,0 +1,49 @@
+---
+import { Picture } from 'astro:assets';
+import processImage from '../assets/images/process-quarry.png';
+import Button from '../components/Button.astro';
+import { company } from '../data/company';
+import { processSteps } from '../data/process';
+---
+
+<section class="process-section" id="processus">
+  <Picture
+    class="process-section__media"
+    src={processImage}
+    formats={['avif']}
+    fallbackFormat="webp"
+    widths={[640, 960, 1440, 1920]}
+    sizes="100vw"
+    alt="Illustration d’un camion-benne circulant dans une carrière"
+    loading="lazy"
+    quality={58}
+    width={1920}
+    height={819}
+  />
+  <div class="process-section__overlay" aria-hidden="true"></div>
+  <div class="process-section__content wrap">
+    <div class="process-section__title" data-reveal>
+      <p><span>03</span><i aria-hidden="true"></i>Notre processus</p>
+      <h2>Du besoin à votre chantier</h2>
+    </div>
+    <ol class="process-steps">
+      {processSteps.map((step) => (
+        <li data-reveal>
+          <span class="process-step__number">{step.number}</span>
+          <span class="process-step__icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="38" height="38"><path d="M6 34h36M10 34V19l14-7 14 7v15M17 34V23h14v11M21 28h6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /></svg>
+          </span>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </li>
+      ))}
+    </ol>
+    <div class="process-cta" data-reveal>
+      <div>
+        <span>Un besoin précis&nbsp;?</span>
+        <strong>Parlons de votre chantier.</strong>
+      </div>
+      <Button href={company.phones[0].href}>Appeler LAMACO</Button>
+    </div>
+  </div>
+</section>

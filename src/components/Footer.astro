@@ -1,0 +1,30 @@
+---
+import { company } from '../data/company';
+import { mainNavigation } from '../data/navigation';
+---
+
+<footer class="site-footer" id="contact">
+  <div class="site-footer__top wrap">
+    <div class="site-footer__brand" data-reveal>
+      <img src="/brand/logo-inverse.svg" alt="LAMACO" width="190" height="41" loading="lazy" />
+      <p>Matériaux de construction et engins pour accompagner vos chantiers au Sénégal.</p>
+    </div>
+
+    <div class="site-footer__nav" data-reveal>
+      <p class="footer-label">Navigation</p>
+      <nav aria-label="Navigation de pied de page">
+        {mainNavigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+    </div>
+
+    <div class="site-footer__contact" data-reveal>
+      <p class="footer-label">Contact</p>
+      <p>Parlons de votre prochain chantier.</p>
+      {company.phones.map((phone) => <a href={phone.href}>{phone.label}</a>)}
+    </div>
+  </div>
+  <div class="site-footer__bottom wrap">
+    <span>© {new Date().getFullYear()} LAMACO</span>
+    <span>Site vitrine — Sénégal</span>
+  </div>
+</footer>

@@ -1,0 +1,52 @@
+---
+import { Picture } from 'astro:assets';
+import excavatorImage from '../assets/images/excavator.png';
+import Button from '../components/Button.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import { equipment } from '../data/equipment';
+---
+
+<section class="equipment-section" id="engins">
+  <div class="equipment-section__grid" aria-hidden="true"></div>
+  <div class="equipment-section__layout wrap">
+    <SectionIntro
+      number="02"
+      eyebrow="Nos engins"
+      title="La puissance au service du terrain"
+      description="LAMACO met à votre disposition ses engins pour la livraison, le terrassement et le nettoyage de terrain."
+      tone="light"
+    >
+      <Button href="#contact" variant="light">Découvrir nos engins</Button>
+    </SectionIntro>
+
+    <div class="equipment-visual" data-reveal>
+      <span class="equipment-visual__label">Équipement disponible</span>
+      <Picture
+        src={excavatorImage}
+        formats={['avif']}
+        fallbackFormat="webp"
+        widths={[640, 960, 1280]}
+        sizes="(max-width: 900px) 100vw, 60vw"
+        alt="Illustration d’une pelle hydraulique jaune sans marquage"
+        loading="lazy"
+        quality={65}
+        width={1280}
+        height={800}
+      />
+    </div>
+
+    <div class="equipment-info" data-reveal>
+      <p class="equipment-info__kicker">Parc actuel</p>
+      {equipment.map((item, index) => (
+        <article>
+          <span>0{index + 1}</span>
+          <div>
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+          </div>
+        </article>
+      ))}
+      <a href="#contact" class="equipment-info__link">Parler de mon chantier <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>

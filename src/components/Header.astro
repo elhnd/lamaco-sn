@@ -1,0 +1,68 @@
+---
+import Button from './Button.astro';
+import { company } from '../data/company';
+import { mainNavigation } from '../data/navigation';
+---
+
+<header class="site-header" data-header>
+  <a class="site-header__brand" href="/" aria-label="LAMACO, accueil">
+    <img src="/brand/logo-inverse.svg" alt="LAMACO" width="185" height="40" />
+    <span>La force du terrain</span>
+  </a>
+
+  <nav class="site-header__desktop-nav" aria-label="Navigation principale">
+    {mainNavigation.map((item, index) => (
+      <a class:list={{ active: index === 0 }} href={item.href}>{item.label}</a>
+    ))}
+  </nav>
+
+  <div class="site-header__actions">
+    <a class="site-header__phone" href={company.phones[0].href} aria-label={`Appeler le ${company.phones[0].label}`}>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="17" height="17">
+        <path d="M7.3 3.4 10 7.2 8.5 9.3c1.2 2.5 3.2 4.5 5.7 5.7l2.1-1.5 3.8 2.7-.8 3.6c-.2.8-1 1.3-1.8 1.2C9.9 19.8 4.2 14.1 3 6.5c-.1-.8.4-1.6 1.2-1.8l3.1-1.3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" />
+      </svg>
+      <span>{company.phones[0].label}</span>
+    </a>
+    <Button class="site-header__quote" href="#contact">Demander un devis</Button>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+      <span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav aria-label="Navigation mobile">
+      {mainNavigation.map((item, index) => (
+        <a href={item.href}><span>0{index + 1}</span>{item.label}</a>
+      ))}
+    </nav>
+    <div class="mobile-menu__contact">
+      <p>Un projet en cours&nbsp;?</p>
+      <a href={company.phones[0].href}>{company.phones[0].label}</a>
+      <a href={company.phones[1].href}>{company.phones[1].label}</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+
+  const closeMenu = () => {
+    if (!toggle || !menu) return;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Ouvrir le menu');
+    menu.hidden = true;
+    document.body.classList.remove('menu-open');
+  };
+
+  toggle?.addEventListener('click', () => {
+    if (!menu) return;
+    const willOpen = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(willOpen));
+    toggle.setAttribute('aria-label', willOpen ? 'Fermer le menu' : 'Ouvrir le menu');
+    menu.hidden = !willOpen;
+    document.body.classList.toggle('menu-open', willOpen);
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+</script>

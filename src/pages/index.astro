@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Equipment from '../sections/Equipment.astro';
+import Hero from '../sections/Hero.astro';
+import Materials from '../sections/Materials.astro';
+import Process from '../sections/Process.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout
+  title="LAMACO — Matériaux, engins et livraison au Sénégal"
+  description="LAMACO fournit des matériaux de construction, propose la location d’engins, le terrassement et la livraison sur chantier au Sénégal."
+>
+  <main>
+    <Hero />
+    <Materials />
+    <Equipment />
+    <Process />
+    <section class="about-strip" id="a-propos">
+      <div class="wrap" data-reveal>
+        <span>LAMACO · Sénégal</span>
+        <p>Une équipe locale au service des particuliers, artisans et professionnels du BTP.</p>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <script>
+    import '../lib/motion/home';
+  </script>
+</BaseLayout>

@@ -1,0 +1,87 @@
+---
+import { Picture } from 'astro:assets';
+import heroImage from '../assets/images/hero-quarry-v2.png';
+import Button from '../components/Button.astro';
+import Header from '../components/Header.astro';
+import { company, homeFacts } from '../data/company';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <Picture
+    class="hero__media"
+    src={heroImage}
+    formats={['avif']}
+    fallbackFormat="webp"
+    widths={[640, 960, 1440, 1920]}
+    sizes="100vw"
+    alt="Illustration d’une carrière avec une pelle, un camion-benne et des granulats"
+    loading="eager"
+    fetchpriority="high"
+    quality={55}
+    width={1920}
+    height={819}
+  />
+  <div class="hero__veil" aria-hidden="true"></div>
+  <Header />
+
+  <div class="hero__socials" aria-hidden="true">
+    <i></i>
+    <span class="social-letter">f</span>
+    <span>
+      <svg viewBox="0 0 24 24" width="20" height="20"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.8" r="1.1" fill="currentColor"/></svg>
+    </span>
+    <span class="social-linkedin">in</span>
+    <span>
+      <svg viewBox="0 0 24 24" width="21" height="21"><path d="M5 19.1 3.8 21l2.8-.7A9 9 0 1 0 5 19.1Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8.2 7.6c.5 3.8 2.4 6 6.2 7.2l1.4-1.7-2-1.2-.9 1a6.8 6.8 0 0 1-3.1-3.3l1-.8-1.2-2-1.4.8Z" fill="currentColor"/></svg>
+    </span>
+    <i></i>
+  </div>
+
+  <div class="hero__content wrap">
+    <p class="hero__tagline" data-hero-item>{company.tagline}</p>
+    <h1 id="hero-title" data-hero-item aria-label="LAMACO">
+      <img
+        class="hero__wordmark"
+        src="/brand/wordmark-inverse.svg"
+        width="2799"
+        height="586"
+        alt=""
+        aria-hidden="true"
+        draggable="false"
+      />
+    </h1>
+    <div class="hero__lead" data-hero-item>
+      <p>{company.promise}</p>
+      <div class="hero__buttons">
+        <Button href="#materiaux">Découvrir nos services</Button>
+        <a class="hero__call" href={company.phones[0].href}>
+          <span class="hero__call-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="17" height="17"><path d="M7.3 3.4 10 7.2 8.5 9.3c1.2 2.5 3.2 4.5 5.7 5.7l2.1-1.5 3.8 2.7-.8 3.6c-.2.8-1 1.3-1.8 1.2C9.9 19.8 4.2 14.1 3 6.5c-.1-.8.4-1.6 1.2-1.8l3.1-1.3Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" /></svg>
+          </span>
+          Nous appeler
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__facts-wrap">
+    <div class="hero__facts wrap" aria-label="Informations clés">
+      {homeFacts.map((fact, index) => (
+        <div class="hero-fact" data-hero-item>
+          <span class="hero-fact__icon" aria-hidden="true">0{index + 1}</span>
+          <div>
+            <strong>{fact.value}</strong>
+            <span>{fact.label}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <a class="hero__scroll" href="#materiaux" aria-label="Faire défiler vers les matériaux">
+    <i aria-hidden="true"></i>
+    <span>Défiler</span>
+    <i aria-hidden="true"></i>
+    <svg aria-hidden="true" viewBox="0 0 16 26" width="16" height="26"><rect x="1" y="1" width="14" height="24" rx="7" fill="none" stroke="currentColor"/><circle cx="8" cy="7" r="1.5" fill="currentColor"/></svg>
+  </a>
+</section>

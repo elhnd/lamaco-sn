@@ -1,0 +1,24 @@
+---
+import Button from '../components/Button.astro';
+import MaterialCard from '../components/MaterialCard.astro';
+import SectionIntro from '../components/SectionIntro.astro';
+import { materials } from '../data/materials';
+---
+
+<section class="materials-section section-dark" id="materiaux">
+  <div class="materials-section__texture" aria-hidden="true"></div>
+  <div class="materials-section__layout wrap">
+    <SectionIntro
+      number="01"
+      eyebrow="Nos matériaux"
+      title="La qualité à la source"
+      description="Du sable aux granulats, nous vous aidons à identifier et acheminer les matériaux adaptés à votre chantier."
+    >
+      <Button href="#contact" variant="outline">Voir tous les matériaux</Button>
+    </SectionIntro>
+
+    <div class="materials-section__cards" aria-label="Matériaux mis en avant">
+      {materials.map((material, index) => <MaterialCard {...material} index={index} />)}
+    </div>
+  </div>
+</section>
