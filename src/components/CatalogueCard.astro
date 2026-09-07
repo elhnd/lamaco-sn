@@ -1,0 +1,26 @@
+---
+import { Picture } from 'astro:assets';
+import type { CatalogueMaterial } from '../data/materials';
+
+interface Props {
+  material: CatalogueMaterial;
+  index: number;
+}
+const { material, index } = Astro.props;
+---
+
+<article class="catalogue-card" data-material={material.group}>
+  <a class="catalogue-card__link" href={`/materiaux/${material.slug}/`} aria-label={`En savoir plus sur le ${material.name.toLowerCase()}`}>
+    <div class="catalogue-card__image">
+      <Picture src={material.image} formats={['avif']} fallbackFormat="webp" widths={[420, 720]} sizes="(max-width: 600px) 88vw, (max-width: 960px) 43vw, 29vw" width={720} height={390} alt={material.alt} loading="lazy" quality={60} />
+      <span class="catalogue-card__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+      <span class="catalogue-card__family">{material.family}</span>
+    </div>
+    <div class="catalogue-card__body">
+      <h2>{material.name}</h2>
+      <span class="catalogue-card__alias">{material.alias}</span>
+      <p>{material.description}</p>
+      <span class="catalogue-card__more">En savoir plus <span aria-hidden="true">↗</span></span>
+    </div>
+  </a>
+</article>

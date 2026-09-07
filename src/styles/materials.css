@@ -1,0 +1,194 @@
+/* Material catalogue and detail pages share the site's industrial palette. */
+.materials-page {
+  background: var(--c-bg);
+  --material-border: var(--c-line);
+}
+
+.materials-page :is(a, button):focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 5px;
+}
+
+.catalogue-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 116px 0 72px;
+  min-height: 450px;
+}
+
+.catalogue-hero__image {
+  position: absolute;
+  z-index: -2;
+  inset: 0 0 0 30%;
+}
+
+.catalogue-hero__image :is(picture, img) {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+}
+
+.catalogue-hero__veil {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(90deg, var(--c-bg) 12%, transparent 90%), linear-gradient(0deg, var(--c-bg), transparent 55%), linear-gradient(180deg, var(--c-bg), transparent 45%);
+}
+
+.catalogue-hero__content { position: relative; }
+.material-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; color: var(--c-muted); font-size: 0.72rem; }
+.material-breadcrumb a { padding-block: 7px; }
+.material-breadcrumb a:hover { color: var(--c-accent); }
+.material-breadcrumb [aria-current] { color: var(--c-text); }
+.material-eyebrow { display: flex; align-items: center; gap: 13px; margin: 28px 0 15px; color: var(--c-accent); font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; }
+.material-eyebrow > span { display: block; width: 29px; height: 1px; background: currentColor; flex-shrink: 0; }
+.materials-page h1 { margin: 0; font-family: var(--font-display); font-size: clamp(4rem, 6.7vw, 7rem); line-height: 0.94; font-weight: 700; letter-spacing: -0.025em; text-transform: uppercase; }
+.heading-dot { color: var(--c-accent); }
+.catalogue-hero__description { max-width: 405px; margin: 22px 0 0; color: var(--c-muted); font-size: 0.84rem; line-height: 1.9; }
+.catalogue-hero__caption { position: absolute; right: 0; bottom: 0; color: var(--c-muted); font-size: 0.59rem; letter-spacing: 0.22em; text-transform: uppercase; }
+.catalogue { padding-bottom: 72px; }
+.catalogue-toolbar { display: flex; justify-content: space-between; gap: 24px; align-items: center; border-bottom: 1px solid var(--material-border); padding-bottom: 24px; margin-bottom: 30px; }
+.catalogue-filters { display: flex; flex-wrap: wrap; gap: 9px; }
+.catalogue-filters[hidden], .catalogue-card[hidden] { display: none; }
+.catalogue-filters button { min-height: 44px; padding: 0 22px; border: 1px solid var(--material-border); background: transparent; color: var(--c-muted); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; transition: color 180ms ease, border-color 180ms ease; }
+.catalogue-filters button:is(:hover, [aria-pressed="true"]) { color: var(--c-accent); border-color: var(--c-accent); background: color-mix(in srgb, var(--c-accent) 6%, transparent); }
+.catalogue-count { margin: 0; white-space: nowrap; color: var(--c-muted); font-size: 0.68rem; }
+.catalogue-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.catalogue-card { min-width: 0; border: 1px solid var(--material-border); border-radius: 3px; background: var(--c-bg); transition: border-color 220ms ease; }
+.catalogue-card:is(:hover, :focus-within) { border-color: var(--c-accent); }
+.catalogue-card__link { display: block; height: 100%; border-radius: inherit; }
+.catalogue-card__image { position: relative; height: clamp(150px, 15vw, 225px); overflow: hidden; border-radius: 2px 2px 0 0; }
+.catalogue-card__image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, var(--c-bg) 100%); }
+.catalogue-card__image :is(picture, img) { width: 100%; height: 100%; }
+.catalogue-card__image img { object-fit: cover; transition: transform 600ms ease; }
+.catalogue-card__link:is(:hover, :focus-visible) img { transform: scale(1.04); }
+.catalogue-card__number { position: absolute; top: 14px; right: 16px; color: var(--c-text); font-size: 0.65rem; font-weight: 700; text-shadow: 0 1px 5px var(--c-bg); }
+.catalogue-card__family { position: absolute; z-index: 1; bottom: 6px; left: 24px; font-size: 0.55rem; letter-spacing: 0.19em; text-transform: uppercase; color: var(--c-muted); }
+.catalogue-card__body { padding: 10px 24px 21px; }
+.catalogue-card h2 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 2.15rem; margin: 0 0 8px; line-height: 1; }
+.catalogue-card__alias { display: block; margin-bottom: 10px; color: var(--c-accent); font-size: 0.64rem; }
+.material-detail__alias { margin: 12px 0 0; color: var(--c-accent); font: 700 1.3rem/1.2 var(--font-display); text-transform: uppercase; }
+.material-detail h1 { font-size: clamp(3.1rem, 5vw, 5.5rem); }
+.material-variants { display: flex; flex-wrap: wrap; gap: 9px; margin-bottom: 25px; }
+.material-variants a { display: inline-flex; min-height: 44px; align-items: center; padding: 8px 14px; border: 1px solid var(--c-line); font-size: 0.73rem; }
+.material-variants a:is(:hover, [aria-current="page"]) { border-color: var(--c-accent); color: var(--c-accent); }
+.material-usage { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 75px); padding: 38px 0; border-top: 1px solid var(--c-line); }
+.material-usage .material-eyebrow { margin-top: 0; }
+.material-usage h2 { margin: 0 0 22px; font: 700 2.4rem/1.05 var(--font-display); text-transform: uppercase; }
+.material-usage h3 { font-size: 0.9rem; margin: 0 0 10px; }
+.material-usage ul { padding-left: 20px; }
+.material-usage li { margin-bottom: 14px; color: var(--c-muted); font-size: 0.83rem; line-height: 1.8; }
+.material-usage li::marker { color: var(--c-accent); }
+.material-usage__guidance p { font-size: 0.79rem; color: var(--c-muted); line-height: 1.9; margin: 0 0 20px; }
+.material-usage__guidance .material-usage__note { font-size: 0.7rem; }
+.material-sources { border-top: 1px solid var(--c-line); padding-top: 12px; }
+.material-sources summary { padding-block: 10px; font-size: 0.73rem; color: var(--c-accent); cursor: pointer; }
+.material-sources a { text-decoration: underline; text-underline-offset: 3px; }
+.material-sources summary:focus-visible { outline: 2px solid var(--c-accent); outline-offset: 3px; }
+.catalogue-card p { max-width: 300px; min-height: 44px; margin: 0 0 16px; color: var(--c-muted); font-size: 0.75rem; line-height: 1.8; }
+.catalogue-card__more { display: flex; justify-content: space-between; align-items: center; gap: 16px; color: var(--c-accent); font-size: 0.61rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.catalogue-card__more > span { font-size: 1.2rem; }
+.catalogue-note { display: flex; gap: 12px; color: var(--c-muted); font-size: 0.7rem; margin: 22px 0 35px; }
+.catalogue-note > span { color: var(--c-accent); }
+.material-advice { position: relative; isolation: isolate; overflow: hidden; display: flex; gap: 26px; align-items: center; padding: 30px 34px; border: 1px solid color-mix(in srgb, var(--c-accent) 55%, transparent); border-radius: 3px; }
+.material-advice__image { position: absolute; z-index: -2; inset: 0; }
+.material-advice__image :is(picture, img) { width: 100%; height: 100%; object-fit: cover; object-position: center 62%; }
+.material-advice::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, var(--c-bg), color-mix(in srgb, var(--c-bg) 80%, transparent)); }
+.material-advice__icon { flex-shrink: 0; display: grid; place-items: center; width: 64px; height: 64px; border: 1px solid color-mix(in srgb, var(--c-accent) 35%, transparent); color: var(--c-accent); }
+.material-advice h2 { margin: 0 0 6px; font: 700 1.75rem/1 var(--font-display); text-transform: uppercase; }
+.material-advice p { margin: 0; max-width: 540px; color: var(--c-muted); font-size: 0.75rem; line-height: 1.8; }
+.material-advice .button { flex-shrink: 0; margin-left: auto; }
+.material-detail { padding-top: 114px; padding-bottom: 70px; }
+.material-detail__hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(32px, 5vw, 85px); margin: 30px 0 70px; align-items: center; }
+.material-detail__visual { position: relative; margin: 0; border: 1px solid var(--material-border); }
+.material-detail__visual picture { display: block; height: 560px; }
+.material-detail__visual img { width: 100%; height: 100%; object-fit: cover; }
+.material-detail__image-label { position: absolute; left: 25px; top: 23px; display: flex; align-items: center; gap: 16px; font: 700 1.6rem/1 var(--font-display); text-shadow: 0 1px 8px var(--c-bg); }
+.material-detail__image-label span { max-width: 80px; font: 500 0.55rem/1.6 var(--font-body); letter-spacing: 0.15em; text-transform: uppercase; }
+.material-detail__visual figcaption { padding: 11px 18px; color: var(--c-muted); font-size: 0.61rem; }
+.material-detail__summary .material-eyebrow { margin-top: 0; }
+.material-detail__lead { margin: 23px 0 16px; max-width: 430px; font-size: 1.05rem; }
+.material-detail__intro { color: var(--c-muted); font-size: 0.82rem; line-height: 1.9; }
+.material-detail__facts { margin: 28px 0; }
+.material-detail__facts > div { display: flex; justify-content: space-between; gap: 22px; padding: 13px 0; border-bottom: 1px solid var(--material-border); font-size: 0.73rem; }
+.material-detail__facts dt { color: var(--c-muted); }
+.material-detail__facts dd { margin: 0; text-align: right; }
+.material-detail__actions { display: flex; align-items: center; flex-wrap: wrap; gap: 24px; }
+.material-text-link { display: inline-flex; align-items: center; gap: 15px; min-height: 44px; color: var(--c-accent); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+.material-text-link:hover { text-decoration: underline; text-underline-offset: 5px; }
+.material-detail__availability { margin-top: 18px; color: var(--c-muted); font-size: 0.67rem; line-height: 1.8; }
+.material-planning { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 40px; padding: 38px 0; border-top: 1px solid var(--material-border); border-bottom: 1px solid var(--material-border); }
+.material-planning .material-eyebrow { margin-top: 0; }
+.material-planning h2, .material-related h2 { margin: 0; font: 700 clamp(1.8rem, 2.4vw, 2.8rem)/1.05 var(--font-display); text-transform: uppercase; }
+.material-planning h2 > span, .material-related h2 > span { color: var(--c-muted); }
+.material-planning h3 { margin: 0 0 16px; font-size: 0.88rem; }
+.material-planning ul { list-style: none; padding: 0; margin: 0; }
+.material-planning li { display: flex; gap: 12px; margin: 10px 0; color: var(--c-muted); font-size: 0.76rem; }
+.material-planning li > span { color: var(--c-accent); }
+.material-planning__delivery p { color: var(--c-muted); font-size: 0.76rem; line-height: 1.9; }
+.material-steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 45px; padding: 40px 0 55px; }
+.material-steps__number { display: block; color: var(--c-accent); font: 700 2.7rem/1 var(--font-display); margin-bottom: 16px; }
+.material-steps h3 { font: 700 1.5rem/1.1 var(--font-display); text-transform: uppercase; margin: 0 0 10px; }
+.material-steps p { color: var(--c-muted); font-size: 0.77rem; max-width: 330px; line-height: 1.8; margin: 0; }
+.material-related { padding: 35px 0 45px; border-top: 1px solid var(--material-border); }
+.material-related__heading { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 30px; }
+.material-related .material-eyebrow { margin-top: 0; }
+
+@media (max-width: 1100px) {
+  .catalogue-toolbar { align-items: flex-start; }
+  .catalogue-count { padding-top: 12px; }
+  .catalogue-filters button { padding-inline: 17px; }
+  .material-advice { flex-wrap: wrap; }
+  .material-advice .button { margin-left: 90px; }
+  .material-planning { gap: 25px; }
+}
+
+@media (max-width: 960px) {
+  .catalogue-hero { min-height: 410px; padding-bottom: 45px; }
+  .catalogue-hero__caption { display: none; }
+  .catalogue-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .catalogue-card__image { height: 190px; }
+  .material-detail__hero { grid-template-columns: 1fr; }
+  .material-detail__visual picture { height: 450px; }
+  .material-detail__summary { max-width: 660px; }
+  .material-planning { grid-template-columns: 1fr 1fr; }
+  .material-planning > div:first-child { grid-column: 1 / -1; }
+  .material-related__heading { align-items: start; flex-direction: column; gap: 10px; }
+}
+
+@media (max-width: 600px) {
+  .material-usage { grid-template-columns: 1fr; }
+  .catalogue-hero { padding-top: 104px; min-height: 400px; }
+  .catalogue-hero__image { left: 0; opacity: 0.5; }
+  .catalogue-hero__veil { background: linear-gradient(90deg, var(--c-bg), transparent), linear-gradient(0deg, var(--c-bg), transparent 85%); }
+  .material-eyebrow { font-size: 0.56rem; letter-spacing: 0.1em; }
+  .catalogue-hero__description { max-width: 300px; font-size: 0.78rem; }
+  .catalogue-toolbar { flex-direction: column; gap: 12px; margin-bottom: 22px; padding-bottom: 17px; }
+  .catalogue-filters { gap: 8px; }
+  .catalogue-filters button { padding-inline: 13px; font-size: 0.58rem; }
+  .catalogue-count { padding-top: 0; }
+  .catalogue-grid { grid-template-columns: 1fr; }
+  .catalogue-card__image { height: 195px; }
+  .catalogue-card p { min-height: 0; }
+  .catalogue-note { font-size: 0.65rem; }
+  .material-advice { padding: 24px; gap: 18px; }
+  .material-advice__icon { width: 50px; height: 50px; }
+  .material-advice h2 { font-size: 1.65rem; }
+  .material-advice .button { margin-left: 0; width: 100%; gap: 18px; font-size: 0.63rem; padding-inline: 16px; }
+  .material-detail { padding-top: 104px; }
+  .material-detail__hero { margin-top: 22px; gap: 30px; margin-bottom: 42px; }
+  .material-detail__visual picture { height: 340px; }
+  .material-detail__facts > div { font-size: 0.67rem; }
+  .material-detail__actions { gap: 12px; }
+  .material-planning { grid-template-columns: 1fr; }
+  .material-steps { grid-template-columns: 1fr; gap: 28px; }
+  .material-steps > div { display: grid; grid-template-columns: 45px 1fr; column-gap: 16px; }
+  .material-steps__number { grid-row: span 2; }
+  .material-detail__lead { font-size: 0.95rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .materials-page *, .materials-page *::before, .materials-page *::after { transition: none !important; }
+}

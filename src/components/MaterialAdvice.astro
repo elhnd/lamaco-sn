@@ -1,0 +1,21 @@
+---
+import { Picture } from 'astro:assets';
+import Button from './Button.astro';
+import quarryImage from '../assets/images/process-quarry.png';
+import { company } from '../data/company';
+import { materialsPage } from '../data/materials';
+---
+
+<aside class="material-advice">
+  <div class="material-advice__image" aria-hidden="true">
+    <Picture src={quarryImage} formats={['avif']} fallbackFormat="webp" widths={[640, 1280]} sizes="90vw" width={1280} height={240} alt="" loading="lazy" quality={48} />
+  </div>
+  <span class="material-advice__icon" aria-hidden="true">
+    <svg viewBox="0 0 48 48" width="42" height="42"><path d="M8 25v-5a16 16 0 0 1 32 0v5M9 21H5v13h8V21Zm30 0h4v13h-8V21Zm0 13v5l-8 4h-8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+  </span>
+  <div>
+    <h2>{materialsPage.adviceTitle}</h2>
+    <p>{materialsPage.adviceDescription}</p>
+  </div>
+  <Button href={company.phones[0].href}>Demander un conseil</Button>
+</aside>

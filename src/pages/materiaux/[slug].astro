@@ -1,0 +1,102 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Button from '../../components/Button.astro';
+import CatalogueCard from '../../components/CatalogueCard.astro';
+import MaterialAdvice from '../../components/MaterialAdvice.astro';
+import { materials, materialCatalogue, materialDetails, materialsPage, materialSources, type MaterialDetail } from '../../data/materials';
+import { company } from '../../data/company';
+import '../../styles/materials.css';
+
+export function getStaticPaths() {
+  return materialDetails.map((material) => ({ params: { slug: material.slug }, props: { material } }));
+}
+interface Props { material: MaterialDetail }
+const { material } = Astro.props;
+const siblings = materialCatalogue.filter((item) => item.group === material.group);
+const related = materials
+  .filter((family) => family.slug !== material.group)
+  .map((family) => materialCatalogue.find((item) => item.group === family.slug)!);
+---
+
+<BaseLayout title={`${material.name} — Matériaux de construction | LAMACO`} description={material.description}>
+  <Header />
+  <main class="materials-page material-detail wrap" id="contenu">
+    <nav class="material-breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a><span aria-hidden="true">/</span><a href="/materiaux/">Matériaux</a><span aria-hidden="true">/</span><span aria-current="page">{material.name}</span></nav>
+
+    <section class="material-detail__hero" aria-labelledby="material-title">
+      <figure class="material-detail__visual">
+        <Picture src={material.image} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes="(max-width: 960px) 90vw, 48vw" width={1000} height={1100} alt={material.alt} loading="eager" fetchpriority="high" quality={58} />
+        <span class="material-detail__image-label">LAMACO <span>Collection matériaux</span></span>
+        <figcaption>Visuel d’illustration · aspect indicatif, calibre non représenté à l’échelle</figcaption>
+      </figure>
+      <div class="material-detail__summary">
+        <p class="material-eyebrow"><span></span> {material.family} / LAMACO</p>
+        <h1 id="material-title">{material.name}<span class="heading-dot">.</span></h1>
+        <p class="material-detail__alias">{material.alias}</p>
+        <p class="material-detail__lead">{material.description}</p>
+        <p class="material-detail__intro">{material.introduction}</p>
+        <dl class="material-detail__facts">
+          <div><dt>Famille</dt><dd>{material.family}</dd></div>
+          <div><dt>{material.overview ? 'Gamme' : material.group === 'sable' ? 'Type' : 'Calibre'}</dt><dd>{material.grade}</dd></div>
+          <div><dt>Fourniture</dt><dd>Selon votre demande</dd></div>
+          <div><dt>Livraison</dt><dd>Sur chantier, à organiser ensemble</dd></div>
+        </dl>
+        <nav class="material-variants" aria-label={material.group === 'sable' ? 'Choisir votre sable' : 'Choisir votre calibre'}>
+          {siblings.map((item) => <a href={`/materiaux/${item.slug}/`} aria-current={item.slug === material.slug ? 'page' : undefined}>{material.group === 'sable' ? item.name : item.grade}</a>)}
+        </nav>
+        <div class="material-detail__actions">
+          <Button href={company.phones[0].href}>Demander un devis</Button>
+          <a class="material-text-link" href="/materiaux/">Tous les matériaux <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="material-detail__availability">{materialsPage.availability}</p>
+      </div>
+    </section>
+
+    <section class="material-usage" aria-labelledby="usage-title">
+      <div>
+        <p class="material-eyebrow"><span></span> {material.overview ? 'La gamme LAMACO' : 'Choisir selon vos travaux'}</p>
+        <h2 id="usage-title">{material.overview ? 'Nos références' : 'Pour quels besoins ?'}</h2>
+        <ul>{material.uses.map((use) => <li>{use}</li>)}</ul>
+      </div>
+      <div class="material-usage__guidance">
+        <h3>{material.overview ? 'Choisissez votre référence' : 'Le choix LAMACO'}</h3>
+        <p>{material.quality}</p>
+        <h3>À savoir pour votre chantier</h3>
+        <p>{material.guidance}</p>
+        {material.terminology && <p>{material.terminology}</p>}
+        {!material.overview && <p class="material-usage__note">{materialsPage.useNote}</p>}
+        {material.sourceIds.length > 0 && <details class="material-sources"><summary>Repères techniques et sources</summary><ul>{material.sourceIds.map((id) => <li><a href={materialSources[id].href}>{materialSources[id].title} ↗</a></li>)}</ul></details>}
+      </div>
+    </section>
+
+    <section class="material-planning" aria-labelledby="planning-title">
+      <div>
+        <p class="material-eyebrow"><span></span> Préparons votre chantier</p>
+        <h2 id="planning-title">Le bon matériau.<br /><span>Un besoin bien défini.</span></h2>
+      </div>
+      <div class="material-planning__request">
+        <h3>Pour préparer votre demande</h3>
+        <ul>{material.request.map((item) => <li><span aria-hidden="true">↗</span>{item}</li>)}</ul>
+      </div>
+      <div class="material-planning__delivery">
+        <h3>Et pour la livraison ?</h3>
+        <p>{materialsPage.delivery}</p>
+        <a class="material-text-link" href={company.phones[0].href}>{company.phones[0].label} <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="material-steps" aria-label="Les étapes de votre demande">
+      {materialsPage.steps.map((step, index) => <div><span class="material-steps__number">0{index + 1}</span><h3>{step.title}</h3><p>{step.text}</p></div>)}
+    </section>
+
+    <section class="material-related" aria-labelledby="related-title">
+      <div class="material-related__heading"><div><p class="material-eyebrow"><span></span> À découvrir aussi</p><h2 id="related-title">D’autres matières, <span>d’autres projets.</span></h2></div><a class="material-text-link" href="/materiaux/">Voir le catalogue <span aria-hidden="true">↗</span></a></div>
+      <div class="catalogue-grid">{related.map((item, index) => <CatalogueCard material={item} index={index} />)}</div>
+    </section>
+    <MaterialAdvice />
+  </main>
+  <Footer />
+</BaseLayout>

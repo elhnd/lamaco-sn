@@ -1,8 +1,8 @@
 export const mainNavigation = [
   { label: 'Accueil', href: '/' },
-  { label: 'Matériaux', href: '#materiaux' },
-  { label: 'Engins', href: '#engins' },
-  { label: 'Réalisations', href: '#processus' },
-  { label: 'À propos', href: '#a-propos' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Matériaux', href: '/materiaux/' },
+  { label: 'Engins', href: '/#engins' },
+  { label: 'Réalisations', href: '/#processus' },
+  { label: 'À propos', href: '/#a-propos' },
+  { label: 'Contact', href: '/#contact' },
 ] as const;

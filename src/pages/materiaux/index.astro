@@ -1,0 +1,83 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import CatalogueCard from '../../components/CatalogueCard.astro';
+import MaterialAdvice from '../../components/MaterialAdvice.astro';
+import heroImage from '../../assets/images/material-basalt.png';
+import { materialCatalogue, materials, materialsPage } from '../../data/materials';
+import '../../styles/materials.css';
+---
+
+<BaseLayout title="Nos matériaux de construction — LAMACO Sénégal" description={materialsPage.description}>
+  <Header />
+  <main class="materials-page" id="contenu">
+    <section class="catalogue-hero" aria-labelledby="catalogue-title">
+      <div class="catalogue-hero__image">
+        <Picture src={heroImage} formats={['avif']} fallbackFormat="webp" widths={[640, 1100, 1600]} sizes="(max-width: 600px) 100vw, 70vw" width={1600} height={780} alt="Illustration de pierres de basalte aux textures minérales" loading="eager" fetchpriority="high" quality={52} />
+      </div>
+      <div class="catalogue-hero__veil" aria-hidden="true"></div>
+      <div class="wrap catalogue-hero__content">
+        <nav class="material-breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Matériaux</span></nav>
+        <p class="material-eyebrow"><span></span> La matière, à l’origine de vos projets</p>
+        <h1 id="catalogue-title">Nos <span>matériaux</span><span class="heading-dot">.</span></h1>
+        <p class="catalogue-hero__description">{materialsPage.description}</p>
+        <span class="catalogue-hero__caption" aria-hidden="true">Basalte · Calcaire · Silex · Sables</span>
+      </div>
+    </section>
+
+    <section class="catalogue wrap" aria-label="Catalogue des matériaux" data-catalogue>
+      <div class="catalogue-toolbar">
+        <div class="catalogue-filters" role="group" aria-label="Filtrer les matériaux" data-filters hidden>
+          <button type="button" data-filter="tous" aria-pressed="true">Tous les matériaux</button>
+          {materials.map((material) => <button type="button" data-filter={material.slug} aria-pressed="false">{material.name}</button>)}
+        </div>
+        <p class="catalogue-count" aria-live="polite" aria-atomic="true" data-count>{materialCatalogue.length} références</p>
+      </div>
+      <div class="catalogue-grid">
+        {materialCatalogue.map((material, index) => <CatalogueCard material={material} index={index} />)}
+      </div>
+      <p class="catalogue-note"><span aria-hidden="true">↳</span> {materialsPage.availability}</p>
+      <p class="catalogue-note">{materialsPage.sizeNote}</p>
+      <MaterialAdvice />
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  const catalogue = document.querySelector<HTMLElement>('[data-catalogue]');
+  const filters = catalogue?.querySelector<HTMLElement>('[data-filters]');
+  const buttons = catalogue?.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = catalogue?.querySelectorAll<HTMLElement>('[data-material]');
+  const count = catalogue?.querySelector<HTMLElement>('[data-count]');
+
+  if (filters && buttons && cards && count) {
+    filters.hidden = false;
+    const applyFilter = (filter: string) => {
+      let total = 0;
+      buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === filter)));
+      cards.forEach((card) => {
+        card.hidden = filter !== 'tous' && card.dataset.material !== filter;
+        if (!card.hidden) total++;
+      });
+      count.textContent = `${total} ${total === 1 ? 'référence' : 'références'}`;
+    };
+    const readFilter = () => {
+      const requested = new URLSearchParams(window.location.search).get('famille');
+      const filter = Array.from(buttons).some((button) => button.dataset.filter === requested) ? requested! : 'tous';
+      applyFilter(filter);
+    };
+    buttons.forEach((button) => button.addEventListener('click', () => {
+      const filter = button.dataset.filter ?? 'tous';
+      const url = new URL(window.location.href);
+      if (filter === 'tous') url.searchParams.delete('famille');
+      else url.searchParams.set('famille', filter);
+      window.history.pushState(null, '', url);
+      applyFilter(filter);
+    }));
+    window.addEventListener('popstate', readFilter);
+    readFilter();
+  }
+</script>

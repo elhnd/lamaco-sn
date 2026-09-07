@@ -1,12 +1,5 @@
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-const updateHeader = () => {
-  document.querySelector<HTMLElement>('[data-header]')?.classList.toggle('is-scrolled', window.scrollY > 90);
-};
-
-window.addEventListener('scroll', updateHeader, { passive: true });
-updateHeader();
-
 async function enableMotion() {
   if (reducedMotion.matches) return;
 
