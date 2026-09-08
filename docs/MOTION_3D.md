@@ -10,13 +10,23 @@ Motion must explain, transition or reinforce the industrial/material story. If r
 Do not add another motion library.
 
 ## Hero sand
-Signature effect: sand falls from above and participates in the scroll transition.
-Implementation:
-- GPU particles (`Points`/buffer geometry + shader or equivalent), not DOM particles.
-- Hero text/content exists as HTML immediately.
-- Start 3D after critical content; scroll progress may control emission/camera.
-- Do not make LCP depend on the scene.
-- Provide static/fewer-particle fallback.
+Current direction (8 September 2026): a sand wake stirred by mouse movement,
+inspired by the fluid cursor response at https://www.wintech.sn/. Grains disperse,
+drift with inertia and settle; a restrained dust layer accompanies the movement.
+There is no automatic falling sand, letter filling or accumulation on the wordmark.
+
+- `src/lib/motion/hero-sand.ts` loads the effect after page load and the first
+  mouse interaction, only on desktop with fine pointer, hover, no reduced motion
+  and no data-saving preference.
+- `src/lib/three/sand-cursor.ts` uses a bounded WebGL point buffer (7,200 slots,
+  one draw call). The GPU evaluates drag, eddies, gravity and fading. No dependency
+  or raster asset is needed; the shader draws grains and low-opacity dust.
+- The transparent, non-interactive canvas stays behind the hero text and links.
+  The logo remains unchanged and HTML is immediately available.
+- Stop the animation after the last grains fade (at most 2.8 seconds of simulated
+  time). Clear and pause offscreen/on hidden tabs; dispose on preference changes
+  and page teardown. Cap pixel ratio at 1.5.
+- Mobile, reduced motion, save-data and unavailable/lost WebGL use the static hero.
 
 ## Equipment 3D
 Use 3D only where it adds product understanding:
