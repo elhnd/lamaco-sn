@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/brand-marks.css';
 
 interface Props {
   title: string;
@@ -21,5 +22,9 @@ const { title, description } = Astro.props;
   </head>
   <body>
     <slot />
+    <script>
+      import { enableGentleScroll } from '../lib/motion/gentle-scroll';
+      enableGentleScroll();
+    </script>
   </body>
 </html>

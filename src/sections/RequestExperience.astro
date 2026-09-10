@@ -1,0 +1,147 @@
+---
+import BrandArrow from '../components/BrandArrow.astro';
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import ProcessIcon from '../components/ProcessIcon.astro';
+import quarryImage from '../assets/images/process-quarry.png';
+import sandImage from '../assets/images/material-sand.png';
+import { company } from '../data/company';
+import { equipment } from '../data/equipment';
+import { materials, materialCatalogue } from '../data/materials';
+import { requestPages, requestTiming, requestAccess, requestWork, requestFaq, type RequestMode } from '../data/requests';
+import '../styles/requests.css';
+interface Props { mode: RequestMode }
+const { mode } = Astro.props;
+const content = requestPages[mode];
+const quote = mode === 'devis';
+---
+
+<BaseLayout title={`${content.title} — LAMACO Sénégal`} description={content.description}>
+  <a class="request-skip" href="#demande">Aller à la demande</a>
+  <Header />
+  <main class={`request-page request-page--${mode}`} id="contenu" data-request-page data-mode={mode} data-phone={company.phones[0].href.replace('tel:', '')}>
+    <PageHero title={content.title} breadcrumb={content.title} eyebrow={content.eyebrow} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Illustration d’un camion-benne dans une carrière' : 'Illustration de la texture d’un sable de construction'} />
+    <div class="wrap request-content">
+      <nav class="request-switch" aria-label="Choisir votre démarche">
+        <a href={requestPages.devis.path} aria-current={quote ? 'page' : undefined}>01 <span>Demander un devis</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
+        <a href={requestPages.conseil.path} aria-current={!quote ? 'page' : undefined}>02 <span>Demander un conseil</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
+      </nav>
+
+      <div class="request-layout">
+        <div class="request-editorial">
+          <h2>{content.heading}<br /><em>{content.accent}</em></h2>
+          <p class="request-lead">{content.intro}</p>
+          <div class="request-note"><span aria-hidden="true"><BrandArrow glyph="↳" /></span><p>{content.note}</p></div>
+          <figure class="request-scene">
+            <Picture src={quote ? quarryImage : sandImage} formats={['avif']} fallbackFormat="webp" widths={[480, 760]} sizes="(max-width: 960px) 90vw, 35vw" width={760} height={360} alt={quote ? 'Illustration d’un camion-benne en carrière' : 'Illustration de la texture d’un sable de construction'} loading="lazy" quality={55} />
+            <figcaption><span>LAMACO / SÉNÉGAL</span><strong>{quote ? 'La force du terrain.' : 'Chaque chantier commence par une question.'}</strong></figcaption>
+          </figure>
+          <a class="request-call" href={company.phones[0].href}><span>Vous préférez en parler ?<strong>{company.phones[0].label}</strong></span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
+        </div>
+
+        <section class="request-desk" id="demande" aria-labelledby="request-form-title">
+          <div class="request-desk__heading"><span>FICHE CHANTIER / {quote ? 'DEVIS' : 'CONSEIL'}</span><span class="request-desk__stamp">À construire ensemble</span></div>
+          <div class="request-progress" data-progress hidden>
+            <ol>{content.steps.map((step, index) => <li><button type="button" data-go={index} aria-current={index === 0 ? 'step' : undefined}><span>0{index + 1}</span>{step}</button></li>)}</ol>
+            <div class="request-progress__track" aria-hidden="true"><span data-progress-fill></span></div>
+          </div>
+          <div class="request-startup" data-startup><p>Le formulaire interactif se prépare. Vous pouvez aussi contacter directement LAMACO.</p><a href={company.phones[0].href}><span>Appeler le {company.phones[0].label} <BrandArrow glyph="↗" /></span></a></div>
+          <noscript><p class="request-noscript">JavaScript est désactivé. Appelez-nous au <a href={company.phones[0].href}>{company.phones[0].label}</a> pour décrire votre projet.</p></noscript>
+
+          <form class="request-form" data-request-form action={content.path} method="post" novalidate hidden>
+            <fieldset class="request-gate" data-gate disabled>
+              <legend class="request-sr">{content.title}</legend>
+              <p class="request-field-note">Les champs marqués * sont nécessaires.</p>
+              <fieldset class="request-step" data-step="0">
+                <legend id="request-form-title" tabindex="-1">{content.firstTitle}</legend>
+                <p class="request-hint">{content.firstHint}</p>
+                <fieldset class="request-choice-group">
+                  <legend class="request-label">{quote ? 'Votre besoin principal' : 'Le sujet de votre question'} *</legend>
+                  <div class="request-choices">
+                    {content.choices.map((choice) => <label class="request-choice"><input type="radio" name="besoin" value={choice.value} required data-choice-label={choice.label} /><span class="request-choice__body"><ProcessIcon name={choice.icon} /><strong>{choice.label}</strong><span>{choice.detail}</span><span class="request-choice__check" aria-hidden="true">✓</span></span></label>)}
+                  </div>
+                </fieldset>
+                {quote ? <>
+                  <div data-conditional="materiaux" hidden>
+                    <label class="request-label" for="material">Le matériau, si vous le connaissez</label>
+                    <select id="material" name="materiau" disabled>
+                      <option value="">À préciser ensemble</option>
+                      {materials.map((family) => <optgroup label={family.name}><option value={family.slug}>{family.name} — référence à préciser</option>{materialCatalogue.filter(item => item.group === family.slug).map(item => <option value={item.slug}>{item.name}</option>)}</optgroup>)}
+                    </select>
+                  </div>
+                  <div data-conditional="engins" hidden>
+                    <label class="request-label" for="equipment">L’engin souhaité</label>
+                    <select id="equipment" name="engin" disabled><option value="">À préciser ensemble</option>{equipment.map(item => <option value={item.name} data-equipment={item.slug}>{item.name}</option>)}</select>
+                  </div>
+                  <div data-conditional="travaux" hidden>
+                    <label class="request-label" for="work">Les travaux envisagés</label>
+                    <select id="work" name="travaux" disabled><option value="">À préciser ensemble</option>{requestWork.map(value => <option>{value}</option>)}</select>
+                  </div>
+                  <label class="request-label" for="quantity">Quantité, dimensions ou durée <span>facultatif</span></label>
+                  <input id="quantity" name="quantite" maxlength="120" placeholder="Ex. : 10 m³ de sable, ou une pelle pour 2 jours" />
+                </> : <>
+                  <label class="request-label" for="question">Votre question, avec vos mots *</label>
+                  <textarea id="question" name="question" rows="4" required minlength="12" maxlength="1200" placeholder="Ex. : je prépare les fondations de ma maison. Quelles informations vous donner pour choisir mon sable ?"></textarea>
+                </>}
+              </fieldset>
+
+              <fieldset class="request-step" data-step="1" hidden disabled>
+                <legend tabindex="-1">{quote ? 'On se retrouve sur quel chantier ?' : 'Un peu de contexte pour vous guider.'}</legend>
+                <p class="request-hint">La localisation et les conditions d’accès nous aident à préparer l’échange. Pas besoin d’une adresse complète.</p>
+                <label class="request-label" for="location">Ville ou zone du chantier *</label>
+                <input id="location" name="localisation" autocomplete="address-level2" required minlength="2" maxlength="120" placeholder="Ex. : Thiès, quartier ou commune" />
+                <div class="request-fields-row">
+                  <div><label class="request-label" for="timing">Votre horizon</label><select id="timing" name="delai">{requestTiming.map(value => <option>{value}</option>)}</select></div>
+                  <div><label class="request-label" for="access">L’accès au terrain</label><select id="access" name="acces">{requestAccess.map(value => <option>{value}</option>)}</select></div>
+                </div>
+                <label class="request-label" for="details">Un détail qui change tout ? <span>facultatif</span></label>
+                <textarea id="details" name="precisions" rows="4" maxlength="1200" placeholder={quote ? 'Autres matériaux souhaités, livraison, particularités du terrain…' : 'Nature des travaux, dimensions connues, étape du chantier…'}></textarea>
+                <p class="request-tip"><span aria-hidden="true"><BrandArrow glyph="↳" /></span> « Je ne sais pas encore » est aussi un bon point de départ.</p>
+              </fieldset>
+
+              <fieldset class="request-step" data-step="2" hidden disabled>
+                <legend tabindex="-1">Faisons connaissance.</legend>
+                <p class="request-hint">Ces coordonnées seront incluses dans le message que vous choisirez d’envoyer.</p>
+                <label class="request-label" for="fullname">Votre nom *</label>
+                <input id="fullname" name="nom" autocomplete="name" required minlength="2" maxlength="100" placeholder="Prénom et nom" />
+                <label class="request-label" for="phone">Votre téléphone *</label>
+                <input id="phone" name="telephone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30" placeholder="+221… ou votre numéro à l’étranger" aria-describedby="phone-hint" />
+                <p class="request-hint" id="phone-hint">Indiquez l’indicatif du pays si vous êtes à l’étranger.</p>
+                <div class="request-ticket"><p>Votre fiche, en bref</p><dl><div><dt>Objet</dt><dd data-recap="besoin">À préciser</dd></div><div><dt>Chantier</dt><dd data-recap="localisation">À préciser</dd></div><div><dt>Horizon</dt><dd data-recap="delai">À définir ensemble</dd></div></dl><span>Le prix et la disponibilité restent à confirmer.</span></div>
+                <p class="request-privacy">Vos réponses restent dans cette page jusqu’à votre action de partage. Aucun envoi automatique, aucun compte à créer. Ne saisissez pas d’informations confidentielles.</p>
+              </fieldset>
+              <div class="request-form__actions"><button class="request-back" type="button" data-back hidden><BrandArrow glyph="←" /> Retour</button><button class="request-next" type="submit" data-next>Le chantier <span aria-hidden="true"><BrandArrow glyph="→" /></span></button></div>
+              <p class="request-send-note">À la fin : un récapitulatif à copier ou à envoyer depuis votre application SMS.</p>
+            </fieldset>
+          </form>
+
+          <section class="request-result" data-result hidden aria-labelledby="result-title">
+            <span class="request-result__badge">PRÊTE À PARTAGER · NON ENVOYÉE</span>
+            <h2 id="result-title" tabindex="-1">Votre chantier<br />a sa fiche<span>.</span></h2>
+            <p>Relisez votre demande, puis partagez-la avec LAMACO. L’envoi se fait dans votre application SMS, pas sur ce site.</p>
+            <label class="request-label" for="message">Votre message</label>
+            <textarea id="message" data-message readonly rows="11"></textarea>
+            <div class="request-result__actions"><button class="request-next" type="button" data-copy>Copier la demande <span aria-hidden="true"><BrandArrow glyph="↗" /></span></button><a class="request-sms" data-sms><span>Ouvrir les SMS <BrandArrow glyph="↗" /></span></a></div>
+            <p class="request-copy-status" data-copy-status role="status"></p>
+            <p class="request-hint">Destinataire : {company.phones[0].label}. Si les SMS ne s’ouvrent pas ou si le texte n’est pas repris, copiez le message. Des frais opérateur peuvent s’appliquer.</p>
+            <a class="request-result__call" href={company.phones[0].href}><span>Ou appeler LAMACO au {company.phones[0].label} <BrandArrow glyph="↗" /></span></a>
+            <button class="request-back" type="button" data-edit><BrandArrow glyph="←" /> Modifier ma demande</button>
+          </section>
+          <div class="request-desk__footer"><span aria-hidden="true"><BrandArrow glyph="↳" /></span> {content.alternate} <a href={content.alternatePath}><span>{content.alternateLabel} <BrandArrow glyph="↗" /></span></a></div>
+        </section>
+      </div>
+
+      <section class="request-faq" aria-labelledby="faq-title"><div><p class="request-eyebrow">Avant de se lancer</p><h2 id="faq-title">Les questions<br />du terrain<span>.</span></h2></div><div>{requestFaq.map(item => <details><summary>{item.question}<span aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div></section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { enableRequestForm } from '../lib/requests';
+  const page = document.querySelector<HTMLElement>('[data-request-page]');
+  if (page) enableRequestForm(page);
+</script>

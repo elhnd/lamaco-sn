@@ -85,13 +85,78 @@ Phones:
 - `/materiaux` — 12 références confirmées, filtrables par famille
 - `/materiaux/{famille}` — présentation de Basalte, Calcaire, Silex ou Sable
 - `/materiaux/{reference}` — fiche de chaque calibre ou sable, usages et demande de devis
-- `/engins` — current equipment only
+- `/engins/` — pelle hydraulique et camion-benne uniquement ; usages, préparation
+  du chantier, caractéristiques à confirmer et accès au devis présélectionné.
 - `/services` — delivery, rental, earthworks, cleaning, material advice
-- `/realisations` — only documented real projects; otherwise use a restrained empty/coming-content state
+- `/realisations/` — reportages documentés ou, en attendant, exemples fictifs
+  expressément autorisés par LAMACO et clairement identifiés (voir ci-dessous).
 - `/a-propos` — company story, positioning, operating approach
-- `/contact` — phones + static contact information; no fake working form until backend exists
+- `/contact/` — confirmed phones, visit information and local message preparation;
+  copy/SMS sharing, no server-side sending or false receipt confirmation
+- `/demande-de-devis/` — guided preparation of a materials, equipment or works request
+- `/demande-de-conseil/` — guided preparation of a material, quantity, delivery or equipment question
+
+### Demandes de devis et de conseil
+
+- Les deux parcours préparent un message localement : besoin/question, contexte du
+  chantier, nom et téléphone. Ils ne transmettent rien à un serveur LAMACO.
+- Le récapitulatif peut être copié ou ouvert dans l’application SMS vers le premier
+  numéro confirmé. L’utilisateur effectue lui-même l’envoi. La copie et l’appel
+  restent disponibles si les liens SMS ou leur préremplissage ne sont pas pris en charge.
+- Ne pas afficher « demande reçue », délai de réponse garanti, prix, stock confirmé,
+  réservation ou rendez-vous fictif. Le résultat porte la mention « non envoyée ».
+- Aucun e-mail ou compte WhatsApp n’est inventé. Pas de pièce jointe, de stockage
+  local, de compte client ou de collecte côté serveur pour ces pages V1.
+- Le catalogue fournit les choix de matériaux ; les fiches préremplissent uniquement
+  une référence reconnue via `?materiau=slug`. La page Engins présélectionne
+  `?engin=pelle-hydraulique|camion-benne` dans le parcours devis. Un besoin encore
+  imprécis est accepté.
+
+### Engins : usages et caractéristiques
+
+- Le parc confirmé reste une pelle hydraulique et un camion-benne. Aucun modèle,
+  tonnage, puissance, capacité de godet/benne ou accessoire n’a été confirmé.
+- Les caractéristiques chiffrées restent « À confirmer » : ne pas les déduire
+  des illustrations ou reprendre celles d’un modèle trouvé sur Internet.
+- Les explications générales sont vérifiées auprès des constructeurs ; elles
+  n’ajoutent pas de prestations non confirmées (levage, démolition, etc.).
+- Ne pas promettre conducteur inclus, carburant, disponibilité immédiate ou
+  réservation : toutes les modalités sont à préciser lors de l’échange.
+- Sources, limites et informations à obtenir : `docs/EQUIPMENT_RESEARCH.md`.
+
+### Contact page
+
+- `src/data/contact.ts` stores coordinates 14.3943798445042, -16.95476360033701,
+  extracted from LAMACO's supplied Street View panorama `2pieZvt1rq6MV3GolqOVHg`.
+- Written address, company email and hours remain unconfirmed (`null`). Do not
+  infer a street address or operating hours from Street View imagery.
+- The contact page shows a dark 2D OpenStreetMap map with a LAMACO pin at those
+  coordinates, plus Google Maps search and directions links, not Street View.
+  Visitors can still arrange their visit by phone.
+- The optional email field is the visitor's email, included only in the message
+  they choose to share. It does not imply an official LAMACO email address.
+- The message form follows the same local-only copy/SMS workflow as quote/advice.
+  Name, phone, subject and message are required; no data is stored or posted.
 
 ## Content rules
+
+### Réalisations et démonstration temporaire
+
+- Le 10 septembre 2026, LAMACO a expressément demandé des projets fictifs pour
+  prévisualiser la page. Trois scénarios illustrent les matériaux d’une maison,
+  la préparation d’un terrain et une livraison, sans client, lieu ni chiffre inventé.
+- Ces scénarios restent séparés des projets réels dans `src/data/project-demos.ts`.
+  Ne jamais les considérer comme des références commerciales ou les valider comme
+  réels. Avertissement visible au-dessus de la galerie et sur chaque visuel.
+- `src/data/projects.ts` reste vide jusqu’à réception de projets documentés et
+  de photographies autorisées. Dès qu’un projet réel est approuvé, seuls les
+  projets réels sont affichés ; retirer les démonstrations avant publication
+  commerciale si aucun reportage authentique n’est prêt.
+- Les récits montrent le besoin, l’intervention et le résultat sans élargir les
+  activités LAMACO à la construction complète de bâtiments ou aux études techniques.
+
+### Règles générales
+
 - French is primary.
 - Tone: direct, professional, concrete, Senegal-relevant.
 - Avoid generic corporate filler.

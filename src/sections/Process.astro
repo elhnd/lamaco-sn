@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets';
 import processImage from '../assets/images/process-quarry.png';
 import Button from '../components/Button.astro';
+import ProcessIcon from '../components/ProcessIcon.astro';
 import { company } from '../data/company';
 import { processSteps } from '../data/process';
 ---
@@ -31,7 +32,7 @@ import { processSteps } from '../data/process';
         <li data-reveal>
           <span class="process-step__number">{step.number}</span>
           <span class="process-step__icon" aria-hidden="true">
-            <svg viewBox="0 0 48 48" width="38" height="38"><path d="M6 34h36M10 34V19l14-7 14 7v15M17 34V23h14v11M21 28h6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" /></svg>
+            <ProcessIcon name={step.icon} />
           </span>
           <h3>{step.title}</h3>
           <p>{step.description}</p>

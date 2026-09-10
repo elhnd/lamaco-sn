@@ -1,0 +1,40 @@
+---
+interface Props {
+  name: 'clipboard' | 'advice' | 'materials' | 'loader' | 'delivery';
+}
+
+const paths: Record<Props['name'], string[]> = {
+  clipboard: [
+    'M17 10h-5a3 3 0 0 0-3 3v27h30V13a3 3 0 0 0-3-3h-5',
+    'M19 6h10a2 2 0 0 1 2 2v6H17V8a2 2 0 0 1 2-2Z',
+    'm15 23 2 2 4-4m4 3h8m-18 8 2 2 4-4m4 3h8',
+  ],
+  advice: [
+    'M8 8h24a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H18L8 37v-7a4 4 0 0 1-4-4V12a4 4 0 0 1 4-4Z',
+    'M40 18a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4v5l-8-5H22',
+    'M12 16h16m-16 7h10',
+  ],
+  materials: [
+    'M6 25h16v15H6Zm20 0h16v15H26ZM16 8h16v13H16Z',
+    'M20 8v5h8V8M11 25v5h6v-5m14 0v5h6v-5',
+    'M3 44h42M8 40v4m16-4v4m16-4v4',
+  ],
+  loader: [
+    'M9 34h17a5 5 0 0 1 0 10H9a5 5 0 0 1 0-10Zm0 5h17',
+    'M7 34V24h15v10M10 24V14h9l4 10M13 18h4v6',
+    'm22 26 5-18 5-2 10 21m-16-3 5-12 7 16',
+    'M37 27h6l2 10h-6l-6-5 4-5Z',
+  ],
+  delivery: [
+    'M9 28V12h21v23H18m12 0h4m-4-17h8l7 9v8h-3',
+    'M34 22h3l4 5h-7v-5Z',
+    'M18 36a4 4 0 1 1-8 0 4 4 0 1 1 8 0Zm24 0a4 4 0 1 1-8 0 4 4 0 1 1 8 0Z',
+    'M3 19h3m-5 6h5m-3 6h3',
+  ],
+};
+const { name } = Astro.props;
+---
+
+<svg viewBox="0 0 48 48" width="42" height="42" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" data-process-icon={name}>
+  {paths[name].map((d) => <path d={d} />)}
+</svg>

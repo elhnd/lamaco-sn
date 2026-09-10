@@ -28,6 +28,54 @@ There is no automatic falling sand, letter filling or accumulation on the wordma
   and page teardown. Cap pixel ratio at 1.5.
 - Mobile, reduced motion, save-data and unavailable/lost WebGL use the static hero.
 
+## Home section parallax
+
+- Current direction: only the hero remains sticky behind the content. In `.home-stack`,
+  `lib/motion/home.ts` keeps materials, equipment, process and about in normal flow,
+  on a shared layer above the hero. They do not stick or overlap each other.
+  A soft shadow marks only the leading edge of the materials section.
+- Start once the document is ready, without waiting for every image to finish;
+  delayed image responses must not prevent the section effect from appearing.
+- Keep the native document scroll position, with no artificial spacers, snapping,
+  scaled text or custom render loop. GSAP contexts own setup/cleanup; ScrollTrigger
+  continues to handle the existing small content reveals only.
+- Desktop and touch/mobile use the same composition. The hero's sticky top is capped
+  at zero or viewport height minus hero height so tall heroes remain fully readable.
+  ResizeObserver recalculates its offset for resizing and text zoom. The fixed
+  navigation stays above the stack; the footer follows outside its containment.
+- Keyboard focus returns to the hero even when covered; other sections and fragment
+  links use native browser scrolling without interception. Card hover,
+  the original hero image composition and the independent sand cursor are preserved.
+- Reduced motion and save-data use normal document flow, including when toggled live.
+  Hidden tabs/page teardown revert contexts; returning recreates them at the current
+  position. Without JS or if optional imports fail, all content remains in normal flow.
+
+## Desktop wheel response
+
+- `lib/motion/gentle-scroll.ts`, loaded by BaseLayout, reduces vertical wheel distance
+  to 65% and smooths it with a short, frame-rate-independent 90ms response. This is
+  explicitly requested; it does not transform the document or replace its scrollbar.
+- Fine-pointer/hover devices only. Touch, reduced motion and save-data remain native.
+  Preserve horizontal gestures, Ctrl/Meta zoom, Shift-wheel, nested scroll containers,
+  form controls and dialogs. Normalize pixel/line/page deltas and clamp at page ends.
+- Keyboard, pointer-down, external scroll/anchors, resizing and hidden tabs interrupt
+  pending motion. A single requestAnimationFrame loop runs only during wheel settling;
+  no permanent ticker, new dependency or second scroll container.
+
+## Réalisations : mouvement éditorial
+
+- `lib/motion/projects.ts` charge GSAP/ScrollTrigger à l’approche du premier
+  contenu animé. Le H1 et le bandeau restent statiques pour préserver le LCP.
+- Apparitions uniques : translation de 14px sur mobile ou 24px sur ordinateur,
+  opacité de 0,85 à 1, 750ms et amortissement progressif. Aucun contenu masqué en CSS.
+- Ordinateur avec pointeur fin uniquement : les photos glissent de -2% à +2%
+  dans leur cadre, avec un léger agrandissement anti-bord vide et un scrub de 0,7s.
+  Aucun pinning, défilement imposé, vidéo automatique ou animation permanente.
+- Réduction des animations, économie de données, onglet masqué et fin de page
+  révoquent les contextes. Les préférences sont suivies en direct ; le retour
+  depuis le cache de navigation est pris en charge. Les détails natifs restent
+  utilisables sans JS ; leur ouverture recalcule les positions des effets.
+
 ## Equipment 3D
 Use 3D only where it adds product understanding:
 - slow idle rotation

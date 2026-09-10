@@ -1,4 +1,5 @@
 ---
+import BrandArrow from '../../components/BrandArrow.astro';
 import { Picture } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
@@ -48,8 +49,8 @@ const related = materials
           {siblings.map((item) => <a href={`/materiaux/${item.slug}/`} aria-current={item.slug === material.slug ? 'page' : undefined}>{material.group === 'sable' ? item.name : item.grade}</a>)}
         </nav>
         <div class="material-detail__actions">
-          <Button href={company.phones[0].href}>Demander un devis</Button>
-          <a class="material-text-link" href="/materiaux/">Tous les matériaux <span aria-hidden="true">↗</span></a>
+          <Button href={`/demande-de-devis/?materiau=${encodeURIComponent(material.slug)}`}>Demander un devis</Button>
+          <a class="material-text-link" href="/materiaux/">Tous les matériaux <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
         </div>
         <p class="material-detail__availability">{materialsPage.availability}</p>
       </div>
@@ -68,7 +69,7 @@ const related = materials
         <p>{material.guidance}</p>
         {material.terminology && <p>{material.terminology}</p>}
         {!material.overview && <p class="material-usage__note">{materialsPage.useNote}</p>}
-        {material.sourceIds.length > 0 && <details class="material-sources"><summary>Repères techniques et sources</summary><ul>{material.sourceIds.map((id) => <li><a href={materialSources[id].href}>{materialSources[id].title} ↗</a></li>)}</ul></details>}
+        {material.sourceIds.length > 0 && <details class="material-sources"><summary>Repères techniques et sources</summary><ul>{material.sourceIds.map((id) => <li><a href={materialSources[id].href}>{materialSources[id].title} <BrandArrow glyph="↗" /></a></li>)}</ul></details>}
       </div>
     </section>
 
@@ -79,12 +80,12 @@ const related = materials
       </div>
       <div class="material-planning__request">
         <h3>Pour préparer votre demande</h3>
-        <ul>{material.request.map((item) => <li><span aria-hidden="true">↗</span>{item}</li>)}</ul>
+        <ul>{material.request.map((item) => <li><span aria-hidden="true"><BrandArrow glyph="↗" /></span>{item}</li>)}</ul>
       </div>
       <div class="material-planning__delivery">
         <h3>Et pour la livraison ?</h3>
         <p>{materialsPage.delivery}</p>
-        <a class="material-text-link" href={company.phones[0].href}>{company.phones[0].label} <span aria-hidden="true">↗</span></a>
+        <a class="material-text-link" href={company.phones[0].href}>{company.phones[0].label} <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
       </div>
     </section>
 
@@ -93,7 +94,7 @@ const related = materials
     </section>
 
     <section class="material-related" aria-labelledby="related-title">
-      <div class="material-related__heading"><div><p class="material-eyebrow"><span></span> À découvrir aussi</p><h2 id="related-title">D’autres matières, <span>d’autres projets.</span></h2></div><a class="material-text-link" href="/materiaux/">Voir le catalogue <span aria-hidden="true">↗</span></a></div>
+      <div class="material-related__heading"><div><p class="material-eyebrow"><span></span> À découvrir aussi</p><h2 id="related-title">D’autres matières, <span>d’autres projets.</span></h2></div><a class="material-text-link" href="/materiaux/">Voir le catalogue <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a></div>
       <div class="catalogue-grid">{related.map((item, index) => <CatalogueCard material={item} index={index} />)}</div>
     </section>
     <MaterialAdvice />

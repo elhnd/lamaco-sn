@@ -1,0 +1,86 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import BrandArrow from '../components/BrandArrow.astro';
+import ProcessIcon from '../components/ProcessIcon.astro';
+import ProjectStory from '../components/ProjectStory.astro';
+import fallbackHero from '../assets/images/process-quarry.png';
+import sandImage from '../assets/images/material-sand.png';
+import { publishedProjects, projectsPage } from '../data/projects';
+import { projectDemos } from '../data/project-demos';
+import '../styles/projects.css';
+const demonstration = publishedProjects.length === 0 && projectDemos.length > 0;
+const stories = demonstration ? projectDemos : publishedProjects;
+const heroImage = stories[0]?.photos[0].image ?? fallbackHero;
+const heroAlt = stories[0]?.photos[0].alt ?? 'Illustration d’une carrière, et non d’un chantier réalisé par LAMACO';
+---
+
+<BaseLayout title="Nos réalisations — LAMACO Sénégal" description={projectsPage.description}>
+  <Header />
+  <main class="projects-page" id="contenu">
+    <div class="projects-hero">
+      <PageHero title={projectsPage.title} breadcrumb="Réalisations" eyebrow={projectsPage.eyebrow} description={projectsPage.intro} image={heroImage} imageAlt={heroAlt} />
+      <div class="projects-hero__foot wrap">
+        <a href="#reportages">{stories.length ? 'Explorer les projets' : 'Le carnet de chantier'} <BrandArrow /></a>
+        {(demonstration || stories.length === 0) && <span>{demonstration ? 'Projets fictifs · images d’illustration' : 'Visuel d’ambiance · illustration'}</span>}
+      </div>
+    </div>
+
+    <section class="projects-journal wrap" id="reportages" aria-labelledby="journal-title">
+      <div class="projects-journal__heading" data-project-reveal>
+        <p class="projects-eyebrow"><span aria-hidden="true"></span>Le carnet de chantier</p>
+        <h2 id="journal-title">{projectsPage.journalTitle}</h2>
+        {stories.length > 0 && <p class="projects-journal__intro">{projectsPage.journalIntro}</p>}
+      </div>
+      {demonstration && <aside class="projects-demo-note" aria-label="Projets fictifs"><strong>Version de démonstration</strong><p>Les projets et récits ci-dessous sont fictifs, et les images sont des illustrations. Ils présentent le futur format de la galerie, pas des réalisations ni des références clients de LAMACO.</p></aside>}
+      {stories.length > 0 ? (
+        <><nav class="projects-story-nav" aria-label="Explorer les projets">{stories.map((project, index) => <a href={`#${project.slug}`}><span>0{index + 1}</span>{project.category}<BrandArrow /></a>)}</nav><div class="projects-stories">{stories.map((project, index) => <ProjectStory project={project} index={index} demonstration={demonstration} />)}</div></>
+      ) : (
+        <div class="projects-empty" data-project-reveal>
+          <div class="projects-empty__mark" aria-hidden="true"><svg viewBox="130.017 513.601 672.903 292.57" width="56" height="26"><use href="/brand/terminal.svg#mark" /></svg></div>
+          <div><p class="projects-empty__label">{projectsPage.emptyLabel}</p><h3>{projectsPage.emptyTitle}</h3><p>{projectsPage.emptyDescription}</p></div>
+          <a href="/contact/">Échanger avec LAMACO <BrandArrow glyph="↗" /></a>
+        </div>
+      )}
+    </section>
+
+    <section class="projects-approach" aria-labelledby="approach-title">
+      <div class="projects-approach__layout wrap">
+        <figure class="projects-approach__figure" data-project-reveal>
+          <div class="project-media" data-project-media><Picture src={sandImage} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1100]} sizes="(max-width: 760px) 91vw, 40vw" alt="Illustration en gros plan de sable doré, sans lien avec une réalisation particulière" loading="lazy" quality={60} /></div>
+          <figcaption>{projectsPage.illustrationCaption}</figcaption>
+        </figure>
+        <div class="projects-approach__content" data-project-reveal>
+          <p class="projects-eyebrow"><span aria-hidden="true"></span>{projectsPage.approachEyebrow}</p>
+          <h2 id="approach-title">{projectsPage.approachTitle}</h2>
+          <p class="projects-approach__description">{projectsPage.approachDescription}</p>
+          <Button href="/demande-de-conseil/" variant="light">Parlons de votre idée</Button>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects-paths wrap" aria-label="Les solutions pour votre chantier">
+      {projectsPage.paths.map(path => <a class="projects-path" href={path.href} data-project-reveal><span class="projects-path__icon"><ProcessIcon name={path.icon} /></span><div><h2>{path.title}</h2><p>{path.description}</p><span class="projects-path__action">{path.label} <BrandArrow /></span></div></a>)}
+    </section>
+
+    <section class="projects-invite wrap" aria-labelledby="invite-title" data-project-reveal>
+      <div class="projects-invite__inner">
+        <p class="projects-eyebrow"><span aria-hidden="true"></span>{projectsPage.ctaEyebrow}</p>
+        <h2 id="invite-title">{projectsPage.ctaTitle}</h2>
+        <div class="projects-invite__bottom"><p>{projectsPage.ctaDescription}</p><Button href="/demande-de-devis/">Confiez-nous votre besoin</Button></div>
+        <a class="projects-invite__contact" href="/contact/">Vous préférez un premier échange ? Contactez-nous <BrandArrow glyph="↗" /></a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { enableProjectsMotion } from '../lib/motion/projects';
+  const page = document.querySelector<HTMLElement>('.projects-page');
+  if (page) enableProjectsMotion(page);
+</script>

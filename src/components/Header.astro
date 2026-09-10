@@ -1,4 +1,5 @@
 ---
+import BrandArrow from './BrandArrow.astro';
 import Button from './Button.astro';
 import { company } from '../data/company';
 import { mainNavigation } from '../data/navigation';
@@ -25,7 +26,7 @@ const isActive = (href: string) => !href.includes('#') && (href === '/' ? pathna
       </svg>
       <span>{company.phones[0].label}</span>
     </a>
-    <Button class="site-header__quote" href="#contact">Demander un devis</Button>
+    <Button class="site-header__quote" href="/demande-de-devis/">Demander un devis</Button>
     <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
       <span></span><span></span>
     </button>
@@ -38,6 +39,8 @@ const isActive = (href: string) => !href.includes('#') && (href === '/' ? pathna
       ))}
     </nav>
     <div class="mobile-menu__contact">
+      <a class="mobile-menu__request" href="/demande-de-devis/"><span>Demander un devis <BrandArrow glyph="↗" /></span></a>
+      <a class="mobile-menu__request" href="/demande-de-conseil/"><span>Demander un conseil <BrandArrow glyph="↗" /></span></a>
       <p>Un projet en cours&nbsp;?</p>
       <a href={company.phones[0].href}>{company.phones[0].label}</a>
       <a href={company.phones[1].href}>{company.phones[1].label}</a>

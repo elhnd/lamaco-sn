@@ -1,0 +1,6 @@
+---
+import { brandArrowMarkup, type ArrowGlyph } from '../lib/brand-arrow';
+interface Props { glyph?: ArrowGlyph }
+const { glyph = '→' } = Astro.props;
+---
+<Fragment set:html={brandArrowMarkup(glyph)} />

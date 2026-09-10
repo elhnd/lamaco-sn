@@ -45,14 +45,78 @@ UI components must not become business-data stores.
 - Les sources éditoriales sont décrites dans `docs/PRODUCT.md` et
   `docs/MATERIALS_RESEARCH.md` ; l’UI rend les données sans dupliquer les fiches.
 
+### Equipment catalogue
+
+- `src/pages/engins.astro` réutilise `PageHero`, `Button`, `BrandArrow` et les icônes
+  existantes ; `src/styles/equipment.css` reste limité à cette page.
+- `src/data/equipment.ts` alimente l’accueil, les fiches du parc et le sélecteur
+  du devis. Les informations complémentaires se déplient avec `details/summary`,
+  accessibles sans JavaScript. Les raccourcis sont des ancres natives.
+- Le préremplissage `?engin=slug` accepte uniquement les slugs exposés par les
+  options du sélecteur. Il choisit le besoin « engins » sans modifier les valeurs
+  existantes du récapitulatif. Un engin reconnu a priorité sur un matériau si
+  les deux paramètres sont présents ; les valeurs inconnues sont ignorées.
+
 ## Rendering
+
+### Réalisations
+
+- `src/pages/realisations.astro` compose le bandeau, les reportages, l’approche
+  éditoriale et les appels à l’action ; styles dans `src/styles/projects.css`.
+- `src/data/projects.ts` contient le modèle typé et les futurs projets réels,
+  filtrés par validation et autorisation de publication (`approved`). Les exemples
+  fictifs demandés par l’utilisateur vivent séparément dans `project-demos.ts`.
+- La galerie choisit les projets approuvés en priorité, sinon les démonstrations
+  explicitement étiquetées ; sans les deux, un état « reportages à venir » reste utile.
+- `ProjectStory.astro` affiche couverture, récit et galerie complémentaire avec
+  `details/summary`. Aucune dépendance JavaScript pour lire les récits ou naviguer.
+- `lib/motion/projects.ts` améliore uniquement cette page. Aucun changement du
+  comportement sticky de l’accueil ou des autres pages.
+
+### Principes
+
 - Default: Astro/static HTML.
 - Vanilla TypeScript for small interactions.
 - Three.js only inside isolated scene modules.
 - GSAP timelines live near the section they control or in `lib/motion`.
 - No React in V1 unless state/interaction complexity clearly justifies it.
 
+### Request preparation pages
+
+- `src/pages/demande-de-devis.astro` and `demande-de-conseil.astro` render the shared
+  `src/sections/RequestExperience.astro`; content lives in `src/data/requests.ts`.
+- `src/lib/requests.ts` enhances three fieldsets, validates each step (including
+  revisited steps), builds a plain-text recap, and exposes clipboard/SMS actions.
+- Progressive enhancement: form hidden and gate disabled until handlers are ready;
+  without JS, show real telephone links. No form POST endpoint or automatic sending.
+- Personal data stays in DOM memory; no URL persistence, localStorage or analytics.
+  Query prefill only accepts catalogue options. Use text/value assignments for user
+  content, never interpolate it as HTML. SMS recipient comes from `company.ts`.
+- Global quote links, material advice links, footer and mobile menu point to these
+  pages. Material-detail quote links carry the selected reference.
+
+### Contact
+
+- `src/pages/contact.astro` provides the dark three-column contact page;
+  `src/data/contact.ts` holds subjects and pending verified contact information.
+- `src/lib/contact.ts` progressively enables a single-screen message form, validates
+  fields and builds a readonly copy/SMS preview. No backend, form POST or storage.
+- Without JavaScript, the form stays hidden/disabled and confirmed phone links work.
+- Shared navigation points to `/contact/`; the footer's existing `#contact` anchor
+  remains available for older links.
+- `ContactMap.astro` / `lib/contact-map.ts` render a lightweight 2D raster map at
+  the coordinates extracted from the supplied Street View link (`contactLocation`).
+  Native TS handles Web Mercator positioning, zoom, mouse/pen drag, keyboard pan
+  and recentering. Touch keeps normal page scrolling. No SDK, dependency or API key.
+- OpenStreetMap tiles load only when visible, only for the current viewport;
+  preserve browser caching and origin referrers, with visible OSM attribution.
+  Tile service is external/best-effort. Without JS or if tiles fail, Google Maps
+  search/directions links remain usable; the message form is independent.
+- Provider requirements: https://operations.osmfoundation.org/policies/tiles/.
+  Google links use https://developers.google.com/maps/documentation/urls/get-started.
+
 ## Boundaries
+
 - Astro components: structure/content.
 - Tailwind/scoped CSS: layout + visual states.
 - GSAP: coordinated/scroll motion.

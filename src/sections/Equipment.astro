@@ -1,13 +1,13 @@
 ---
+import BrandArrow from '../components/BrandArrow.astro';
 import { Picture } from 'astro:assets';
-import excavatorImage from '../assets/images/excavator.png';
+import excavatorImage from '../assets/images/excavator-isolated.png';
 import Button from '../components/Button.astro';
 import SectionIntro from '../components/SectionIntro.astro';
 import { equipment } from '../data/equipment';
 ---
 
 <section class="equipment-section" id="engins">
-  <div class="equipment-section__grid" aria-hidden="true"></div>
   <div class="equipment-section__layout wrap">
     <SectionIntro
       number="02"
@@ -16,22 +16,22 @@ import { equipment } from '../data/equipment';
       description="LAMACO met à votre disposition ses engins pour la livraison, le terrassement et le nettoyage de terrain."
       tone="light"
     >
-      <Button href="#contact" variant="light">Découvrir nos engins</Button>
+      <Button href="/engins/" variant="light">Découvrir nos engins</Button>
     </SectionIntro>
 
-    <div class="equipment-visual" data-reveal>
-      <span class="equipment-visual__label">Équipement disponible</span>
+    <div class="equipment-visual">
+      <!-- <span class="equipment-visual__label">Équipement disponible</span> -->
       <Picture
         src={excavatorImage}
         formats={['avif']}
         fallbackFormat="webp"
         widths={[640, 960, 1280]}
-        sizes="(max-width: 900px) 100vw, 60vw"
+        sizes="(max-width: 640px) 100vw, (max-width: 960px) 52vw, 46vw"
         alt="Illustration d’une pelle hydraulique jaune sans marquage"
         loading="lazy"
         quality={65}
         width={1280}
-        height={800}
+        height={801}
       />
     </div>
 
@@ -46,7 +46,7 @@ import { equipment } from '../data/equipment';
           </div>
         </article>
       ))}
-      <a href="#contact" class="equipment-info__link">Parler de mon chantier <span aria-hidden="true">↗</span></a>
+      <a href="/contact/" class="equipment-info__link">Parler de mon chantier <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
     </div>
   </div>
 </section>

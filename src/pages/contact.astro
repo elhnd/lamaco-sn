@@ -1,0 +1,84 @@
+---
+import BrandArrow from '../components/BrandArrow.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactIcon from '../components/ContactIcon.astro';
+import ContactMap from '../components/ContactMap.astro';
+import PageHero from '../components/PageHero.astro';
+import quarryImage from '../assets/images/process-quarry.png';
+import { company } from '../data/company';
+import { contactDetails, contactPage } from '../data/contact';
+import '../styles/contact.css';
+---
+
+<BaseLayout title="Contactez-nous — LAMACO Sénégal" description={contactPage.description}>
+  <Header />
+  <main class="contact-page" id="contenu">
+    <PageHero title={contactPage.title} breadcrumb="Contact" eyebrow={contactPage.eyebrow} description={contactPage.intro} image={quarryImage} imageAlt="Illustration d’un camion-benne dans une carrière" />
+    <div class="contact-layout wrap">
+      <section class="contact-information" aria-labelledby="contact-title">
+        <p class="contact-eyebrow">Un échange direct</p>
+        <h2 id="contact-title">{contactPage.informationTitle}<span>.</span></h2>
+        <dl class="contact-details">
+          <div><dt><span class="contact-icon"><ContactIcon name="phone" /></span>Téléphone</dt><dd>{company.phones.map(phone => <a href={phone.href}>{phone.label}</a>)}</dd></div>
+          <div><dt><span class="contact-icon"><ContactIcon name="pin" /></span>{contactDetails.address ? 'Adresse' : 'Votre visite'}</dt><dd>{contactDetails.address ?? contactPage.visitNote}</dd></div>
+          {contactDetails.email && <div><dt><span class="contact-icon"><ContactIcon name="mail" /></span>E-mail</dt><dd><a href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a></dd></div>}
+          <div><dt><span class="contact-icon"><ContactIcon name="clock" /></span>{contactDetails.hours ? 'Horaires' : 'Avant de vous déplacer'}</dt><dd>{contactDetails.hours ?? contactPage.hoursNote}</dd></div>
+        </dl>
+        <div class="contact-signature"><img src="/brand/icon.svg" alt="" width="28" height="28" /><span>Construire. Livrer. Équiper.</span></div>
+      </section>
+
+      <section class="contact-message" aria-labelledby="message-title" data-contact-message data-phone={company.phones[0].href.replace('tel:', '')}>
+        <div class="contact-section-label"><span aria-hidden="true">01</span> À vous la parole</div>
+        <h2 id="message-title">Écrivez-nous<span>.</span></h2>
+        <p class="contact-message__intro">Quelques mots suffisent pour démarrer. Préparez votre message ici, puis choisissez de le partager avec LAMACO.</p>
+        <div class="contact-fallback" data-contact-fallback><p>Vous pouvez nous joindre directement par téléphone.</p><a href={company.phones[0].href}><span>Appeler le {company.phones[0].label} <BrandArrow glyph="↗" /></span></a></div>
+        <noscript><p class="contact-small">JavaScript est désactivé : utilisez les liens d’appel pour nous contacter.</p></noscript>
+
+        <form class="contact-form" data-contact-form action="/contact/" method="post" novalidate hidden>
+          <fieldset disabled data-contact-gate>
+            <legend class="contact-sr">Préparer un message pour LAMACO</legend>
+            <p class="contact-small">Les champs marqués * sont nécessaires.</p>
+            <div class="contact-form__row">
+              <div><label for="contact-name">Nom complet *</label><input id="contact-name" name="nom" autocomplete="name" required minlength="2" maxlength="100" placeholder="Votre nom" /></div>
+              <div><label for="contact-phone">Téléphone *</label><input id="contact-phone" name="telephone" type="tel" autocomplete="tel" required maxlength="30" placeholder="+221… ou votre indicatif" /></div>
+            </div>
+            <label for="contact-email">Votre e-mail <span>facultatif</span></label>
+            <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="160" placeholder="Pour compléter vos coordonnées" />
+            <label for="contact-subject">Sujet *</label>
+            <select id="contact-subject" name="sujet" required><option value="">De quoi souhaitez-vous parler ?</option>{contactPage.subjects.map(subject => <option>{subject}</option>)}</select>
+            <p class="contact-context" data-contact-context hidden></p>
+            <label for="contact-body">Votre message *</label>
+            <textarea id="contact-body" name="message" required minlength="12" maxlength="2000" rows="5" placeholder="Votre besoin, le lieu du chantier, ce que vous aimeriez savoir…" aria-describedby="message-count"></textarea>
+            <p class="contact-count" id="message-count" data-contact-count>0 / 2 000 caractères</p>
+            <button class="contact-primary" type="submit">Préparer mon message <span aria-hidden="true"><BrandArrow glyph="→" /></span></button>
+            <p class="contact-small contact-privacy">Rien n’est envoyé automatiquement. Vos réponses restent sur cette page jusqu’à votre action de partage. N’indiquez pas d’informations confidentielles.</p>
+          </fieldset>
+        </form>
+
+        <section class="contact-result" data-contact-result hidden aria-labelledby="contact-result-title">
+          <p class="contact-result__status">À partager · non envoyé</p>
+          <h3 id="contact-result-title" tabindex="-1">Votre message est prêt.</h3>
+          <p class="contact-small">Relisez-le, puis copiez-le ou ouvrez votre application SMS. Vous y confirmez vous-même l’envoi.</p>
+          <label for="contact-preview">Votre récapitulatif</label><textarea id="contact-preview" data-contact-preview readonly rows="11"></textarea>
+          <button class="contact-primary" type="button" data-contact-copy>Copier mon message <span aria-hidden="true"><BrandArrow glyph="↗" /></span></button>
+          <a class="contact-sms" data-contact-sms><span>Ouvrir les SMS <BrandArrow glyph="↗" /></span></a>
+          <p class="contact-small" data-contact-copy-status role="status"></p>
+          <p class="contact-small">Destinataire : {company.phones[0].label}. Si le texte n’est pas repris par votre application, copiez-le. Des frais opérateur peuvent s’appliquer.</p>
+          <button class="contact-edit" type="button" data-contact-edit><BrandArrow glyph="←" /> Modifier mon message</button>
+        </section>
+      </section>
+
+      <ContactMap />
+    </div>
+    <nav class="contact-shortcuts wrap" aria-label="Préparer une demande détaillée"><div><span>Un besoin déjà en tête ?</span><p>Prenez le chemin qui vous ressemble.</p></div><a href="/demande-de-devis/"><span>01</span> Demander un devis <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a><a href="/demande-de-conseil/"><span>02</span> Demander un conseil <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a></nav>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  import { enableContactForm } from '../lib/contact';
+  const section = document.querySelector<HTMLElement>('[data-contact-message]');
+  if (section) enableContactForm(section);
+</script>

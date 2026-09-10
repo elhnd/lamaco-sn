@@ -1,0 +1,77 @@
+/* Keep the existing glyph's width, line-height and inherited color. */
+.brand-arrow { position: relative; }
+.brand-arrow > .brand-arrow__measure { visibility: hidden; }
+.brand-arrow > .brand-arrow__art { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.brand-arrow[data-direction="diagonal"] > .brand-arrow__art { transform: rotate(-45deg) scale(0.9); }
+.brand-arrow[data-direction="left"] > .brand-arrow__art { transform: rotate(180deg); }
+
+/* The original 1px layout boxes remain intact; only the ink overflows them. */
+:is(.section-intro__line, .process-section__title > p i, .hero__socials i,
+  .hero__scroll i, .page-hero__eyebrow > span, .material-eyebrow > span,
+  .request-eyebrow > span, .fleet-eyebrow > span, .projects-eyebrow > span, .menu-toggle span) {
+  position: relative;
+  background: none;
+}
+:where(.section-intro__line, .process-section__title > p i, .hero__socials i,
+  .hero__scroll i, .page-hero__eyebrow > span, .material-eyebrow > span,
+  .request-eyebrow > span, .fleet-eyebrow > span, .projects-eyebrow > span, .menu-toggle span)::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 7px;
+  transform: translateY(-50%);
+  background: var(--c-accent);
+  mask: url('/brand/rule.svg') center / 100% 100% no-repeat;
+}
+.hero__scroll i::before {
+  left: 50%;
+  top: 0;
+  width: 7px;
+  height: 100%;
+  transform: translateX(-50%);
+  mask-image: url('/brand/rule-vertical.svg');
+}
+.site-header__desktop-nav a::after {
+  height: 7px;
+  bottom: 10px;
+  mask: url('/brand/rule.svg') center / 100% 100% no-repeat;
+}
+.site-header__desktop-nav a:focus-visible::after { right: 0; }
+.menu-toggle span::before { height: 4px; background: currentColor; }
+/* Keep the open menu's close symbol unambiguous. */
+.menu-toggle[aria-expanded="true"] span::before { height: 1px; mask: none; }
+
+/* Retain the border's space, replacing only its decorative colored ink. */
+:is(.equipment-visual__label, .request-tip, .contact-context) {
+  position: relative;
+  border-left-color: transparent;
+}
+.equipment-visual__label { position: absolute; }
+:is(.equipment-visual__label, .request-tip, .contact-context)::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: -4px;
+  width: 6px;
+  background: var(--c-accent);
+  mask: url('/brand/rule-vertical.svg') center / 100% 100% no-repeat;
+}
+.request-switch a[aria-current] { position: relative; box-shadow: none; }
+.request-switch a[aria-current]::after,
+.request-result__badge::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 7px;
+  background: var(--c-accent);
+  mask: url('/brand/rule.svg') center / 100% 100% no-repeat;
+}
+.request-result__badge { position: relative; border-bottom-color: transparent; }

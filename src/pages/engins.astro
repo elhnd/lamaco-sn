@@ -1,0 +1,83 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import BrandArrow from '../components/BrandArrow.astro';
+import ProcessIcon from '../components/ProcessIcon.astro';
+import heroImage from '../assets/images/hero-quarry-v2.png';
+import { equipment, equipmentPage } from '../data/equipment';
+import '../styles/equipment.css';
+---
+
+<BaseLayout title="Nos engins de chantier — LAMACO Sénégal" description={equipmentPage.description}>
+  <Header />
+  <main class="equipment-page" id="contenu">
+    <PageHero title={equipmentPage.title} breadcrumb="Engins" eyebrow={equipmentPage.eyebrow} description={equipmentPage.intro} image={heroImage} imageAlt="Illustration d’une pelle hydraulique et d’un camion-benne dans une carrière" />
+
+    <section class="fleet wrap" aria-label="Le parc d’engins LAMACO">
+      <div class="fleet-toolbar">
+        <nav class="fleet-shortcuts" aria-label="Accéder à un engin">
+          {equipment.map(item => <a href={`#${item.slug}`}>{item.name}<BrandArrow /></a>)}
+        </nav>
+        <p><strong>0{equipment.length}</strong> engins · parc actuel</p>
+      </div>
+
+      <div class="fleet-grid">
+        {equipment.map((item, index) => (
+          <article class:list={['fleet-card', { 'fleet-card--excavator': item.slug === 'pelle-hydraulique' }]} id={item.slug} aria-labelledby={`${item.slug}-title`}>
+            <div class="fleet-card__visual">
+              <Picture src={item.image} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes="(max-width: 760px) 91vw, 45vw" alt={item.imageAlt} loading="lazy" quality={65} />
+              <span class="fleet-card__number" aria-hidden="true">0{index + 1}</span>
+              <span class="fleet-card__visual-note">Illustration</span>
+            </div>
+            <div class="fleet-card__body">
+              <p class="fleet-card__category"><ProcessIcon name={item.icon} />{item.category}</p>
+              <h2 id={`${item.slug}-title`}>{item.name}</h2>
+              <p class="fleet-card__description">{item.description}</p>
+              <ul class="fleet-card__uses" aria-label="Usages">{item.uses.map(use => <li>{use}</li>)}</ul>
+              <details class="fleet-card__details">
+                <summary>En savoir plus <span aria-hidden="true">+</span></summary>
+                <div>
+                  <p>{item.detail}</p>
+                  <h3>Comment cet engin est utilisé</h3>
+                  <p>{item.operation}</p>
+                  <h3>À préciser pour votre demande</h3>
+                  <ul>{item.preparation.map(point => <li>{point}</li>)}</ul>
+                  <h3 class="fleet-card__technical-heading">Caractéristiques techniques</h3>
+                  <p>{equipmentPage.technicalNote}</p>
+                  <dl class="fleet-card__technical">{item.technical.map(label => <div><dt>{label}</dt><dd>À confirmer</dd></div>)}</dl>
+                  <p class="fleet-card__source"><a href={item.source.href} rel="external">{item.source.label} <BrandArrow glyph="↗" /></a><small>{equipmentPage.sourceNote}</small></p>
+                </div>
+              </details>
+              <Button href={`/demande-de-devis/?engin=${item.slug}`}>Demander un devis</Button>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="fleet-notes">
+        <p><BrandArrow glyph="↳" />{equipmentPage.availability}</p>
+        <p>{equipmentPage.imageNote}</p>
+      </div>
+
+      <section class="fleet-planning" aria-labelledby="planning-title">
+        <div class="fleet-planning__heading">
+          <p class="fleet-eyebrow"><span aria-hidden="true"></span>Avant de démarrer</p>
+          <h2 id="planning-title">{equipmentPage.planningTitle}</h2>
+        </div>
+        <ol>
+          {equipmentPage.planning.map((step, index) => <li><span class="fleet-planning__number">0{index + 1}</span><h3>{step.title}</h3><p>{step.description}</p></li>)}
+        </ol>
+      </section>
+
+      <aside class="fleet-advice" aria-labelledby="advice-title">
+        <span class="fleet-advice__icon"><ProcessIcon name="advice" /></span>
+        <div><h2 id="advice-title">{equipmentPage.adviceTitle}</h2><p>{equipmentPage.adviceDescription}</p></div>
+        <Button href="/demande-de-conseil/">Demander un conseil</Button>
+      </aside>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

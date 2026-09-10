@@ -6,6 +6,7 @@
   --c-bg: #0a0a09;
   --c-surface: #121210;
   --c-text: #f3f0e8;
+  --c-white: #fff;
   --c-muted: #a8a39a;
   --c-accent: #f5a623;
   --c-line: rgba(255, 255, 255, 0.14);
@@ -26,6 +27,19 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 94px;
   background: var(--c-bg);
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-accent) var(--c-bg);
+}
+
+html::-webkit-scrollbar { width: 8px; height: 8px; }
+html::-webkit-scrollbar-track { background: var(--c-bg); }
+html::-webkit-scrollbar-thumb { background: var(--c-accent); border: 2px solid var(--c-bg); border-radius: 8px; min-height: 44px; }
+html::-webkit-scrollbar-thumb:hover { background: color-mix(in srgb, var(--c-accent) 80%, var(--c-white)); }
+@media (forced-colors: active) {
+  html { scrollbar-width: auto; scrollbar-color: auto; }
+  html::-webkit-scrollbar { width: auto; height: auto; }
+  html::-webkit-scrollbar-track { background: Canvas; }
+  html::-webkit-scrollbar-thumb { background: ButtonText; border-color: Canvas; }
 }
 
 body {
@@ -65,6 +79,18 @@ svg {
 .wrap {
   width: var(--wrap);
   margin-inline: auto;
+}
+
+.site-footer__contact .footer-request,
+.mobile-menu__contact .mobile-menu__request {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.site-footer__contact .footer-request {
+  display: flex;
+  width: fit-content;
 }
 
 .button {
@@ -229,6 +255,11 @@ svg {
 .menu-toggle,
 .mobile-menu {
   display: none;
+}
+
+/* Only the hero stays behind the normal-flow content that follows it. */
+.home-stack[data-parallax="hero-fixed"] > .hero + section {
+  box-shadow: 0 -22px 55px rgba(0, 0, 0, 0.28);
 }
 
 /* Hero */
@@ -589,7 +620,7 @@ svg {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: 45px 0 14px;
+  padding: 68px 0;
   background: var(--c-bg);
 }
 
@@ -606,36 +637,38 @@ svg {
 
 .materials-section__layout {
   display: grid;
-  grid-template-columns: 350px minmax(0, 1fr);
-  align-items: start;
-  gap: clamp(52px, 4.5vw, 70px);
+  width: min(94vw, 1560px);
+  grid-template-columns: minmax(290px, 0.9fr) minmax(0, 3fr);
+  align-items: center;
+  gap: clamp(32px, 3vw, 48px);
 }
 
 .materials-section .section-intro__eyebrow {
-  margin-bottom: 15px;
+  margin-bottom: 22px;
 }
 
 .materials-section .section-intro__number {
-  font-size: 3.2rem;
+  font-size: 3.5rem;
 }
 
 .materials-section .section-intro h2 {
-  max-width: 320px;
-  font-size: clamp(3.15rem, 3.7vw, 3.75rem);
-  line-height: 0.88;
+  max-width: 350px;
+  font-size: clamp(3.3rem, 3.9vw, 4.1rem);
+  line-height: 0.95;
+  text-wrap: balance;
 }
 
 .materials-section .section-intro > p {
-  max-width: 330px;
-  margin: 17px 0 15px;
-  font-size: 0.7rem;
-  line-height: 1.7;
+  max-width: 350px;
+  margin: 22px 0 24px;
+  font-size: 0.8rem;
+  line-height: 1.8;
 }
 
 .materials-section .button {
-  min-height: 40px;
-  padding-inline: 17px;
-  font-size: 0.62rem;
+  min-height: 48px;
+  padding-inline: 19px;
+  font-size: 0.65rem;
 }
 
 .materials-section__cards {
@@ -647,7 +680,7 @@ svg {
 
 .material-card {
   position: relative;
-  height: 262px;
+  height: clamp(330px, 24vw, 380px);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: var(--c-surface);
@@ -667,7 +700,7 @@ svg {
 .material-card__shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 33%, rgba(8, 8, 7, 0.26) 57%, rgba(7, 7, 6, 0.98) 100%);
+  background: linear-gradient(180deg, transparent 30%, rgba(8, 8, 7, 0.3) 53%, rgba(7, 7, 6, 0.98) 100%);
 }
 
 .material-card__content {
@@ -676,7 +709,7 @@ svg {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 14px 18px 16px;
+  padding: 18px 18px 22px;
 }
 
 .material-card__index {
@@ -703,20 +736,17 @@ svg {
 }
 
 .material-card p {
-  max-height: 0;
-  margin: 0;
-  overflow: hidden;
+  margin: 12px 0 0;
+  min-height: 4.95em;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 0.68rem;
-  line-height: 1.55;
-  opacity: 0;
-  transition: max-height 300ms ease, margin-top 300ms ease, opacity 300ms ease;
+  font-size: 0.72rem;
+  line-height: 1.65;
 }
 
 .material-card__arrow {
   position: absolute;
   right: 15px;
-  bottom: 14px;
+  bottom: 20px;
   width: 44px;
   height: 44px;
   display: grid;
@@ -731,21 +761,9 @@ svg {
   transform: scale(1.055);
 }
 
-.material-card:hover p {
-  max-height: 60px;
-  margin-top: 10px;
-  opacity: 1;
-}
-
 .material-card:hover .material-card__arrow {
   color: var(--c-dark-text);
   background: var(--c-accent);
-}
-
-.material-card:focus-within p {
-  max-height: 60px;
-  margin-top: 10px;
-  opacity: 1;
 }
 
 .material-card__arrow:focus-visible {
@@ -761,24 +779,13 @@ svg {
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: 56px 0;
+  padding: 72px 0 82px;
   color: var(--c-dark-text);
   background: var(--c-light-bg);
 }
 
-.equipment-section__grid {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  opacity: 0.32;
-  background-image:
-    linear-gradient(rgba(17, 17, 15, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(17, 17, 15, 0.08) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(90deg, transparent, #000 28%, #000 75%, transparent);
-}
-
 .equipment-section__layout {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(270px, 0.82fr) minmax(440px, 1.55fr) minmax(250px, 0.7fr);
   align-items: center;
@@ -790,6 +797,28 @@ svg {
   align-self: stretch;
   display: flex;
   align-items: center;
+  padding-block: 54px 28px;
+  /* Let the white extraction blend into the section instead of making a card. */
+  mix-blend-mode: multiply;
+}
+
+.equipment-visual picture {
+  position: relative;
+}
+
+.equipment-visual picture::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 33%;
+  right: 6%;
+  top: 89%;
+  height: 4%;
+  border-radius: 50%;
+  background: var(--c-dark-text);
+  opacity: 0.13;
+  filter: blur(10px);
+  pointer-events: none;
 }
 
 .equipment-visual picture,
@@ -799,18 +828,19 @@ svg {
 
 .equipment-visual img {
   height: auto;
-  filter: drop-shadow(0 28px 22px rgba(42, 31, 12, 0.17));
+  /* Fade the white image edges imperceptibly into the shared backdrop. */
+  mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
 }
 
 .equipment-visual__label {
   position: absolute;
   z-index: 2;
   top: 10px;
-  left: 8%;
+  left: 4%;
   padding: 8px 12px;
   border-left: 2px solid var(--c-accent);
   color: rgba(17, 17, 15, 0.68);
-  background: rgba(238, 234, 225, 0.72);
+  background: transparent;
   font-size: 0.58rem;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -977,10 +1007,11 @@ svg {
   position: absolute;
   top: 5px;
   right: 18px;
-  color: rgba(255, 255, 255, 0.22);
+  color: var(--c-white);
   font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 900;
+  text-shadow: 0 1px 6px var(--c-bg);
 }
 
 .process-step__icon {
@@ -1153,6 +1184,7 @@ svg {
   .materials-section__cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .material-card { height: 290px; }
 }
 
 @media (max-width: 1180px) {
@@ -1260,6 +1292,7 @@ svg {
 
   .mobile-menu {
     position: fixed;
+    overflow-y: auto;
     z-index: 2;
     inset: 0;
     display: grid;
@@ -1374,6 +1407,7 @@ svg {
 
   .materials-section__layout {
     display: block;
+    width: var(--wrap);
   }
 
   .materials-section {
@@ -1402,12 +1436,6 @@ svg {
     min-width: min(420px, 72vw);
     height: 500px;
     scroll-snap-align: start;
-  }
-
-  .material-card p {
-    max-height: 60px;
-    margin-top: 8px;
-    opacity: 1;
   }
 
   .equipment-section__layout {

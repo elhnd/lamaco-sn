@@ -1,4 +1,5 @@
 ---
+import BrandArrow from './BrandArrow.astro';
 import { Picture } from 'astro:assets';
 import type { CatalogueMaterial } from '../data/materials';
 
@@ -20,7 +21,7 @@ const { material, index } = Astro.props;
       <h2>{material.name}</h2>
       <span class="catalogue-card__alias">{material.alias}</span>
       <p>{material.description}</p>
-      <span class="catalogue-card__more">En savoir plus <span aria-hidden="true">↗</span></span>
+      <span class="catalogue-card__more">En savoir plus <span aria-hidden="true"><BrandArrow glyph="↗" /></span></span>
     </div>
   </a>
 </article>

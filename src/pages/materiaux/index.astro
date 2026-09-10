@@ -1,4 +1,5 @@
 ---
+import BrandArrow from '../../components/BrandArrow.astro';
 import { Picture } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
@@ -38,7 +39,7 @@ import '../../styles/materials.css';
       <div class="catalogue-grid">
         {materialCatalogue.map((material, index) => <CatalogueCard material={material} index={index} />)}
       </div>
-      <p class="catalogue-note"><span aria-hidden="true">↳</span> {materialsPage.availability}</p>
+      <p class="catalogue-note"><span aria-hidden="true"><BrandArrow glyph="↳" /></span> {materialsPage.availability}</p>
       <p class="catalogue-note">{materialsPage.sizeNote}</p>
       <MaterialAdvice />
     </section>

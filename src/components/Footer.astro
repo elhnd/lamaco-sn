@@ -1,4 +1,5 @@
 ---
+import BrandArrow from './BrandArrow.astro';
 import { company } from '../data/company';
 import { mainNavigation } from '../data/navigation';
 ---
@@ -21,6 +22,8 @@ import { mainNavigation } from '../data/navigation';
       <p class="footer-label">Contact</p>
       <p>Parlons de votre prochain chantier.</p>
       {company.phones.map((phone) => <a href={phone.href}>{phone.label}</a>)}
+      <a class="footer-request" href="/demande-de-devis/"><span>Demander un devis <BrandArrow glyph="↗" /></span></a>
+      <a class="footer-request" href="/demande-de-conseil/"><span>Demander un conseil <BrandArrow glyph="↗" /></span></a>
     </div>
   </div>
   <div class="site-footer__bottom wrap">

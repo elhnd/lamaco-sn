@@ -2,7 +2,6 @@
 import { Picture } from 'astro:assets';
 import Button from './Button.astro';
 import quarryImage from '../assets/images/process-quarry.png';
-import { company } from '../data/company';
 import { materialsPage } from '../data/materials';
 ---
 
@@ -17,5 +16,5 @@ import { materialsPage } from '../data/materials';
     <h2>{materialsPage.adviceTitle}</h2>
     <p>{materialsPage.adviceDescription}</p>
   </div>
-  <Button href={company.phones[0].href}>Demander un conseil</Button>
+  <Button href="/demande-de-conseil/">Demander un conseil</Button>
 </aside>

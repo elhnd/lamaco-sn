@@ -1,0 +1,28 @@
+---
+import { Picture } from 'astro:assets';
+import BrandArrow from './BrandArrow.astro';
+import type { Project } from '../data/projects';
+interface Props { project: Project; index: number; demonstration?: boolean }
+const { project, index, demonstration = false } = Astro.props;
+const [cover, ...gallery] = project.photos;
+---
+
+<article class:list={['project-story', { 'project-story--reverse': index % 2 === 1 }]} id={project.slug} aria-labelledby={`${project.slug}-title`}>
+  <figure class="project-story__cover" data-project-reveal>
+    <div class="project-media" data-project-media><Picture src={cover.image} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes="(max-width: 760px) 91vw, 55vw" alt={cover.alt} loading="lazy" quality={65} />{demonstration && <span class="project-story__demo">Projet de démonstration</span>}</div>
+    {cover.caption && <figcaption>{cover.caption}</figcaption>}
+  </figure>
+  <div class="project-story__text" data-project-reveal>
+    <p class="projects-eyebrow"><span aria-hidden="true"></span>{project.category}</p>
+    <span class="project-story__number" aria-hidden="true">0{index + 1}</span>
+    <h3 id={`${project.slug}-title`}>{project.title}</h3>
+    {project.location && <p class="project-story__location">{project.location}</p>}
+    <p>{project.summary}</p>
+    <details>
+      <summary>Découvrir ce chantier <span aria-hidden="true">+</span></summary>
+      <dl><dt>Le besoin</dt><dd>{project.need}</dd><dt>Notre intervention</dt><dd>{project.intervention}</dd><dt>Le résultat</dt><dd>{project.result}</dd></dl>
+      {gallery.map(photo => <figure><Picture src={photo.image} formats={['avif']} fallbackFormat="webp" widths={[480, 800]} sizes="(max-width: 760px) 91vw, 40vw" alt={photo.alt} loading="lazy" quality={65} />{photo.caption && <figcaption>{photo.caption}</figcaption>}</figure>)}
+    </details>
+    <a class="project-story__link" href="/demande-de-devis/">Parlons de votre chantier <BrandArrow glyph="↗" /></a>
+  </div>
+</article>
