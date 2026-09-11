@@ -25,6 +25,7 @@ Read only the docs needed for the task:
 - Visual/UI decisions → `docs/DESIGN_SYSTEM.md`
 - GSAP/Three.js behavior → `docs/MOTION_3D.md`
 - Loading/budgets/mobile → `docs/PERFORMANCE.md`
+- SEO → `SEO.md`
 
 Do not read every doc by default. Do not duplicate rules between docs.
 

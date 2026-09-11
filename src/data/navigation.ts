@@ -3,6 +3,6 @@ export const mainNavigation = [
   { label: 'Matériaux', href: '/materiaux/' },
   { label: 'Engins', href: '/engins/' },
   { label: 'Réalisations', href: '/realisations/' },
-  { label: 'À propos', href: '/#a-propos' },
+  { label: 'À propos', href: '/a-propos/' },
   { label: 'Contact', href: '/contact/' },
 ] as const;

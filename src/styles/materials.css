@@ -51,7 +51,9 @@
 .catalogue { padding-bottom: 72px; }
 .catalogue-toolbar { display: flex; justify-content: space-between; gap: 24px; align-items: center; border-bottom: 1px solid var(--material-border); padding-bottom: 24px; margin-bottom: 30px; }
 .catalogue-filters { display: flex; flex-wrap: wrap; gap: 9px; }
-.catalogue-filters[hidden], .catalogue-card[hidden] { display: none; }
+/* Keep the wrapping height before enhancement; inert also prevents keyboard focus. */
+.catalogue-filters[data-filters-pending] { visibility: hidden; }
+.catalogue-card[hidden] { display: none; }
 .catalogue-filters button { min-height: 44px; padding: 0 22px; border: 1px solid var(--material-border); background: transparent; color: var(--c-muted); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; cursor: pointer; transition: color 180ms ease, border-color 180ms ease; }
 .catalogue-filters button:is(:hover, [aria-pressed="true"]) { color: var(--c-accent); border-color: var(--c-accent); background: color-mix(in srgb, var(--c-accent) 6%, transparent); }
 .catalogue-count { margin: 0; white-space: nowrap; color: var(--c-muted); font-size: 0.68rem; }
@@ -67,7 +69,7 @@
 .catalogue-card__number { position: absolute; top: 14px; right: 16px; color: var(--c-text); font-size: 0.65rem; font-weight: 700; text-shadow: 0 1px 5px var(--c-bg); }
 .catalogue-card__family { position: absolute; z-index: 1; bottom: 6px; left: 24px; font-size: 0.55rem; letter-spacing: 0.19em; text-transform: uppercase; color: var(--c-muted); }
 .catalogue-card__body { padding: 10px 24px 21px; }
-.catalogue-card h2 { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 2.15rem; margin: 0 0 8px; line-height: 1; }
+.catalogue-card :is(h2, h3) { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 2.15rem; margin: 0 0 8px; line-height: 1; }
 .catalogue-card__alias { display: block; margin-bottom: 10px; color: var(--c-accent); font-size: 0.64rem; }
 .material-detail__alias { margin: 12px 0 0; color: var(--c-accent); font: 700 1.3rem/1.2 var(--font-display); text-transform: uppercase; }
 .material-detail h1 { font-size: clamp(3.1rem, 5vw, 5.5rem); }

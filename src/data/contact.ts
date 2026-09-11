@@ -1,3 +1,5 @@
+import { company } from './company';
+
 // Complete only from confirmed LAMACO information, not the reference mockup.
 // Coordinates extracted from the Street View link supplied by LAMACO.
 export const contactLocation = {
@@ -14,7 +16,7 @@ export const contactDetails: {
   email: string | null;
   hours: string | null;
 } = {
-  address: null,
+  address: `${company.address.street}, ${company.address.city}, ${company.market}`,
   mapHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coordinates)}`,
   directionsHref: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(coordinates)}`,
   email: null,

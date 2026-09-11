@@ -22,7 +22,7 @@ const related = materials
   .map((family) => materialCatalogue.find((item) => item.group === family.slug)!);
 ---
 
-<BaseLayout title={`${material.name} — Matériaux de construction | LAMACO`} description={material.description}>
+<BaseLayout title={`${material.name} au Sénégal | LAMACO`} description={`${material.name} : ${material.description} Consultez les usages et préparez votre devis avec LAMACO au Sénégal.`} image={material.image} imageAlt={material.alt} pageType={material.overview ? 'CollectionPage' : 'WebPage'} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'Matériaux', path: '/materiaux/' }, { name: material.name, path: `/materiaux/${material.slug}/` }]}>
   <Header />
   <main class="materials-page material-detail wrap" id="contenu">
     <nav class="material-breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a><span aria-hidden="true">/</span><a href="/materiaux/">Matériaux</a><span aria-hidden="true">/</span><span aria-current="page">{material.name}</span></nav>
@@ -95,7 +95,7 @@ const related = materials
 
     <section class="material-related" aria-labelledby="related-title">
       <div class="material-related__heading"><div><p class="material-eyebrow"><span></span> À découvrir aussi</p><h2 id="related-title">D’autres matières, <span>d’autres projets.</span></h2></div><a class="material-text-link" href="/materiaux/">Voir le catalogue <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a></div>
-      <div class="catalogue-grid">{related.map((item, index) => <CatalogueCard material={item} index={index} />)}</div>
+      <div class="catalogue-grid">{related.map((item, index) => <CatalogueCard material={item} index={index} headingLevel="h3" />)}</div>
     </section>
     <MaterialAdvice />
   </main>

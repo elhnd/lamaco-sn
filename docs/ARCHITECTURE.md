@@ -40,8 +40,8 @@ UI components must not become business-data stores.
   famille. Les calibres ont des slugs comme `silex-8-16` ; les deux sables utilisent
   `sable-dakar` et `sable-tasseb`.
 - Les anciens chemins `/materiaux/beton` et `/materiaux/gravier` redirigent vers
-  le catalogue via la configuration Astro. En hébergement statique, ces pages
-  utilisent la redirection HTML générée par Astro, pas une règle serveur HTTP 301.
+  le catalogue via la configuration Astro. `public/.htaccess` ajoute les HTTP 301
+  sur LWS/Apache ; la redirection HTML Astro reste le repli sur un serveur statique.
 - Les sources éditoriales sont décrites dans `docs/PRODUCT.md` et
   `docs/MATERIALS_RESEARCH.md` ; l’UI rend les données sans dupliquer les fiches.
 
@@ -124,6 +124,10 @@ UI components must not become business-data stores.
 Do not use Three.js for effects CSS/GSAP can do cheaper.
 
 ## Deployment
+- Branche `v2` : origine `https://v2.lamaco-sn.com`. SEO et protections :
+  `SEO.md`, `SECURITY.md`. `V2_RELEASE.md` décrit la livraison sur le sous-domaine.
+- `npm run package:dist` valide le build présent et crée le ZIP dans `artifacts/`.
+  L'archive contient directement les fichiers à extraire à la racine du sous-domaine.
 - Build locally/CI with the repo package manager.
 - Output must be static and uploadable to LWS `public_html`.
 - No runtime Node dependency on LWS.

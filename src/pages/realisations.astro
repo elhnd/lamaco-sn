@@ -19,7 +19,7 @@ const heroImage = stories[0]?.photos[0].image ?? fallbackHero;
 const heroAlt = stories[0]?.photos[0].alt ?? 'Illustration d’une carrière, et non d’un chantier réalisé par LAMACO';
 ---
 
-<BaseLayout title="Nos réalisations — LAMACO Sénégal" description={projectsPage.description}>
+<BaseLayout title="Nos réalisations — LAMACO Sénégal" description={projectsPage.description} noindex={publishedProjects.length === 0} pageType="CollectionPage" image={heroImage} imageAlt={heroAlt} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'Réalisations', path: '/realisations/' }]}>
   <Header />
   <main class="projects-page" id="contenu">
     <div class="projects-hero">

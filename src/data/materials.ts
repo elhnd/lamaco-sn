@@ -237,7 +237,7 @@ export const materialDetails = [
 export type MaterialDetail = (typeof materialDetails)[number];
 
 export const materialsPage = {
-  description: 'Basalte, calcaire, silex et sables de Dakar ou de Tasseb : retrouvez nos calibres et choisissez le matériau adapté à vos travaux.',
+  description: 'Basalte, calcaire, silex et sables de Dakar ou de Tasseb : consultez les matériaux LAMACO pour vos chantiers au Sénégal et préparez votre devis.',
   availability: 'Références proposées par LAMACO. Quantités, tarifs, stock et livraison à confirmer pour votre commande.',
   adviceTitle: 'Besoin d’un matériau spécifique ?',
   adviceDescription: 'Un doute sur le choix ou la quantité ? Parlons de vos travaux et préparons votre demande ensemble.',

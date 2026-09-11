@@ -1,0 +1,81 @@
+---
+import { Picture } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PageHero from '../components/PageHero.astro';
+import Button from '../components/Button.astro';
+import BrandArrow from '../components/BrandArrow.astro';
+import ProcessIcon from '../components/ProcessIcon.astro';
+import quarryImage from '../assets/images/process-quarry.png';
+import { aboutPage } from '../data/about';
+import { company } from '../data/company';
+import '../styles/about.css';
+---
+
+<BaseLayout title="À propos de LAMACO | Entreprise BTP au Sénégal" description={aboutPage.description} image={quarryImage} imageAlt={aboutPage.imageAlt} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'À propos', path: '/a-propos/' }]}>
+  <Header />
+  <main class="about-page" id="contenu">
+    <PageHero title={aboutPage.title} breadcrumb="À propos" eyebrow={aboutPage.eyebrow} description={aboutPage.intro} image={quarryImage} imageAlt={aboutPage.imageAlt} />
+    <nav class="about-nav wrap" aria-label="Dans cette page">
+      <a href="#entreprise">L’entreprise <BrandArrow /></a>
+      <a href="#acteurs">Les acteurs de LAMACO <BrandArrow /></a>
+      <a href="#approche">Notre approche <BrandArrow /></a>
+    </nav>
+
+    <section class="about-story wrap" id="entreprise" aria-labelledby="story-title">
+      <div class="about-story__content">
+        <p class="about-eyebrow">{aboutPage.storyEyebrow}</p>
+        <h2 id="story-title">{aboutPage.storyTitle}</h2>
+        {aboutPage.story.map(paragraph => <p class="about-copy">{paragraph}</p>)}
+        <a class="about-link" href="/contact/">Échanger avec LAMACO <BrandArrow glyph="↗" /></a>
+      </div>
+      <figure class="about-story__figure">
+        <div class="about-story__image">
+          <Picture src={quarryImage} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1100]} sizes="(max-width: 760px) 88vw, 44vw" alt={aboutPage.imageAlt} loading="lazy" quality={60} />
+          <span class="about-story__stamp" aria-hidden="true">Construire.<br />Livrer.<br />Équiper.</span>
+        </div>
+        <figcaption>{aboutPage.imageCaption}</figcaption>
+      </figure>
+      <dl class="about-resources">
+        {aboutPage.resources.map(resource => <div><dt>{resource.label}</dt><dd class="about-resources__value">{resource.value}</dd><dd class="about-resources__detail">{resource.detail}</dd></div>)}
+      </dl>
+    </section>
+
+    <section class="about-team" id="acteurs" aria-labelledby="team-title">
+      <div class="wrap">
+        <div class="about-team__heading">
+          <div><p class="about-eyebrow">{aboutPage.teamEyebrow}</p><h2 id="team-title">{aboutPage.teamTitle}</h2></div>
+          <p class="about-copy">{aboutPage.teamIntro}</p>
+        </div>
+        <div class="about-team__members">
+          {aboutPage.teamMembers.map(member => (
+            <article class="about-actor">
+              <div class="about-actor__identity" aria-hidden="true"><span>{member.initials}</span><svg viewBox="130.017 513.601 672.903 292.57" width="42" height="19" focusable="false"><use href="/brand/terminal.svg#mark" /></svg></div>
+              <p class="about-actor__role">{member.role}</p>
+              <h3>{member.name}</h3>
+              <p class="about-actor__presentation">{member.presentation}</p>
+              <p class="about-actor__focus">{member.focus}</p>
+            </article>
+          ))}
+        </div>
+        <div class="about-team__contact"><span>Rencontrons-nous autour de votre projet.</span><Button href="/contact/" variant="light">Contacter l’équipe</Button></div>
+      </div>
+    </section>
+
+    <section class="about-approach wrap" id="approche" aria-labelledby="approach-title">
+      <div><p class="about-eyebrow">{aboutPage.approachEyebrow}</p><h2 id="approach-title">{aboutPage.approachTitle}</h2><p class="about-copy">{aboutPage.approachIntro}</p></div>
+      <ol class="about-approach__steps">
+        {aboutPage.approach.map((step, index) => <li><span aria-hidden="true">0{index + 1}</span><div><h3>{step.title}</h3><p class="about-copy">{step.description}</p></div></li>)}
+      </ol>
+    </section>
+
+    <aside class="about-diaspora wrap" aria-labelledby="diaspora-title"><span class="about-diaspora__icon"><ProcessIcon name="advice" /></span><div><h2 id="diaspora-title">Vous préparez votre projet depuis l’étranger ?</h2><p>{company.diasporaContact}</p></div><a class="about-link" href="/demande-de-conseil/">Préparer notre échange <BrandArrow glyph="↗" /></a></aside>
+
+    <section class="about-invite wrap" aria-labelledby="invite-title">
+      <div><p class="about-eyebrow">{aboutPage.ctaEyebrow}</p><h2 id="invite-title">{aboutPage.ctaTitle}</h2><p class="about-copy">{aboutPage.ctaDescription}</p></div>
+      <div class="about-invite__actions"><Button href="/demande-de-devis/">Demander un devis</Button><a class="about-link" href={company.phones[0].href}>Appeler le {company.phones[0].label} <BrandArrow glyph="↗" /></a></div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

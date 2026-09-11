@@ -12,7 +12,7 @@ import { contactDetails, contactPage } from '../data/contact';
 import '../styles/contact.css';
 ---
 
-<BaseLayout title="Contactez-nous — LAMACO Sénégal" description={contactPage.description}>
+<BaseLayout title="Contact et projets BTP au Sénégal | LAMACO" description={contactPage.description} pageType="ContactPage" image={quarryImage} imageAlt="Illustration d’un camion-benne dans une carrière" breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'Contact', path: '/contact/' }]}>
   <Header />
   <main class="contact-page" id="contenu">
     <PageHero title={contactPage.title} breadcrumb="Contact" eyebrow={contactPage.eyebrow} description={contactPage.intro} image={quarryImage} imageAlt="Illustration d’un camion-benne dans une carrière" />
@@ -32,7 +32,7 @@ import '../styles/contact.css';
       <section class="contact-message" aria-labelledby="message-title" data-contact-message data-phone={company.phones[0].href.replace('tel:', '')}>
         <div class="contact-section-label"><span aria-hidden="true">01</span> À vous la parole</div>
         <h2 id="message-title">Écrivez-nous<span>.</span></h2>
-        <p class="contact-message__intro">Quelques mots suffisent pour démarrer. Préparez votre message ici, puis choisissez de le partager avec LAMACO.</p>
+        <p class="contact-message__intro">{company.diasporaContact} Préparez votre message ici, puis choisissez de le partager avec LAMACO.</p>
         <div class="contact-fallback" data-contact-fallback><p>Vous pouvez nous joindre directement par téléphone.</p><a href={company.phones[0].href}><span>Appeler le {company.phones[0].label} <BrandArrow glyph="↗" /></span></a></div>
         <noscript><p class="contact-small">JavaScript est désactivé : utilisez les liens d’appel pour nous contacter.</p></noscript>
 

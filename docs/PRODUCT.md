@@ -69,6 +69,17 @@ les usages généraux ; elles ne certifient pas les produits LAMACO.
 - 1 outdoor depot/storage/display area
 - Team: about 4 people
 
+### Acteurs de LAMACO — 10 septembre 2026
+
+- Idrissa NDIAYE : CEO.
+- El Hadji NDIAYE : Project Manager.
+- Aly NIANG : Gérant.
+
+Noms et fonctions transmis directement par LAMACO. Les présentations de
+`src/data/about.ts` sont des textes provisoires expressément demandés pour la page
+`/a-propos/`, à remplacer par les biographies définitives. Aucun parcours,
+diplôme, ancienneté ou portrait n’a été fourni ; les cartes utilisent des initiales.
+
 Do not present future categories (hardware store, marketplace, digital tools, simulator, AI, etc.) as active services unless explicitly requested.
 
 ## Audience
@@ -76,6 +87,8 @@ Individuals, self-builders, artisans, BTP companies, developers/investors and Se
 
 ## Contact
 Website: `https://lamaco-sn.com`
+Base confirmée dans la demande SEO du 10 septembre 2026 : route de Mbour,
+Thiès, Sénégal. Marché : Sénégal, notamment Thiès et Dakar, avec une audience diaspora.
 Phones:
 - `+221 77 276 06 21`
 - `+221 77 639 27 96`
@@ -128,8 +141,10 @@ Phones:
 
 - `src/data/contact.ts` stores coordinates 14.3943798445042, -16.95476360033701,
   extracted from LAMACO's supplied Street View panorama `2pieZvt1rq6MV3GolqOVHg`.
-- Written address, company email and hours remain unconfirmed (`null`). Do not
-  infer a street address or operating hours from Street View imagery.
+- Written address is now confirmed separately: route de Mbour, Thiès, Sénégal.
+  Company email and hours remain unconfirmed (`null`). Do not infer additional
+  address details or operating hours from Street View imagery. The historical
+  map pin must be checked against the confirmed address before deployment.
 - The contact page shows a dark 2D OpenStreetMap map with a LAMACO pin at those
   coordinates, plus Google Maps search and directions links, not Street View.
   Visitors can still arrange their visit by phone.

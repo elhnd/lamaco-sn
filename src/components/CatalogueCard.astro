@@ -6,8 +6,9 @@ import type { CatalogueMaterial } from '../data/materials';
 interface Props {
   material: CatalogueMaterial;
   index: number;
+  headingLevel?: 'h2' | 'h3';
 }
-const { material, index } = Astro.props;
+const { material, index, headingLevel: Heading = 'h2' } = Astro.props;
 ---
 
 <article class="catalogue-card" data-material={material.group}>
@@ -18,7 +19,7 @@ const { material, index } = Astro.props;
       <span class="catalogue-card__family">{material.family}</span>
     </div>
     <div class="catalogue-card__body">
-      <h2>{material.name}</h2>
+      <Heading>{material.name}</Heading>
       <span class="catalogue-card__alias">{material.alias}</span>
       <p>{material.description}</p>
       <span class="catalogue-card__more">En savoir plus <span aria-hidden="true"><BrandArrow glyph="↗" /></span></span>

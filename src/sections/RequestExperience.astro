@@ -19,7 +19,7 @@ const content = requestPages[mode];
 const quote = mode === 'devis';
 ---
 
-<BaseLayout title={`${content.title} — LAMACO Sénégal`} description={content.description}>
+<BaseLayout title={`${content.title} BTP au Sénégal | LAMACO`} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Illustration d’un camion-benne dans une carrière' : 'Illustration de la texture d’un sable de construction'} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: content.title, path: content.path }]}>
   <a class="request-skip" href="#demande">Aller à la demande</a>
   <Header />
   <main class={`request-page request-page--${mode}`} id="contenu" data-request-page data-mode={mode} data-phone={company.phones[0].href.replace('tel:', '')}>

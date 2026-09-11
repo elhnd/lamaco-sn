@@ -11,7 +11,7 @@ import { materialCatalogue, materials, materialsPage } from '../../data/material
 import '../../styles/materials.css';
 ---
 
-<BaseLayout title="Nos matériaux de construction — LAMACO Sénégal" description={materialsPage.description}>
+<BaseLayout title="Matériaux de construction au Sénégal | LAMACO" description={materialsPage.description} pageType="CollectionPage" image={heroImage} imageAlt="Illustration de pierres de basalte aux textures minérales" breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'Matériaux', path: '/materiaux/' }]}>
   <Header />
   <main class="materials-page" id="contenu">
     <section class="catalogue-hero" aria-labelledby="catalogue-title">
@@ -30,7 +30,7 @@ import '../../styles/materials.css';
 
     <section class="catalogue wrap" aria-label="Catalogue des matériaux" data-catalogue>
       <div class="catalogue-toolbar">
-        <div class="catalogue-filters" role="group" aria-label="Filtrer les matériaux" data-filters hidden>
+        <div class="catalogue-filters" role="group" aria-label="Filtrer les matériaux" data-filters data-filters-pending inert>
           <button type="button" data-filter="tous" aria-pressed="true">Tous les matériaux</button>
           {materials.map((material) => <button type="button" data-filter={material.slug} aria-pressed="false">{material.name}</button>)}
         </div>
@@ -55,7 +55,8 @@ import '../../styles/materials.css';
   const count = catalogue?.querySelector<HTMLElement>('[data-count]');
 
   if (filters && buttons && cards && count) {
-    filters.hidden = false;
+    filters.inert = false;
+    filters.removeAttribute('data-filters-pending');
     const applyFilter = (filter: string) => {
       let total = 0;
       buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.filter === filter)));

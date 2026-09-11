@@ -6,6 +6,9 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "check": "astro check",
+    "test": "node --test scripts/*.test.mjs",
+    "check:release": "node scripts/validate-build.mjs",
+    "package:dist": "sh scripts/package-dist.sh",
     "preview": "astro preview"
   },
   "dependencies": {

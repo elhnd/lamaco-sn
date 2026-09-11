@@ -1,0 +1,43 @@
+# LWS / Apache: upload this hidden file alongside the generated pages.
+# Host checks keep local previews and other environments untouched.
+RewriteEngine On
+
+Options -Indexes
+<IfModule mod_negotiation.c>
+  Options -MultiViews
+</IfModule>
+
+# Keep ACME verification available, but never serve hidden/source/backup files.
+RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,L]
+<FilesMatch "(?i)(^(?:package(?:-lock)?\.json|.*\.config\.[^/]+)$|\.(?:map|ts|tsx|mjs|sql|log|bak|zip|tar|gz|pem|key)$)">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Strict-Transport-Security "max-age=31536000" "expr=%{HTTPS} == 'on'"
+</IfModule>
+
+# The build appends a CSP with hashes matching the generated inline scripts.
+
+RewriteCond %{HTTP_HOST} ^www\.v2\.lamaco-sn\.com$ [NC]
+RewriteRule ^ https://v2.lamaco-sn.com%{REQUEST_URI} [R=301,L,NE]
+
+RewriteCond %{HTTP_HOST} ^v2\.lamaco-sn\.com$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://v2.lamaco-sn.com%{REQUEST_URI} [R=301,L,NE]
+
+# THE_REQUEST distinguishes explicit requests from Apache's DirectoryIndex.
+RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html(?:[?\s]) [NC]
+RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
+
+# Superseded catalogue categories: use HTTP redirects on the production host.
+RewriteRule ^materiaux/(gravier|beton)/?$ /materiaux/ [R=301,L]
+
+# Previous services URL; corresponding content is now on home.
+RewriteRule ^services/?$ /#materiaux [R=301,L,NE]
+
+# Existing physical directories keep Apache's native trailing-slash redirect.

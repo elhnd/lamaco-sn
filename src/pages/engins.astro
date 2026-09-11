@@ -9,10 +9,18 @@ import BrandArrow from '../components/BrandArrow.astro';
 import ProcessIcon from '../components/ProcessIcon.astro';
 import heroImage from '../assets/images/hero-quarry-v2.png';
 import { equipment, equipmentPage } from '../data/equipment';
+import { company } from '../data/company';
 import '../styles/equipment.css';
 ---
 
-<BaseLayout title="Nos engins de chantier — LAMACO Sénégal" description={equipmentPage.description}>
+<BaseLayout title="Location d’engins BTP au Sénégal | LAMACO" description={equipmentPage.description} pageType="CollectionPage" image={heroImage} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'Engins', path: '/engins/' }]} structuredData={equipment.map(item => ({
+  '@type': 'Service', '@id': `${company.website}/engins/#service-${item.slug}`,
+  name: `Location de ${item.name.toLowerCase()}`, description: item.description,
+  url: `${company.website}/engins/#${item.slug}`,
+  provider: { '@id': `${company.website}/#organization` },
+  areaServed: { '@type': 'Country', name: company.market },
+  mainEntityOfPage: { '@id': `${company.website}/engins/#webpage` },
+}))}>
   <Header />
   <main class="equipment-page" id="contenu">
     <PageHero title={equipmentPage.title} breadcrumb="Engins" eyebrow={equipmentPage.eyebrow} description={equipmentPage.intro} image={heroImage} imageAlt="Illustration d’une pelle hydraulique et d’un camion-benne dans une carrière" />
