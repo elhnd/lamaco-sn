@@ -92,6 +92,7 @@ Thiès, Sénégal. Marché : Sénégal, notamment Thiès et Dakar, avec une audi
 Phones:
 - `+221 77 276 06 21`
 - `+221 77 639 27 96`
+Email: `lamaco.sn@gmail.com`
 
 ## V1 pages
 - `/` — brand, core offers, materials, equipment, process, strong contact CTA
@@ -118,7 +119,8 @@ Phones:
   restent disponibles si les liens SMS ou leur préremplissage ne sont pas pris en charge.
 - Ne pas afficher « demande reçue », délai de réponse garanti, prix, stock confirmé,
   réservation ou rendez-vous fictif. Le résultat porte la mention « non envoyée ».
-- Aucun e-mail ou compte WhatsApp n’est inventé. Pas de pièce jointe, de stockage
+- L’e-mail confirmé est `lamaco.sn@gmail.com`. Aucun autre e-mail ou compte WhatsApp
+  n’est inventé. Pas de pièce jointe, de stockage
   local, de compte client ou de collecte côté serveur pour ces pages V1.
 - Le catalogue fournit les choix de matériaux ; les fiches préremplissent uniquement
   une référence reconnue via `?materiau=slug`. La page Engins présélectionne
@@ -142,14 +144,15 @@ Phones:
 - `src/data/contact.ts` stores coordinates 14.3943798445042, -16.95476360033701,
   extracted from LAMACO's supplied Street View panorama `2pieZvt1rq6MV3GolqOVHg`.
 - Written address is now confirmed separately: route de Mbour, Thiès, Sénégal.
-  Company email and hours remain unconfirmed (`null`). Do not infer additional
+  Company email is confirmed as `lamaco.sn@gmail.com`; hours remain unconfirmed
+  (`null`). Do not infer additional
   address details or operating hours from Street View imagery. The historical
   map pin must be checked against the confirmed address before deployment.
 - The contact page shows a dark 2D OpenStreetMap map with a LAMACO pin at those
   coordinates, plus Google Maps search and directions links, not Street View.
   Visitors can still arrange their visit by phone.
 - The optional email field is the visitor's email, included only in the message
-  they choose to share. It does not imply an official LAMACO email address.
+  they choose to share. It remains distinct from LAMACO’s confirmed company email.
 - The message form follows the same local-only copy/SMS workflow as quote/advice.
   Name, phone, subject and message are required; no data is stored or posted.
 

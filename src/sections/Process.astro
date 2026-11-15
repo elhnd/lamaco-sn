@@ -24,13 +24,12 @@ import { processSteps } from '../data/process';
   <div class="process-section__overlay" aria-hidden="true"></div>
   <div class="process-section__content wrap">
     <div class="process-section__title" data-reveal>
-      <p><span>03</span><i aria-hidden="true"></i>Notre processus</p>
+      <p><i aria-hidden="true"></i>Notre processus</p>
       <h2>Du besoin à votre chantier</h2>
     </div>
     <ol class="process-steps">
       {processSteps.map((step) => (
         <li data-reveal>
-          <span class="process-step__number">{step.number}</span>
           <span class="process-step__icon" aria-hidden="true">
             <ProcessIcon name={step.icon} />
           </span>

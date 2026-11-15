@@ -66,7 +66,6 @@
 .catalogue-card__image :is(picture, img) { width: 100%; height: 100%; }
 .catalogue-card__image img { object-fit: cover; transition: transform 600ms ease; }
 .catalogue-card__link:is(:hover, :focus-visible) img { transform: scale(1.04); }
-.catalogue-card__number { position: absolute; top: 14px; right: 16px; color: var(--c-text); font-size: 0.65rem; font-weight: 700; text-shadow: 0 1px 5px var(--c-bg); }
 .catalogue-card__family { position: absolute; z-index: 1; bottom: 6px; left: 24px; font-size: 0.55rem; letter-spacing: 0.19em; text-transform: uppercase; color: var(--c-muted); }
 .catalogue-card__body { padding: 10px 24px 21px; }
 .catalogue-card :is(h2, h3) { font-family: var(--font-display); font-weight: 700; text-transform: uppercase; font-size: 2.15rem; margin: 0 0 8px; line-height: 1; }

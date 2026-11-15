@@ -19,7 +19,7 @@ export const contactDetails: {
   address: `${company.address.street}, ${company.address.city}, ${company.market}`,
   mapHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coordinates)}`,
   directionsHref: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(coordinates)}`,
-  email: null,
+  email: company.email,
   hours: null,
 };
 

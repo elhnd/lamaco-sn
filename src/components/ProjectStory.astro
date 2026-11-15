@@ -14,7 +14,6 @@ const [cover, ...gallery] = project.photos;
   </figure>
   <div class="project-story__text" data-project-reveal>
     <p class="projects-eyebrow"><span aria-hidden="true"></span>{project.category}</p>
-    <span class="project-story__number" aria-hidden="true">0{index + 1}</span>
     <h3 id={`${project.slug}-title`}>{project.title}</h3>
     {project.location && <p class="project-story__location">{project.location}</p>}
     <p>{project.summary}</p>

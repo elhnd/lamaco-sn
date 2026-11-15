@@ -15,8 +15,6 @@
 .fleet-card__visual img { object-fit: cover; object-position: 15% 75%; }
 .fleet-card--excavator .fleet-card__visual { background: var(--c-light-bg); }
 .fleet-card--excavator .fleet-card__visual img { object-fit: contain; mix-blend-mode: multiply; padding: 25px 20px; }
-.fleet-card__number { position: absolute; top: 20px; right: 24px; color: var(--c-white); font: 700 1.75rem/1 var(--font-display); }
-.fleet-card--excavator .fleet-card__number { color: var(--c-dark-text); }
 .fleet-card__visual-note { position: absolute; bottom: 14px; left: 24px; color: var(--c-white); font-size: 0.52rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
 .fleet-card--excavator .fleet-card__visual-note { color: var(--c-dark-text); }
 .fleet-card__body { padding: 26px 30px 30px; }
@@ -53,8 +51,7 @@
 .fleet-eyebrow > span { width: 29px; height: 1px; flex-shrink: 0; }
 .fleet-planning h2 { max-width: 360px; margin: 0; font: 700 2.5rem/1.05 var(--font-display); text-transform: uppercase; }
 .fleet-planning ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; margin: 0; padding: 0; list-style: none; }
-.fleet-planning__number { color: var(--c-white); font: 700 1.9rem/1 var(--font-display); }
-.fleet-planning h3 { margin: 14px 0 8px; font: 700 1.5rem/1 var(--font-display); text-transform: uppercase; }
+.fleet-planning h3 { margin: 0 0 8px; font: 700 1.5rem/1 var(--font-display); text-transform: uppercase; }
 .fleet-planning li p { margin: 0; color: var(--c-muted); font-size: 0.74rem; line-height: 1.8; }
 .fleet-advice { display: flex; align-items: center; gap: 26px; padding: 30px; border: 1px solid color-mix(in srgb, var(--c-accent) 45%, transparent); background: var(--c-surface); }
 .fleet-advice__icon { color: var(--c-accent); flex-shrink: 0; }
@@ -81,9 +78,6 @@
   .fleet-shortcuts a { flex: 1 1 auto; justify-content: space-between; gap: 12px; padding: 10px 12px; }
   .fleet-card__body { padding: 22px 20px; }
   .fleet-planning ol { grid-template-columns: 1fr; gap: 24px; }
-  .fleet-planning ol li { display: grid; grid-template-columns: 36px 1fr; column-gap: 16px; }
-  .fleet-planning__number { grid-row: span 2; }
-  .fleet-planning h3 { margin-top: 0; }
   .fleet-advice { padding: 24px 20px; gap: 18px; }
   .fleet-advice .button { width: 100%; }
 }

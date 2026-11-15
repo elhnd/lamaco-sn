@@ -37,7 +37,7 @@ import '../../styles/materials.css';
         <p class="catalogue-count" aria-live="polite" aria-atomic="true" data-count>{materialCatalogue.length} références</p>
       </div>
       <div class="catalogue-grid">
-        {materialCatalogue.map((material, index) => <CatalogueCard material={material} index={index} />)}
+        {materialCatalogue.map((material) => <CatalogueCard material={material} />)}
       </div>
       <p class="catalogue-note"><span aria-hidden="true"><BrandArrow glyph="↳" /></span> {materialsPage.availability}</p>
       <p class="catalogue-note">{materialsPage.sizeNote}</p>

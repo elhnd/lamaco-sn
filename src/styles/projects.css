@@ -51,12 +51,10 @@
 .projects-demo-note p { margin: 6px 0 0; color: var(--c-muted); font-size: 0.74rem; line-height: 1.8; }
 .projects-story-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
 .projects-story-nav a { display: inline-flex; align-items: center; gap: 16px; min-height: 46px; padding: 10px 16px; border: 1px solid var(--c-line); color: var(--c-text); font-size: 0.62rem; font-weight: 700; text-transform: uppercase; }
-.projects-story-nav a > span:first-child { color: var(--c-accent); }
 .projects-story-nav a:hover { border-color: var(--c-accent); }
 .project-story { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(30px, 5vw, 70px); align-items: center; padding-block: 46px; scroll-margin-top: 105px; }
 .project-story + .project-story { border-top: 1px solid var(--c-line); }
 .project-story__text { position: relative; }
-.project-story__number { display: block; margin: 0 0 18px; color: var(--c-white); font: 700 2rem/1 var(--font-display); }
 .project-story__demo { position: absolute; bottom: 18px; left: 18px; right: auto; max-width: calc(100% - 36px); padding: 9px 12px; background: var(--c-bg); color: var(--c-text); font-size: 0.55rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
 .project-story--reverse { grid-template-columns: 1fr 1.2fr; }
 .project-story--reverse .project-story__cover { order: 2; }

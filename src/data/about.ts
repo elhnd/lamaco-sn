@@ -22,7 +22,7 @@ export const aboutPage = {
   ],
   teamEyebrow: '02 · Les acteurs de LAMACO',
   teamTitle: 'Ceux qui font avancer LAMACO.',
-  teamIntro: 'Direction, coordination des projets et gestion quotidienne : trois rôles complémentaires au service d’une même ambition, accompagner vos besoins de chantier.',
+  teamIntro: '',
   // Names and roles supplied directly by LAMACO on 10 September 2026.
   // Provisional presentation copy explicitly requested by the user; replace with
   // approved biographies later. No invented credentials, tenure or achievements.
@@ -42,7 +42,7 @@ export const aboutPage = {
   ],
   approachEyebrow: '03 · Notre façon de travailler',
   approachTitle: 'Un besoin clair. Une suite à préparer ensemble.',
-  approachIntro: 'Matériaux, accès au chantier, engin ou livraison : chaque échange commence par les informations utiles à votre projet.',
+  approachIntro: '',
   approach: [
     { title: 'Partir de vos travaux', description: 'Précisez la nature du projet, sa localisation et les matériaux ou travaux envisagés. Si le besoin est encore ouvert, commencez par une demande de conseil.' },
     { title: 'Préciser les modalités', description: 'Quantités, disponibilité, tarifs, accès et date souhaitée sont à confirmer avec LAMACO avant de convenir d’une commande ou d’une intervention.' },

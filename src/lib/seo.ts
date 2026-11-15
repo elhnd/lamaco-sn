@@ -30,6 +30,7 @@ export function pageGraph(options: {
         description: company.description,
         logo: `${company.website}/brand/logo-primary.svg`,
         telephone: company.phones[0].href.replace('tel:', ''),
+        email: company.email,
         address: {
           '@type': 'PostalAddress', streetAddress: company.address.street,
           addressLocality: company.address.city, addressCountry: company.address.countryCode,

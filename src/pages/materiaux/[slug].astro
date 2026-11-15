@@ -4,7 +4,7 @@ import { Picture } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import Button from '../../components/Button.astro';
+import RequestButton from '../../components/RequestButton.astro';
 import CatalogueCard from '../../components/CatalogueCard.astro';
 import MaterialAdvice from '../../components/MaterialAdvice.astro';
 import { materials, materialCatalogue, materialDetails, materialsPage, materialSources, type MaterialDetail } from '../../data/materials';
@@ -49,7 +49,7 @@ const related = materials
           {siblings.map((item) => <a href={`/materiaux/${item.slug}/`} aria-current={item.slug === material.slug ? 'page' : undefined}>{material.group === 'sable' ? item.name : item.grade}</a>)}
         </nav>
         <div class="material-detail__actions">
-          <Button href={`/demande-de-devis/?materiau=${encodeURIComponent(material.slug)}`}>Demander un devis</Button>
+          <RequestButton mode="devis" query={`materiau=${encodeURIComponent(material.slug)}`} />
           <a class="material-text-link" href="/materiaux/">Tous les matériaux <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
         </div>
         <p class="material-detail__availability">{materialsPage.availability}</p>
@@ -95,7 +95,7 @@ const related = materials
 
     <section class="material-related" aria-labelledby="related-title">
       <div class="material-related__heading"><div><p class="material-eyebrow"><span></span> À découvrir aussi</p><h2 id="related-title">D’autres matières, <span>d’autres projets.</span></h2></div><a class="material-text-link" href="/materiaux/">Voir le catalogue <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a></div>
-      <div class="catalogue-grid">{related.map((item, index) => <CatalogueCard material={item} index={index} headingLevel="h3" />)}</div>
+      <div class="catalogue-grid">{related.map((item) => <CatalogueCard material={item} headingLevel="h3" />)}</div>
     </section>
     <MaterialAdvice />
   </main>

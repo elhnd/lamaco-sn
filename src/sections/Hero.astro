@@ -66,9 +66,8 @@ import { company, homeFacts } from '../data/company';
 
   <div class="hero__facts-wrap">
     <div class="hero__facts wrap" aria-label="Informations clés">
-      {homeFacts.map((fact, index) => (
+      {homeFacts.map((fact) => (
         <div class="hero-fact" data-hero-item>
-          <span class="hero-fact__icon" aria-hidden="true">0{index + 1}</span>
           <div>
             <strong>{fact.value}</strong>
             <span>{fact.label}</span>

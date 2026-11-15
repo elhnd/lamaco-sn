@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
-import Button from '../components/Button.astro';
+import RequestButton from '../components/RequestButton.astro';
 import BrandArrow from '../components/BrandArrow.astro';
 import ProcessIcon from '../components/ProcessIcon.astro';
 import ProjectStory from '../components/ProjectStory.astro';
@@ -38,7 +38,7 @@ const heroAlt = stories[0]?.photos[0].alt ?? 'Illustration d’une carrière, et
       </div>
       {demonstration && <aside class="projects-demo-note" aria-label="Projets fictifs"><strong>Version de démonstration</strong><p>Les projets et récits ci-dessous sont fictifs, et les images sont des illustrations. Ils présentent le futur format de la galerie, pas des réalisations ni des références clients de LAMACO.</p></aside>}
       {stories.length > 0 ? (
-        <><nav class="projects-story-nav" aria-label="Explorer les projets">{stories.map((project, index) => <a href={`#${project.slug}`}><span>0{index + 1}</span>{project.category}<BrandArrow /></a>)}</nav><div class="projects-stories">{stories.map((project, index) => <ProjectStory project={project} index={index} demonstration={demonstration} />)}</div></>
+        <><nav class="projects-story-nav" aria-label="Explorer les projets">{stories.map((project) => <a href={`#${project.slug}`}>{project.category}<BrandArrow /></a>)}</nav><div class="projects-stories">{stories.map((project, index) => <ProjectStory project={project} index={index} demonstration={demonstration} />)}</div></>
       ) : (
         <div class="projects-empty" data-project-reveal>
           <div class="projects-empty__mark" aria-hidden="true"><svg viewBox="130.017 513.601 672.903 292.57" width="56" height="26"><use href="/brand/terminal.svg#mark" /></svg></div>
@@ -58,7 +58,7 @@ const heroAlt = stories[0]?.photos[0].alt ?? 'Illustration d’une carrière, et
           <p class="projects-eyebrow"><span aria-hidden="true"></span>{projectsPage.approachEyebrow}</p>
           <h2 id="approach-title">{projectsPage.approachTitle}</h2>
           <p class="projects-approach__description">{projectsPage.approachDescription}</p>
-          <Button href="/demande-de-conseil/" variant="light">Parlons de votre idée</Button>
+          <RequestButton mode="conseil" variant="light" />
         </div>
       </div>
     </section>
@@ -71,7 +71,7 @@ const heroAlt = stories[0]?.photos[0].alt ?? 'Illustration d’une carrière, et
       <div class="projects-invite__inner">
         <p class="projects-eyebrow"><span aria-hidden="true"></span>{projectsPage.ctaEyebrow}</p>
         <h2 id="invite-title">{projectsPage.ctaTitle}</h2>
-        <div class="projects-invite__bottom"><p>{projectsPage.ctaDescription}</p><Button href="/demande-de-devis/">Confiez-nous votre besoin</Button></div>
+        <div class="projects-invite__bottom"><p>{projectsPage.ctaDescription}</p><RequestButton mode="devis" /></div>
         <a class="projects-invite__contact" href="/contact/">Vous préférez un premier échange ? Contactez-nous <BrandArrow glyph="↗" /></a>
       </div>
     </section>

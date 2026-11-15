@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
-import Button from '../components/Button.astro';
+import RequestButton from '../components/RequestButton.astro';
 import BrandArrow from '../components/BrandArrow.astro';
 import ProcessIcon from '../components/ProcessIcon.astro';
 import heroImage from '../assets/images/hero-quarry-v2.png';
@@ -34,11 +34,10 @@ import '../styles/equipment.css';
       </div>
 
       <div class="fleet-grid">
-        {equipment.map((item, index) => (
+        {equipment.map((item) => (
           <article class:list={['fleet-card', { 'fleet-card--excavator': item.slug === 'pelle-hydraulique' }]} id={item.slug} aria-labelledby={`${item.slug}-title`}>
             <div class="fleet-card__visual">
               <Picture src={item.image} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes="(max-width: 760px) 91vw, 45vw" alt={item.imageAlt} loading="lazy" quality={65} />
-              <span class="fleet-card__number" aria-hidden="true">0{index + 1}</span>
               <span class="fleet-card__visual-note">Illustration</span>
             </div>
             <div class="fleet-card__body">
@@ -60,7 +59,7 @@ import '../styles/equipment.css';
                   <p class="fleet-card__source"><a href={item.source.href} rel="external">{item.source.label} <BrandArrow glyph="↗" /></a><small>{equipmentPage.sourceNote}</small></p>
                 </div>
               </details>
-              <Button href={`/demande-de-devis/?engin=${item.slug}`}>Demander un devis</Button>
+              <RequestButton mode="devis" query={`engin=${encodeURIComponent(item.slug)}`} />
             </div>
           </article>
         ))}
@@ -76,14 +75,14 @@ import '../styles/equipment.css';
           <h2 id="planning-title">{equipmentPage.planningTitle}</h2>
         </div>
         <ol>
-          {equipmentPage.planning.map((step, index) => <li><span class="fleet-planning__number">0{index + 1}</span><h3>{step.title}</h3><p>{step.description}</p></li>)}
+          {equipmentPage.planning.map((step) => <li><h3>{step.title}</h3><p>{step.description}</p></li>)}
         </ol>
       </section>
 
       <aside class="fleet-advice" aria-labelledby="advice-title">
         <span class="fleet-advice__icon"><ProcessIcon name="advice" /></span>
         <div><h2 id="advice-title">{equipmentPage.adviceTitle}</h2><p>{equipmentPage.adviceDescription}</p></div>
-        <Button href="/demande-de-conseil/">Demander un conseil</Button>
+        <RequestButton mode="conseil" />
       </aside>
     </section>
   </main>

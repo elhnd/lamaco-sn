@@ -9,6 +9,7 @@ import PageHero from '../components/PageHero.astro';
 import quarryImage from '../assets/images/process-quarry.png';
 import { company } from '../data/company';
 import { contactDetails, contactPage } from '../data/contact';
+import { requestPages } from '../data/requests';
 import '../styles/contact.css';
 ---
 
@@ -72,7 +73,7 @@ import '../styles/contact.css';
 
       <ContactMap />
     </div>
-    <nav class="contact-shortcuts wrap" aria-label="Préparer une demande détaillée"><div><span>Un besoin déjà en tête ?</span><p>Prenez le chemin qui vous ressemble.</p></div><a href="/demande-de-devis/"><span>01</span> Demander un devis <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a><a href="/demande-de-conseil/"><span>02</span> Demander un conseil <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a></nav>
+    <nav class="contact-shortcuts wrap" aria-label="Préparer une demande détaillée"><div><span>Un besoin déjà en tête ?</span><p>Prenez le chemin qui vous ressemble.</p></div><a href={requestPages.devis.path}><span>01</span> {requestPages.devis.label} <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a><a href={requestPages.conseil.path}><span>02</span> {requestPages.conseil.label} <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a></nav>
   </main>
   <Footer />
 </BaseLayout>

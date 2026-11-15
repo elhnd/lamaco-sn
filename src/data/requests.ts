@@ -3,6 +3,7 @@ export type RequestMode = 'devis' | 'conseil';
 export const requestPages = {
   devis: {
     path: '/demande-de-devis/',
+    label: 'Demander un devis',
     title: 'Demande de devis',
     description: 'Préparez votre demande de matériaux, de location d’engins ou de travaux avec LAMACO au Sénégal.',
     eyebrow: 'Du projet au concret',
@@ -24,6 +25,7 @@ export const requestPages = {
   },
   conseil: {
     path: '/demande-de-conseil/',
+    label: 'Demander un conseil',
     title: 'Demande de conseil',
     description: 'Un doute sur un matériau, une quantité, un engin ou la livraison ? Préparez votre question pour LAMACO.',
     eyebrow: 'Parlons terrain, simplement',

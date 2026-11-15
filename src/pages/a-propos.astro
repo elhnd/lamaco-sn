@@ -5,6 +5,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import PageHero from '../components/PageHero.astro';
 import Button from '../components/Button.astro';
+import RequestButton from '../components/RequestButton.astro';
 import BrandArrow from '../components/BrandArrow.astro';
 import ProcessIcon from '../components/ProcessIcon.astro';
 import quarryImage from '../assets/images/process-quarry.png';
@@ -74,7 +75,7 @@ import '../styles/about.css';
 
     <section class="about-invite wrap" aria-labelledby="invite-title">
       <div><p class="about-eyebrow">{aboutPage.ctaEyebrow}</p><h2 id="invite-title">{aboutPage.ctaTitle}</h2><p class="about-copy">{aboutPage.ctaDescription}</p></div>
-      <div class="about-invite__actions"><Button href="/demande-de-devis/">Demander un devis</Button><a class="about-link" href={company.phones[0].href}>Appeler le {company.phones[0].label} <BrandArrow glyph="↗" /></a></div>
+      <div class="about-invite__actions"><RequestButton mode="devis" /><a class="about-link" href={company.phones[0].href}>Appeler le {company.phones[0].label} <BrandArrow glyph="↗" /></a></div>
     </section>
   </main>
   <Footer />

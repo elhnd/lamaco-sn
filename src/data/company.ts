@@ -14,6 +14,7 @@ export const company = {
     { label: '+221 77 276 06 21', href: 'tel:+221772760621' },
     { label: '+221 77 639 27 96', href: 'tel:+221776392796' },
   ],
+  email: 'lamaco.sn@gmail.com',
   tagline: 'Construire. Livrer. Équiper.',
   promise:
     'Matériaux de construction, location d’engins et services pour vos chantiers au Sénégal.',

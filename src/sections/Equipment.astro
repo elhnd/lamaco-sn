@@ -10,7 +10,6 @@ import { equipment } from '../data/equipment';
 <section class="equipment-section" id="engins">
   <div class="equipment-section__layout wrap">
     <SectionIntro
-      number="02"
       eyebrow="Nos engins"
       title="La puissance au service du terrain"
       description="LAMACO met à votre disposition ses engins pour la livraison, le terrassement et le nettoyage de terrain."
@@ -37,9 +36,8 @@ import { equipment } from '../data/equipment';
 
     <div class="equipment-info" data-reveal>
       <p class="equipment-info__kicker">Parc actuel</p>
-      {equipment.map((item, index) => (
+      {equipment.map((item) => (
         <article>
-          <span>0{index + 1}</span>
           <div>
             <h3>{item.name}</h3>
             <p>{item.description}</p>

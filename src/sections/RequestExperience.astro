@@ -26,8 +26,8 @@ const quote = mode === 'devis';
     <PageHero title={content.title} breadcrumb={content.title} eyebrow={content.eyebrow} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Illustration d’un camion-benne dans une carrière' : 'Illustration de la texture d’un sable de construction'} />
     <div class="wrap request-content">
       <nav class="request-switch" aria-label="Choisir votre démarche">
-        <a href={requestPages.devis.path} aria-current={quote ? 'page' : undefined}>01 <span>Demander un devis</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
-        <a href={requestPages.conseil.path} aria-current={!quote ? 'page' : undefined}>02 <span>Demander un conseil</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
+        <a href={requestPages.devis.path} aria-current={quote ? 'page' : undefined}>01 <span>{requestPages.devis.label}</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
+        <a href={requestPages.conseil.path} aria-current={!quote ? 'page' : undefined}>02 <span>{requestPages.conseil.label}</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
       </nav>
 
       <div class="request-layout">
