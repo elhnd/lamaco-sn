@@ -141,13 +141,13 @@ Email: `lamaco.sn@gmail.com`
 
 ### Contact page
 
-- `src/data/contact.ts` stores coordinates 14.3943798445042, -16.95476360033701,
-  extracted from LAMACO's supplied Street View panorama `2pieZvt1rq6MV3GolqOVHg`.
+- `src/data/contact.ts` stores the confirmed coordinates
+  14.757599271164812, -16.951935946935176, supplied by LAMACO via Google Maps
+  on 21 November 2026.
 - Written address is now confirmed separately: route de Mbour, Thiès, Sénégal.
   Company email is confirmed as `lamaco.sn@gmail.com`; hours remain unconfirmed
   (`null`). Do not infer additional
-  address details or operating hours from Street View imagery. The historical
-  map pin must be checked against the confirmed address before deployment.
+  address details or operating hours from Street View imagery.
 - The contact page shows a dark 2D OpenStreetMap map with a LAMACO pin at those
   coordinates, plus Google Maps search and directions links, not Street View.
   Visitors can still arrange their visit by phone.

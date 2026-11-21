@@ -23,7 +23,7 @@ import '../styles/equipment.css';
 }))}>
   <Header />
   <main class="equipment-page" id="contenu">
-    <PageHero title={equipmentPage.title} breadcrumb="Engins" eyebrow={equipmentPage.eyebrow} description={equipmentPage.intro} image={heroImage} imageAlt="Illustration d’une pelle hydraulique et d’un camion-benne dans une carrière" />
+    <PageHero title={equipmentPage.title} breadcrumb="Engins" eyebrow={equipmentPage.eyebrow} description={equipmentPage.intro} image={heroImage} imageAlt="Visuel éditorial d’une pelle hydraulique et d’un camion-benne dans une carrière" />
 
     <section class="fleet wrap" aria-label="Le parc d’engins LAMACO">
       <div class="fleet-toolbar">
@@ -37,7 +37,7 @@ import '../styles/equipment.css';
           <article class:list={['fleet-card', { 'fleet-card--excavator': item.slug === 'pelle-hydraulique' }]} id={item.slug} aria-labelledby={`${item.slug}-title`}>
             <div class="fleet-card__visual">
               <Picture src={item.image} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes="(max-width: 760px) 91vw, 45vw" alt={item.imageAlt} loading="lazy" quality={65} />
-              <span class="fleet-card__visual-note">Illustration</span>
+              <span class="fleet-card__visual-note">Visuel de référence</span>
             </div>
             <div class="fleet-card__body">
               <p class="fleet-card__category"><ProcessIcon name={item.icon} />{item.category}</p>
