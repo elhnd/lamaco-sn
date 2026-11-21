@@ -14,7 +14,7 @@ import '../styles/projects.css';
 const demonstration = publishedProjects.length === 0 && projectDemos.length > 0;
 const stories = demonstration ? projectDemos : publishedProjects;
 const heroImage = stories[0]?.photos[0].image ?? fallbackHero;
-const heroAlt = stories[0]?.photos[0].alt ?? 'Illustration d’une carrière, et non d’un chantier réalisé par LAMACO';
+const heroAlt = stories[0]?.photos[0].alt ?? 'Visuel éditorial d’une carrière';
 ---
 
 <BaseLayout title="Nos réalisations — LAMACO Sénégal" description={projectsPage.description} noindex={publishedProjects.length === 0} pageType="CollectionPage" image={heroImage} imageAlt={heroAlt} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'Réalisations', path: '/realisations/' }]}>
@@ -44,7 +44,7 @@ const heroAlt = stories[0]?.photos[0].alt ?? 'Illustration d’une carrière, et
     <section class="projects-approach" aria-labelledby="approach-title">
       <div class="projects-approach__layout wrap">
         <figure class="projects-approach__figure" data-project-reveal>
-          <div class="project-media" data-project-media><Picture src={sandImage} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1100]} sizes="(max-width: 760px) 91vw, 40vw" alt="Illustration en gros plan de sable doré, sans lien avec une réalisation particulière" loading="lazy" quality={60} /></div>
+          <div class="project-media" data-project-media><Picture src={sandImage} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1100]} sizes="(max-width: 760px) 91vw, 40vw" alt="Gros plan sur une texture de sable doré" loading="lazy" quality={60} /></div>
           <figcaption>{projectsPage.illustrationCaption}</figcaption>
         </figure>
         <div class="projects-approach__content" data-project-reveal>

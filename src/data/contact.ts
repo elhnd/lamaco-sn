@@ -1,10 +1,10 @@
 import { company } from './company';
 
 // Complete only from confirmed LAMACO information, not the reference mockup.
-// Coordinates extracted from the Street View link supplied by LAMACO.
+// Coordinates confirmed by LAMACO from the current Google Maps location.
 export const contactLocation = {
-  latitude: 14.3943798445042,
-  longitude: -16.95476360033701,
+  latitude: 14.757599271164812,
+  longitude: -16.951935946935176,
   tileUrl: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 } as const;
 const coordinates = `${contactLocation.latitude},${contactLocation.longitude}`;

@@ -9,7 +9,7 @@ const [cover, ...gallery] = project.photos;
 
 <article class:list={['project-story', { 'project-story--reverse': index % 2 === 1 }]} id={project.slug} aria-labelledby={`${project.slug}-title`}>
   <figure class="project-story__cover" data-project-reveal>
-    <div class="project-media" data-project-media><Picture src={cover.image} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes="(max-width: 760px) 91vw, 55vw" alt={cover.alt} loading="lazy" quality={65} />{demonstration && <span class="project-story__demo">Projet de démonstration</span>}</div>
+    <div class="project-media" data-project-media><Picture src={cover.image} formats={['avif']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes="(max-width: 760px) 91vw, 55vw" alt={cover.alt} loading="lazy" quality={65} />{demonstration && <span class="project-story__demo">Exemple de chantier</span>}</div>
     {cover.caption && <figcaption>{cover.caption}</figcaption>}
   </figure>
   <div class="project-story__text" data-project-reveal>

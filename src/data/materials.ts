@@ -29,26 +29,26 @@ export interface MaterialFamily {
 export const materials: readonly MaterialFamily[] = [
   {
     slug: 'basalte', name: 'Basalte', alias: 'Béton noir',
-    image: basaltImage, alt: 'Illustration de basalte noir ; calibre non représenté à l’échelle',
+    image: basaltImage, alt: 'Visuel de référence du basalte noir ; calibre sans échelle',
     description: 'Béton noir : calibres 8/16, 3/8 et 0/3.',
     introduction: 'Le basalte, appelé béton noir dans notre offre, se décline en trois calibres. Les gravillons répondent aux demandes de granulats ; le 0/3 est proposé pour le terrassement et la fabrication de briques de construction.',
     terminology: 'Aussi appelé « béton armé » dans l’appellation commerciale LAMACO. Le produit fourni est un granulat : un béton armé est, techniquement, un béton associé à des armatures en acier.',
   },
   {
     slug: 'calcaire', name: 'Calcaire', alias: 'Béton blanc',
-    image: limestoneImage, alt: 'Illustration de calcaire clair ; calibre non représenté à l’échelle',
+    image: limestoneImage, alt: 'Visuel de référence du calcaire clair ; calibre sans échelle',
     description: 'Béton blanc : calibres 5/15, 3/8, 15/25 et 0/3.',
     introduction: 'Notre calcaire, également appelé béton blanc, est proposé en quatre calibres. Choisissez les gravillons selon les besoins de votre chantier ou le 0/3 pour les terrassements après fondation.',
   },
   {
     slug: 'silex', name: 'Silex', alias: 'Béton Mapaté',
-    image: silexImage, alt: 'Illustration de silex ; calibre non représenté à l’échelle',
+    image: silexImage, alt: 'Visuel de référence du silex ; calibre sans échelle',
     description: 'Béton Mapaté : calibres 8/16, 3/8 et 0/3.',
     introduction: 'Le silex, aussi appelé béton Mapaté, fait partie de notre offre de granulats. Du 8/16 sans poussière au 0/3 pour le terrassement, chaque référence répond à un besoin distinct.',
   },
   {
     slug: 'sable', name: 'Sable', alias: 'Dakar & Tasseb',
-    image: sandImage, alt: 'Illustration de sable ; aspect et provenance non représentatifs d’un lot',
+    image: sandImage, alt: 'Visuel de référence du sable ; aspect variable selon le lot',
     description: 'Sable de Dakar pour le gros œuvre, sable de Tasseb pour les finitions.',
     introduction: 'Deux sables pour deux besoins : le sable grossier de Dakar pour les fondations et maçonneries lourdes, et le sable fin de Tasseb pour la maçonnerie et les finitions.',
   },

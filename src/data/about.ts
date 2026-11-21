@@ -13,8 +13,8 @@ export const aboutPage = {
     'Entreprise sénégalaise en développement, LAMACO réunit la fourniture de matériaux, la location d’engins et les services de terrain. Du choix des granulats à leur livraison, notre activité répond aux besoins concrets du chantier.',
     'Notre point de départ : votre besoin, le lieu des travaux et les conditions d’accès. Ces éléments permettent de préparer ensemble la suite du projet.',
   ],
-  imageAlt: 'Illustration d’une carrière avec des matériaux et des engins, et non une photographie du dépôt LAMACO',
-  imageCaption: 'Univers des matériaux · visuel d’illustration',
+  imageAlt: 'Visuel éditorial d’une carrière avec des matériaux et des engins',
+  imageCaption: 'L’univers LAMACO · matériaux et engins',
   resources: [
     { value: '01', label: 'Camion-benne', detail: 'Pour le transport des matériaux.' },
     { value: '01', label: 'Pelle hydraulique', detail: 'Pour les travaux de terrain.' },

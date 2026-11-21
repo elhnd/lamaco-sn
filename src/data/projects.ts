@@ -38,7 +38,7 @@ export const projectsPage = {
   approachEyebrow: 'Et si on parlait de votre projet ?',
   approachTitle: 'Une idée en tête. Du concret entre les mains.',
   approachDescription: 'Une maison à construire, un terrain à préparer, des matériaux à faire livrer… Dites-nous où vous en êtes. Nous préciserons ensemble ce que LAMACO peut apporter à votre chantier.',
-  illustrationCaption: 'La matière au départ du projet · illustration de sable',
+  illustrationCaption: 'La matière au départ du projet · sable',
   paths: [
     { title: 'Trouver vos matériaux', description: 'Sables, basalte, calcaire et silex : explorez les références et leurs usages.', href: '/materiaux/', label: 'Voir les matériaux', icon: 'materials' },
     { title: 'Préparer votre terrain', description: 'Pelle hydraulique, camion-benne : découvrez les engins et les besoins auxquels ils répondent.', href: '/engins/', label: 'Découvrir les engins', icon: 'loader' },

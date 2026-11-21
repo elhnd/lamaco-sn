@@ -19,11 +19,11 @@ const content = requestPages[mode];
 const quote = mode === 'devis';
 ---
 
-<BaseLayout title={`${content.title} BTP au Sénégal | LAMACO`} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Illustration d’un camion-benne dans une carrière' : 'Illustration de la texture d’un sable de construction'} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: content.title, path: content.path }]}>
+<BaseLayout title={`${content.title} BTP au Sénégal | LAMACO`} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Visuel éditorial d’un camion-benne dans une carrière' : 'Texture d’un sable de construction'} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: content.title, path: content.path }]}>
   <a class="request-skip" href="#demande">Aller à la demande</a>
   <Header />
   <main class={`request-page request-page--${mode}`} id="contenu" data-request-page data-mode={mode} data-phone={company.phones[0].href.replace('tel:', '')}>
-    <PageHero title={content.title} breadcrumb={content.title} eyebrow={content.eyebrow} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Illustration d’un camion-benne dans une carrière' : 'Illustration de la texture d’un sable de construction'} />
+    <PageHero title={content.title} breadcrumb={content.title} eyebrow={content.eyebrow} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Visuel éditorial d’un camion-benne dans une carrière' : 'Texture d’un sable de construction'} />
     <div class="wrap request-content">
       <nav class="request-switch" aria-label="Choisir votre démarche">
         <a href={requestPages.devis.path} aria-current={quote ? 'page' : undefined}>01 <span>{requestPages.devis.label}</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
@@ -36,7 +36,7 @@ const quote = mode === 'devis';
           <p class="request-lead">{content.intro}</p>
           <div class="request-note"><span aria-hidden="true"><BrandArrow glyph="↳" /></span><p>{content.note}</p></div>
           <figure class="request-scene">
-            <Picture src={quote ? quarryImage : sandImage} formats={['avif']} fallbackFormat="webp" widths={[480, 760]} sizes="(max-width: 960px) 90vw, 35vw" width={760} height={360} alt={quote ? 'Illustration d’un camion-benne en carrière' : 'Illustration de la texture d’un sable de construction'} loading="lazy" quality={55} />
+            <Picture src={quote ? quarryImage : sandImage} formats={['avif']} fallbackFormat="webp" widths={[480, 760]} sizes="(max-width: 960px) 90vw, 35vw" width={760} height={360} alt={quote ? 'Visuel éditorial d’un camion-benne en carrière' : 'Texture d’un sable de construction'} loading="lazy" quality={55} />
             <figcaption><span>LAMACO / SÉNÉGAL</span><strong>{quote ? 'La force du terrain.' : 'Chaque chantier commence par une question.'}</strong></figcaption>
           </figure>
           <a class="request-call" href={company.phones[0].href}><span>Vous préférez en parler ?<strong>{company.phones[0].label}</strong></span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
