@@ -24,10 +24,11 @@ const { title, breadcrumb, eyebrow, description, image, imageAlt } = Astro.props
     <h1 id="page-title">{title}<span>.</span></h1>
     <p class="page-hero__description">{description}</p>
   </div>
+  <div class="page-hero__divider" aria-hidden="true"></div>
 </section>
 
 <style>
-  .page-hero { position: relative; isolation: isolate; overflow: hidden; padding: 116px 0 72px; min-height: 450px; }
+  .page-hero { position: relative; isolation: isolate; overflow: hidden; padding: 116px 0 0; min-height: 450px; }
   .page-hero__image { position: absolute; z-index: -2; inset: 0 0 0 30%; }
   .page-hero__image :global(picture), .page-hero__image :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
   .page-hero__veil { position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, var(--c-bg) 12%, transparent 90%), linear-gradient(0deg, var(--c-bg), transparent 55%), linear-gradient(180deg, var(--c-bg), transparent 45%); }
@@ -41,8 +42,9 @@ const { title, breadcrumb, eyebrow, description, image, imageAlt } = Astro.props
   .page-hero h1 { max-width: 1000px; margin: 0; font-family: var(--font-display); font-size: clamp(4rem, 6.7vw, 7rem); line-height: 0.94; font-weight: 700; letter-spacing: -0.025em; text-transform: uppercase; text-wrap: balance; }
   .page-hero h1 > span { color: var(--c-accent); }
   .page-hero__description { max-width: 440px; margin: 22px 0 0; color: var(--c-muted); font-size: 0.84rem; line-height: 1.9; }
+  .page-hero__divider { position: absolute; z-index: 1; right: 0; bottom: 0; left: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--c-line) 8%, var(--c-line) 92%, transparent); }
   @media (max-width: 960px) {
-    .page-hero { min-height: 410px; padding-bottom: 45px; }
+    .page-hero { min-height: 410px; padding-bottom: 0; }
   }
   @media (max-width: 600px) {
     .page-hero { padding-top: 104px; min-height: 400px; }

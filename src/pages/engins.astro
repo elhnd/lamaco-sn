@@ -28,9 +28,8 @@ import '../styles/equipment.css';
     <section class="fleet wrap" aria-label="Le parc d’engins LAMACO">
       <div class="fleet-toolbar">
         <nav class="fleet-shortcuts" aria-label="Accéder à un engin">
-          {equipment.map(item => <a href={`#${item.slug}`}>{item.name}<BrandArrow /></a>)}
+          {equipment.map(item => <a href={`#${item.slug}`}>{item.name}</a>)}
         </nav>
-        <p><strong>0{equipment.length}</strong> engins · parc actuel</p>
       </div>
 
       <div class="fleet-grid">
@@ -53,10 +52,6 @@ import '../styles/equipment.css';
                   <p>{item.operation}</p>
                   <h3>À préciser pour votre demande</h3>
                   <ul>{item.preparation.map(point => <li>{point}</li>)}</ul>
-                  <h3 class="fleet-card__technical-heading">Caractéristiques techniques</h3>
-                  <p>{equipmentPage.technicalNote}</p>
-                  <dl class="fleet-card__technical">{item.technical.map(label => <div><dt>{label}</dt><dd>À confirmer</dd></div>)}</dl>
-                  <p class="fleet-card__source"><a href={item.source.href} rel="external">{item.source.label} <BrandArrow glyph="↗" /></a><small>{equipmentPage.sourceNote}</small></p>
                 </div>
               </details>
               <RequestButton mode="devis" query={`engin=${encodeURIComponent(item.slug)}`} />

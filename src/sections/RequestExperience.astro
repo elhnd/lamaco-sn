@@ -139,9 +139,3 @@ const quote = mode === 'devis';
   </main>
   <Footer />
 </BaseLayout>
-
-<script>
-  import { enableRequestForm } from '../lib/requests';
-  const page = document.querySelector<HTMLElement>('[data-request-page]');
-  if (page) enableRequestForm(page);
-</script>

@@ -4,10 +4,6 @@
 .about-eyebrow { margin: 0 0 24px; color: var(--c-accent); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
 .about-copy { color: var(--c-muted); font-size: 0.9rem; line-height: 1.9; }
 .about-link { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 48px; color: var(--c-accent); font-size: 0.72rem; font-weight: 700; }
-.about-nav { display: flex; flex-wrap: wrap; gap: 16px 48px; padding-block: 8px 22px; border-bottom: 1px solid var(--c-line); }
-.about-nav a { display: inline-flex; align-items: center; gap: 24px; min-height: 44px; color: var(--c-muted); font-size: 0.72rem; }
-.about-nav a:hover { color: var(--c-accent); }
-.about-nav .brand-arrow { color: var(--c-accent); }
 .about-story { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 60px clamp(32px, 7vw, 110px); padding-block: 80px; }
 .about-story__content h2 { max-width: 560px; margin-bottom: 28px; }
 .about-story__content .about-copy { max-width: 550px; }
@@ -67,7 +63,6 @@
   .about-diaspora > .about-link { margin-left: 70px; }
 }
 @media (max-width: 760px) {
-  .about-nav { gap: 6px 24px; }
   .about-story, .about-team, .about-approach, .about-invite { padding-block: 52px; }
   .about-story, .about-team__heading, .about-approach { grid-template-columns: 1fr; gap: 32px; }
   .about-story__image { aspect-ratio: 4 / 3; }

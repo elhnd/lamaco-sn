@@ -57,6 +57,28 @@ body.menu-open {
   overflow: hidden;
 }
 
+::view-transition-group(lamaco-header) {
+  animation: none;
+}
+
+::view-transition-old(root) {
+  animation: 120ms ease-in both page-leave;
+}
+
+::view-transition-new(root) {
+  animation: 220ms ease-out both page-enter;
+}
+
+@keyframes page-enter {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+
+@keyframes page-leave {
+  from { opacity: 1; }
+  to { opacity: 0.3; }
+}
+
 button,
 a {
   color: inherit;
@@ -1082,8 +1104,18 @@ svg {
 
 /* Footer */
 .site-footer {
+  position: relative;
   padding-top: 80px;
   background: #080807;
+}
+
+.site-footer__divider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--c-line) 8%, var(--c-line) 92%, transparent);
 }
 
 .site-footer__top {

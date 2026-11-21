@@ -6,7 +6,7 @@ const pathname = Astro.url.pathname.replace(/\/$/, '') + '/';
 const isActive = (href: string) => !href.includes('#') && (href === '/' ? pathname === '/' : pathname.startsWith(href));
 ---
 
-<header class="site-header" data-header>
+<header class="site-header" data-header transition:persist="lamaco-header">
   <a class="site-header__brand" href="/" aria-label="LAMACO, accueil">
     <img src="/brand/logo-inverse.svg" alt="LAMACO" width="185" height="40" />
     <span>La force du terrain</span>
@@ -63,6 +63,7 @@ const isActive = (href: string) => !href.includes('#') && (href === '/' ? pathna
   updateHeader();
   const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   const menu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+  const navigationLinks = header?.querySelectorAll<HTMLAnchorElement>('nav a');
 
   const closeMenu = () => {
     if (!toggle || !menu) return;
@@ -91,4 +92,21 @@ const isActive = (href: string) => !href.includes('#') && (href === '/' ? pathna
   window.matchMedia('(min-width: 961px)').addEventListener('change', (event) => {
     if (event.matches) closeMenu();
   });
+  const updateNavigation = () => {
+    const currentPath = location.pathname.replace(/\/$/, '') + '/';
+    navigationLinks?.forEach((link) => {
+      const href = link.getAttribute('href') ?? '';
+      if (href.includes('#')) return;
+      const active = href === '/' ? currentPath === '/' : currentPath.startsWith(href);
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', currentPath === href ? 'page' : 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  document.addEventListener('astro:after-swap', () => {
+    closeMenu();
+    updateHeader();
+    updateNavigation();
+  });
+  updateNavigation();
 </script>

@@ -7,8 +7,7 @@ import Footer from '../../components/Footer.astro';
 import RequestButton from '../../components/RequestButton.astro';
 import CatalogueCard from '../../components/CatalogueCard.astro';
 import MaterialAdvice from '../../components/MaterialAdvice.astro';
-import { materials, materialCatalogue, materialDetails, materialsPage, materialSources, type MaterialDetail } from '../../data/materials';
-import { company } from '../../data/company';
+import { materials, materialCatalogue, materialDetails, materialsPage, type MaterialDetail } from '../../data/materials';
 import '../../styles/materials.css';
 
 export function getStaticPaths() {
@@ -55,6 +54,7 @@ const related = materials
         <p class="material-detail__availability">{materialsPage.availability}</p>
       </div>
     </section>
+    <div class="material-detail__divider" aria-hidden="true"></div>
 
     <section class="material-usage" aria-labelledby="usage-title">
       <div>
@@ -69,28 +69,7 @@ const related = materials
         <p>{material.guidance}</p>
         {material.terminology && <p>{material.terminology}</p>}
         {!material.overview && <p class="material-usage__note">{materialsPage.useNote}</p>}
-        {material.sourceIds.length > 0 && <details class="material-sources"><summary>Repères techniques et sources</summary><ul>{material.sourceIds.map((id) => <li><a href={materialSources[id].href}>{materialSources[id].title} <BrandArrow glyph="↗" /></a></li>)}</ul></details>}
       </div>
-    </section>
-
-    <section class="material-planning" aria-labelledby="planning-title">
-      <div>
-        <p class="material-eyebrow"><span></span> Préparons votre chantier</p>
-        <h2 id="planning-title">Le bon matériau.<br /><span>Un besoin bien défini.</span></h2>
-      </div>
-      <div class="material-planning__request">
-        <h3>Pour préparer votre demande</h3>
-        <ul>{material.request.map((item) => <li><span aria-hidden="true"><BrandArrow glyph="↗" /></span>{item}</li>)}</ul>
-      </div>
-      <div class="material-planning__delivery">
-        <h3>Et pour la livraison ?</h3>
-        <p>{materialsPage.delivery}</p>
-        <a class="material-text-link" href={company.phones[0].href}>{company.phones[0].label} <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
-      </div>
-    </section>
-
-    <section class="material-steps" aria-label="Les étapes de votre demande">
-      {materialsPage.steps.map((step, index) => <div><span class="material-steps__number">0{index + 1}</span><h3>{step.title}</h3><p>{step.text}</p></div>)}
     </section>
 
     <section class="material-related" aria-labelledby="related-title">
