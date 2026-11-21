@@ -7,7 +7,7 @@ import { contactDetails, contactLocation } from '../data/contact';
   data-latitude={contactLocation.latitude} data-longitude={contactLocation.longitude} data-tile-url={contactLocation.tileUrl}>
   <div class="contact-map__viewport" data-map-viewport tabindex="0" role="group" aria-label="Carte de localisation LAMACO. Utilisez les flèches pour déplacer la carte et les boutons pour zoomer.">
     <div class="contact-map__tiles" data-map-tiles aria-hidden="true"></div>
-    <div class="contact-map__caption"><p class="contact-eyebrow">Nous trouver</p><h2 id="map-title">Au plus près<br />de vos projets<span>.</span></h2></div>
+    <div class="contact-map__caption"><p class="contact-eyebrow">Nous situer</p><h2 id="map-title">Au plus près<br />de vos projets<span>.</span></h2></div>
     <div class="contact-map__marker" data-map-marker>
       <svg viewBox="0 0 40 52" width="40" height="52" aria-hidden="true"><path fill="currentColor" d="M20 1C9.5 1 2 8.8 2 19c0 13 18 32 18 32s18-19 18-32C38 8.8 30.5 1 20 1Z"/><circle cx="20" cy="19" r="6" fill="var(--c-bg)"/></svg>
       <a class="contact-map__label" href={contactDetails.mapHref} target="_blank" rel="noopener noreferrer"><strong>LAMACO <span>Sénégal</span></strong><span>Construire. Livrer. Équiper.</span><span class="contact-map__coordinates">{contactLocation.latitude.toFixed(6)}° N · {Math.abs(contactLocation.longitude).toFixed(6)}° O</span></a>
@@ -26,9 +26,3 @@ import { contactDetails, contactLocation } from '../data/contact';
     <a href={contactDetails.mapHref} target="_blank" rel="noopener noreferrer">Ouvrir dans Google Maps <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
   </div>
 </aside>
-
-<script>
-  import { enableContactMap } from '../lib/contact-map';
-  const map = document.querySelector<HTMLElement>('[data-contact-map]');
-  if (map) enableContactMap(map);
-</script>

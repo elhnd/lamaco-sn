@@ -19,15 +19,15 @@ const content = requestPages[mode];
 const quote = mode === 'devis';
 ---
 
-<BaseLayout title={`${content.title} — LAMACO Sénégal`} description={content.description}>
+<BaseLayout title={`${content.title} BTP au Sénégal | LAMACO`} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Illustration d’un camion-benne dans une carrière' : 'Illustration de la texture d’un sable de construction'} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: content.title, path: content.path }]}>
   <a class="request-skip" href="#demande">Aller à la demande</a>
   <Header />
   <main class={`request-page request-page--${mode}`} id="contenu" data-request-page data-mode={mode} data-phone={company.phones[0].href.replace('tel:', '')}>
     <PageHero title={content.title} breadcrumb={content.title} eyebrow={content.eyebrow} description={content.description} image={quote ? quarryImage : sandImage} imageAlt={quote ? 'Illustration d’un camion-benne dans une carrière' : 'Illustration de la texture d’un sable de construction'} />
     <div class="wrap request-content">
       <nav class="request-switch" aria-label="Choisir votre démarche">
-        <a href={requestPages.devis.path} aria-current={quote ? 'page' : undefined}>01 <span>Demander un devis</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
-        <a href={requestPages.conseil.path} aria-current={!quote ? 'page' : undefined}>02 <span>Demander un conseil</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
+        <a href={requestPages.devis.path} aria-current={quote ? 'page' : undefined}>01 <span>{requestPages.devis.label}</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
+        <a href={requestPages.conseil.path} aria-current={!quote ? 'page' : undefined}>02 <span>{requestPages.conseil.label}</span><span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
       </nav>
 
       <div class="request-layout">
@@ -139,9 +139,3 @@ const quote = mode === 'devis';
   </main>
   <Footer />
 </BaseLayout>
-
-<script>
-  import { enableRequestForm } from '../lib/requests';
-  const page = document.querySelector<HTMLElement>('[data-request-page]');
-  if (page) enableRequestForm(page);
-</script>

@@ -1,10 +1,11 @@
 ---
-import BrandArrow from './BrandArrow.astro';
+import RequestButton from './RequestButton.astro';
 import { company } from '../data/company';
 import { mainNavigation } from '../data/navigation';
 ---
 
 <footer class="site-footer" id="contact">
+  <div class="site-footer__divider" aria-hidden="true"></div>
   <div class="site-footer__top wrap">
     <div class="site-footer__brand" data-reveal>
       <img src="/brand/logo-inverse.svg" alt="LAMACO" width="190" height="41" loading="lazy" />
@@ -22,8 +23,9 @@ import { mainNavigation } from '../data/navigation';
       <p class="footer-label">Contact</p>
       <p>Parlons de votre prochain chantier.</p>
       {company.phones.map((phone) => <a href={phone.href}>{phone.label}</a>)}
-      <a class="footer-request" href="/demande-de-devis/"><span>Demander un devis <BrandArrow glyph="↗" /></span></a>
-      <a class="footer-request" href="/demande-de-conseil/"><span>Demander un conseil <BrandArrow glyph="↗" /></span></a>
+      <a href={`mailto:${company.email}`}>{company.email}</a>
+      <RequestButton class="footer-request" mode="devis" />
+      <RequestButton class="footer-request" mode="conseil" />
     </div>
   </div>
   <div class="site-footer__bottom wrap">

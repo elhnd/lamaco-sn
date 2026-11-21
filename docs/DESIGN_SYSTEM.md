@@ -26,7 +26,9 @@ Do not scatter raw colors through components.
 ## Layout
 - Large imagery, strong whitespace, clear grid.
 - Desktop can be cinematic; mobile becomes simpler rather than merely squeezed.
-- Use section numbers (`01`, `02`, …) sparingly as navigation rhythm.
+- Do not use decorative numbers (`01`, `02`, …) on marketing cards, section
+  introductions, process illustrations, equipment cards or project stories.
+  Keep numbers only when they communicate factual content or functional progress.
 - Primary CTA is accent-filled; secondary CTA is restrained outline/text.
 - Corners mostly sharp/small radius. Avoid pill-everything UI.
 
@@ -102,8 +104,8 @@ Cards are content containers, not the default layout for every section.
   avec une alternance de surfaces sombres et sable clair, de grands visuels lumineux
   et des reportages alternant image et récit. Aucun carrousel automatique.
 - Chaque reportage propose une lecture courte puis des détails natifs : besoin,
-  intervention, résultat et photos complémentaires. Les numéros servent uniquement
-  de repères de lecture, jamais de statistiques de réalisations.
+  intervention, résultat et photos complémentaires. Les catégories et titres servent
+  de repères de lecture ; ne pas afficher de numérotation décorative des réalisations.
 - Les scénarios fictifs autorisés sont signalés au-dessus de la galerie, sur chaque
   couverture et dans les légendes. Ne pas ajouter de faux avis ou de logos clients.
 - Orienter vers les matériaux, les engins, le conseil et le devis avec des liens

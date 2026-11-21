@@ -1,0 +1,54 @@
+import assert from 'node:assert/strict';
+import { readFile, access } from 'node:fs/promises';
+import { htmlFiles, headTags, indexableCanonical } from './sitemap.mjs';
+import { inlineScriptHashes } from './security.mjs';
+
+const dir = new URL('../dist/', import.meta.url);
+const site = 'https://v2.lamaco-sn.com';
+const sitemap = await readFile(new URL('sitemap.xml', dir), 'utf8');
+const robots = await readFile(new URL('robots.txt', dir), 'utf8');
+const rules = await readFile(new URL('.htaccess', dir), 'utf8');
+const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+assert.equal(new Set(urls).size, urls.length, 'Duplicate sitemap URL');
+assert(robots.includes(`Sitemap: ${site}/sitemap.xml`));
+assert(rules.includes('Header always set Content-Security-Policy'));
+assert(!rules.includes("script-src 'self' 'unsafe-inline'"));
+const titles = new Set();
+const descriptions = new Set();
+const expected = new Set();
+let pages = 0;
+for (const file of await htmlFiles(dir)) {
+  const html = await readFile(file, 'utf8');
+  for (const hash of inlineScriptHashes(html)) assert(rules.includes(hash), `CSP missing hash in ${file}`);
+  const tags = headTags(html);
+  // Astro redirect documents omit an explicit <head> wrapper.
+  if (/<meta\b[^>]*http-equiv=["']refresh["']/i.test(html)) continue;
+  pages++;
+  const title = html.match(/<title>(.*?)<\/title>/s)?.[1];
+  const description = tags.filter(tag => tag.name === 'description');
+  assert(title && !titles.has(title), `Missing/duplicate title: ${file}`); titles.add(title);
+  assert.equal(description.length, 1);
+  assert(description[0].content && !descriptions.has(description[0].content), `Duplicate description: ${file}`);
+  descriptions.add(description[0].content);
+  assert.equal([...html.matchAll(/<h1\b/gi)].length, 1);
+  assert.equal([...html.matchAll(/<main\b/gi)].length, 1);
+  assert(html.includes('<html lang="fr">'));
+  const canonical = tags.filter(tag => tag.rel === 'canonical');
+  assert.equal(canonical.length, 1);
+  const url = new URL(canonical[0].href);
+  assert.equal(url.origin, site); assert(!url.search && !url.hash);
+  assert.equal(tags.find(tag => tag.property === 'og:url')?.content, url.href);
+  const image = new URL(tags.find(tag => tag.property === 'og:image').content);
+  assert.equal(image.origin, site); await access(new URL(`.${image.pathname}`, dir));
+  const scripts = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)];
+  assert.equal(scripts.length, 1);
+  const graph = JSON.parse(scripts[0][1])['@graph'];
+  assert(graph.some(node => node['@type'] === 'WebSite' && node.url === `${site}/`));
+  assert(!html.includes('https://lamaco-sn.com'), `Old production URL in ${file}`);
+  const indexed = indexableCanonical(html, site);
+  if (indexed) expected.add(indexed);
+}
+assert.deepEqual(new Set(urls), expected);
+assert(expected.has(`${site}/a-propos/`));
+assert(!expected.has(`${site}/realisations/`));
+console.log(`Build validated: ${pages} content pages, ${urls.length} sitemap URLs, V2 metadata and CSP hashes.`);

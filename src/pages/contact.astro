@@ -12,27 +12,28 @@ import { contactDetails, contactPage } from '../data/contact';
 import '../styles/contact.css';
 ---
 
-<BaseLayout title="Contactez-nous — LAMACO Sénégal" description={contactPage.description}>
+<BaseLayout title="Contact et projets BTP au Sénégal | LAMACO" description={contactPage.description} pageType="ContactPage" image={quarryImage} imageAlt="Illustration d’un camion-benne dans une carrière" breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'Contact', path: '/contact/' }]}>
   <Header />
   <main class="contact-page" id="contenu">
     <PageHero title={contactPage.title} breadcrumb="Contact" eyebrow={contactPage.eyebrow} description={contactPage.intro} image={quarryImage} imageAlt="Illustration d’un camion-benne dans une carrière" />
     <div class="contact-layout wrap">
-      <section class="contact-information" aria-labelledby="contact-title">
-        <p class="contact-eyebrow">Un échange direct</p>
-        <h2 id="contact-title">{contactPage.informationTitle}<span>.</span></h2>
-        <dl class="contact-details">
-          <div><dt><span class="contact-icon"><ContactIcon name="phone" /></span>Téléphone</dt><dd>{company.phones.map(phone => <a href={phone.href}>{phone.label}</a>)}</dd></div>
-          <div><dt><span class="contact-icon"><ContactIcon name="pin" /></span>{contactDetails.address ? 'Adresse' : 'Votre visite'}</dt><dd>{contactDetails.address ?? contactPage.visitNote}</dd></div>
-          {contactDetails.email && <div><dt><span class="contact-icon"><ContactIcon name="mail" /></span>E-mail</dt><dd><a href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a></dd></div>}
-          <div><dt><span class="contact-icon"><ContactIcon name="clock" /></span>{contactDetails.hours ? 'Horaires' : 'Avant de vous déplacer'}</dt><dd>{contactDetails.hours ?? contactPage.hoursNote}</dd></div>
-        </dl>
-        <div class="contact-signature"><img src="/brand/icon.svg" alt="" width="28" height="28" /><span>Construire. Livrer. Équiper.</span></div>
-      </section>
+      <aside class="contact-sidebar" aria-label="Coordonnées et localisation">
+        <section class="contact-information" aria-labelledby="contact-title">
+          <p class="contact-eyebrow">Un échange direct</p>
+          <h2 id="contact-title">{contactPage.informationTitle}<span>.</span></h2>
+          <dl class="contact-details">
+            <div><dt><span class="contact-icon"><ContactIcon name="phone" /></span>Téléphone</dt><dd>{company.phones.map(phone => <a href={phone.href}>{phone.label}</a>)}</dd></div>
+            <div><dt><span class="contact-icon"><ContactIcon name="pin" /></span>{contactDetails.address ? 'Adresse' : 'Votre visite'}</dt><dd>{contactDetails.address ?? contactPage.visitNote}</dd></div>
+            {contactDetails.email && <div><dt><span class="contact-icon"><ContactIcon name="mail" /></span>E-mail</dt><dd><a href={`mailto:${contactDetails.email}`}>{contactDetails.email}</a></dd></div>}
+          </dl>
+        </section>
+        <ContactMap />
+      </aside>
 
       <section class="contact-message" aria-labelledby="message-title" data-contact-message data-phone={company.phones[0].href.replace('tel:', '')}>
-        <div class="contact-section-label"><span aria-hidden="true">01</span> À vous la parole</div>
+        <p class="contact-section-label">À vous la parole</p>
         <h2 id="message-title">Écrivez-nous<span>.</span></h2>
-        <p class="contact-message__intro">Quelques mots suffisent pour démarrer. Préparez votre message ici, puis choisissez de le partager avec LAMACO.</p>
+        <p class="contact-message__intro">Un chantier à préparer, un matériau à identifier ou une question sur nos services ? Préparez votre message ici, puis choisissez de le partager avec LAMACO.</p>
         <div class="contact-fallback" data-contact-fallback><p>Vous pouvez nous joindre directement par téléphone.</p><a href={company.phones[0].href}><span>Appeler le {company.phones[0].label} <BrandArrow glyph="↗" /></span></a></div>
         <noscript><p class="contact-small">JavaScript est désactivé : utilisez les liens d’appel pour nous contacter.</p></noscript>
 
@@ -69,16 +70,7 @@ import '../styles/contact.css';
           <button class="contact-edit" type="button" data-contact-edit><BrandArrow glyph="←" /> Modifier mon message</button>
         </section>
       </section>
-
-      <ContactMap />
     </div>
-    <nav class="contact-shortcuts wrap" aria-label="Préparer une demande détaillée"><div><span>Un besoin déjà en tête ?</span><p>Prenez le chemin qui vous ressemble.</p></div><a href="/demande-de-devis/"><span>01</span> Demander un devis <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a><a href="/demande-de-conseil/"><span>02</span> Demander un conseil <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a></nav>
   </main>
   <Footer />
 </BaseLayout>
-
-<script>
-  import { enableContactForm } from '../lib/contact';
-  const section = document.querySelector<HTMLElement>('[data-contact-message]');
-  if (section) enableContactForm(section);
-</script>

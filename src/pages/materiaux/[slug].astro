@@ -4,11 +4,10 @@ import { Picture } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import Button from '../../components/Button.astro';
+import RequestButton from '../../components/RequestButton.astro';
 import CatalogueCard from '../../components/CatalogueCard.astro';
 import MaterialAdvice from '../../components/MaterialAdvice.astro';
-import { materials, materialCatalogue, materialDetails, materialsPage, materialSources, type MaterialDetail } from '../../data/materials';
-import { company } from '../../data/company';
+import { materials, materialCatalogue, materialDetails, materialsPage, type MaterialDetail } from '../../data/materials';
 import '../../styles/materials.css';
 
 export function getStaticPaths() {
@@ -22,7 +21,7 @@ const related = materials
   .map((family) => materialCatalogue.find((item) => item.group === family.slug)!);
 ---
 
-<BaseLayout title={`${material.name} — Matériaux de construction | LAMACO`} description={material.description}>
+<BaseLayout title={`${material.name} au Sénégal | LAMACO`} description={`${material.name} : ${material.description} Consultez les usages et préparez votre devis avec LAMACO au Sénégal.`} image={material.image} imageAlt={material.alt} pageType={material.overview ? 'CollectionPage' : 'WebPage'} breadcrumbs={[{ name: 'Accueil', path: '/' }, { name: 'Matériaux', path: '/materiaux/' }, { name: material.name, path: `/materiaux/${material.slug}/` }]}>
   <Header />
   <main class="materials-page material-detail wrap" id="contenu">
     <nav class="material-breadcrumb" aria-label="Fil d’Ariane"><a href="/">Accueil</a><span aria-hidden="true">/</span><a href="/materiaux/">Matériaux</a><span aria-hidden="true">/</span><span aria-current="page">{material.name}</span></nav>
@@ -49,12 +48,13 @@ const related = materials
           {siblings.map((item) => <a href={`/materiaux/${item.slug}/`} aria-current={item.slug === material.slug ? 'page' : undefined}>{material.group === 'sable' ? item.name : item.grade}</a>)}
         </nav>
         <div class="material-detail__actions">
-          <Button href={`/demande-de-devis/?materiau=${encodeURIComponent(material.slug)}`}>Demander un devis</Button>
+          <RequestButton mode="devis" query={`materiau=${encodeURIComponent(material.slug)}`} />
           <a class="material-text-link" href="/materiaux/">Tous les matériaux <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
         </div>
         <p class="material-detail__availability">{materialsPage.availability}</p>
       </div>
     </section>
+    <div class="material-detail__divider" aria-hidden="true"></div>
 
     <section class="material-usage" aria-labelledby="usage-title">
       <div>
@@ -69,33 +69,12 @@ const related = materials
         <p>{material.guidance}</p>
         {material.terminology && <p>{material.terminology}</p>}
         {!material.overview && <p class="material-usage__note">{materialsPage.useNote}</p>}
-        {material.sourceIds.length > 0 && <details class="material-sources"><summary>Repères techniques et sources</summary><ul>{material.sourceIds.map((id) => <li><a href={materialSources[id].href}>{materialSources[id].title} <BrandArrow glyph="↗" /></a></li>)}</ul></details>}
       </div>
-    </section>
-
-    <section class="material-planning" aria-labelledby="planning-title">
-      <div>
-        <p class="material-eyebrow"><span></span> Préparons votre chantier</p>
-        <h2 id="planning-title">Le bon matériau.<br /><span>Un besoin bien défini.</span></h2>
-      </div>
-      <div class="material-planning__request">
-        <h3>Pour préparer votre demande</h3>
-        <ul>{material.request.map((item) => <li><span aria-hidden="true"><BrandArrow glyph="↗" /></span>{item}</li>)}</ul>
-      </div>
-      <div class="material-planning__delivery">
-        <h3>Et pour la livraison ?</h3>
-        <p>{materialsPage.delivery}</p>
-        <a class="material-text-link" href={company.phones[0].href}>{company.phones[0].label} <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a>
-      </div>
-    </section>
-
-    <section class="material-steps" aria-label="Les étapes de votre demande">
-      {materialsPage.steps.map((step, index) => <div><span class="material-steps__number">0{index + 1}</span><h3>{step.title}</h3><p>{step.text}</p></div>)}
     </section>
 
     <section class="material-related" aria-labelledby="related-title">
       <div class="material-related__heading"><div><p class="material-eyebrow"><span></span> À découvrir aussi</p><h2 id="related-title">D’autres matières, <span>d’autres projets.</span></h2></div><a class="material-text-link" href="/materiaux/">Voir le catalogue <span aria-hidden="true"><BrandArrow glyph="↗" /></span></a></div>
-      <div class="catalogue-grid">{related.map((item, index) => <CatalogueCard material={item} index={index} />)}</div>
+      <div class="catalogue-grid">{related.map((item) => <CatalogueCard material={item} headingLevel="h3" />)}</div>
     </section>
     <MaterialAdvice />
   </main>

@@ -1,0 +1,21 @@
+---
+import Button from './Button.astro';
+import { requestPages, type RequestMode } from '../data/requests';
+
+interface Props {
+  mode: RequestMode;
+  href?: string;
+  query?: string;
+  variant?: 'primary' | 'outline' | 'light';
+  class?: string;
+}
+
+const { mode, href, query, variant, class: className = '' } = Astro.props;
+const request = requestPages[mode];
+const resolvedVariant = variant ?? (mode === 'devis' ? 'primary' : 'outline');
+const resolvedHref = query ? `${request.path}?${query}` : (href ?? request.path);
+---
+
+<Button href={resolvedHref} variant={resolvedVariant} class={className}>
+  {request.label}
+</Button>
